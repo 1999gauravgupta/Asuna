@@ -33,11 +33,6 @@ async def on_ready():
     await bot.change_presence(game=discord.Game(name='Listening to -help'))
     print("status changing done")
 
-# @bot.event
-# async def on_message(message):
-#     if message.content == ":FeelsMagik:":
-#         await bot.delete_message(message)
-
 @bot.command(pass_context=True)
 async def ping(self):
         before = time.monotonic()
@@ -75,7 +70,7 @@ async def svrinfo(ctx):
 
 @bot.command(pass_context=True)
 async def say(ctx,*,something=None):
-    if ctx.message.author.id=="343395225571426304" or "402829897514352641":
+    if ctx.message.author.id=="343395225571426304":
         if something is None:
             await bot.say("What would you like me to say? :thinking:")
         else:
@@ -108,37 +103,102 @@ async def pfp(ctx,user:discord.Member=None):
     print("Avatar")
 
 @bot.command(pass_context=True)
-async def ask(ctx):
-    choice=["It is certain :8ball:","It is decidedly so :8ball:","Without a doubt :8ball:","Yes, definitely :8ball:","You may rely on it :8ball:","As I see it, yes :8ball:","Most likely :8ball:","Outlook good :8ball:","Yes :8ball:","Signs point to yes :8ball:","Reply hazy try again :8ball:","Ask again later :8ball:","Better not tell you now :8ball:","Cannot predict now :8ball:","Concentrate and ask again :8ball:","Don't count on it :8ball:","My reply is no :8ball:","My sources say no :8ball:","Outlook not so good :8ball:","Very doubtful :8ball:"]
-    ch=random.randint(1,20)
-    await bot.say(choice[ch])
-    print("ask")
+async def ask(ctx,*,p=None):
+    if p!=None:
+        p=p.lower()
+        when= ['Soon™', 'Maybe tomorrow.', 'Maybe next year...', 'Right now.', 'In a few months.']
+        what= ['A plane.', 'What? Ask again.', 'A gift.', 'Nothing.', 'A ring.', 'I do not know', "Maybe something."]
+        howmuch= ['A lot.', 'A bit.', 'A few.', 'Ask me tomorrow.', 'I do not know, ask a physicist.', 'Nothing.', "2 or 3 liters, I don't remember.", 'Infinity.', '1010 liters.']
+        howmany= ['A lot.', 'A bit.', 'A few.', 'Ask me tomorrow.', "I don't know, ask a physicist.", 'Nothing.', '2 or 3, I do not remember.', 'Infinity', '1010.']
+        why= ['Maybe genetics.', 'Because somebody decided it.', 'For the glory of satan, of course!', 'I do not know, maybe destiny.', 'Because I said so.', 'I have no idea.', 'Harambe did nothing wrong.', 'Ask the owner of this server.', 'Ask again.', 'To get to the other side.', 'It says so in the Bible.']
+        who= ['A human.', 'A robot.', 'An airplane.', 'A bird.', 'A carbon composition.', 'A bunch of zeroes and ones.', 'I have no clue, is it material?', 'That is not logical.']
+        other= ['Most likely.', 'Nope.', 'YES!', 'Maybe.']
+        result1 = p.find('when')
+        result2 = p.find('what')
+        result3 = p.find('how much')
+        result4 = p.find('how many')
+        result5 = p.find('why')
+        result6 = p.find('who')
+        if result1!=-1: 
+            check=len(when)
+            var=random.randint(0,check)
+            await bot.say(when[var])
+        else:
+            if result2!=-1:
+                check=len(what)
+                var=random.randint(0,check)
+                await bot.say(what[var])
+            else:
+                if result3!=-1:
+                    check=len(howmuch)
+                    var=random.randint(0,check)
+                    await bot.say(howmuch[var])
+                else:
+                    if result4!=-1:
+                        check=len(howmany)
+                        var=random.randint(0,check)
+                        await bot.say(howmany[var])
+                    else:
+                        if result5!=-1:
+                            check=len(why)
+                            var=random.randint(0,check)
+                            await bot.say(why[var])
+                        else:
+                            if result6!=-1:
+                                check=len(who)
+                                var=random.randint(0,check)
+                                await bot.say(who[var])
+                            else:
+                                check=len(other)
+                                var=random.randint(0,check)
+                                await bot.say(other[var])
 
 bot.remove_command("help")
 @bot.command(pass_context=True)
 async def help(ctx):
-    embed=discord.Embed(title="Help",description="Gives you a list of command that bot curently has:",color=0xf7d28c,inline=False)
-    embed.add_field(name="ping", value="Basic Ping Command",inline=False)
-    embed.add_field(name="info [@User]", value="Gives you the basic information about selected user",inline=False)
-    embed.add_field(name="svrinfo", value="Gives you the information of the server where the command is being used",inline=False)
-    embed.add_field(name="pfp [@User]",value="Shows you the photo of required user",inline=False)
-    embed.add_field(name="quote",value="Displays a random quote",inline=False)
-    embed.add_field(name="invite",value="Generates invite link to add Asuna to your guild",inline=False)
-    embed.add_field(name="ask <A yes/no question>",value="Gives answer to your query :stuck_out_tongue_winking_eye: ",inline=False)
-    embed.add_field(name="ud <query>",value="Searches the meaning of given query in Urban Dictionary",inline=False)  
-    embed.add_field(name="define <query>",value="Searches the meaning of given query in Dictionary",inline=False)
-    embed.add_field(name="google <query>",value="Searches Google for your query",inline =False)
-    embed.add_field(name="wiki <query>",value="Searches Wikipedia for your query",inline =False)
-    embed.add_field(name="yt <query>",value="Searches YouTube for your query",inline=False)                    
-    embed.add_field(name="emo <word>",value="Emojify your text :wink:",inline=False)     
-    embed.add_field(name="norris [@mention]",value="Displays a random norris facts",inline=False)
-    embed.add_field(name="xkcd [number]",value="Displays given comic else random comic",inline=False)  
-    embed.add_field(name="weather <location>",value="Gives weather info for given location",inline=False)
-    embed.add_field(name="pokemon <name>",value="Gives info about required pokemon",inline=False)     
-    embed.add_field(name="sebi",value="Displays a random meme from SebiSauce collection :laughing:",inline=False)
-    embed.add_field(name="shrug",value="Appends a shrug in the chat",inline=False)
-    embed.set_footer(text="Arguments in [] are optional but arguments in <> are necessary for given function to work")       
-    await bot.whisper(embed=embed)
+    help1="""
+:page_with_curl: | Help Message
+
+**General User/Server/Bot Info Commands:**
+• -info [@user]→ Provides some information about the user who invoked the command or of mentioned user.
+• -svrinfo → Provides some information about the server in which the command is invoked.
+• -pfp [@user] → Display avatar of yours or mentioned user.
+• -invite → Add Asuna to your guild.
+• -ping → Runs a connection test to Discord.
+• -help → Display this message.
+
+**General Query Commands:**
+• -google <query> → Searches Google for your query.
+• -wiki <query> → Searches Wikipedia for your query.
+• -yt <query> → Searches YouTube for your query.
+• -weather <location> → Displays weather of given location.
+• -pokemon <query> → Gives some data about queried pokemon.
+• -ud <word> → Searches Urban Dictionary for your word.
+• -define <word> → Searches Dictionary for your word.
+
+**General Fun Commands:**
+• -quote → Display random motivational code to make your day.
+• -ask <question>→ Asuna helps you with your questions.
+• -emo <text>→ Emojifies the text.
+• -norris [@user] → Display random chuck norris joke.
+• -xkcd [number] → Searches xkcd for your comic else prints a random comic.
+• -sebi → Display a random SebiSauce.
+
+**General Emoji Commands:**
+• -shrug → Appends a shrug emoji.
+• -sip → Appends a sip emoji.
+• -bang → Appends a bang emoji.
+• -wonder → Appends a wonder emoji.
+• -sweat → Appends a blob sweat emoji.
+• -blush → Appends a blob blush emoji.
+• -mikuyay → Appends a excited miku emoji.
+• -peek → Appends a peek emoji.
+• -dance → Appends a dance emoji (broken atm ).
+• -j → Appends a emoji (Tbh idk what that emoji is ).
+
+**Arguments in [] are optional but arguments in <> are necessary for given function to work**
+"""
+    await bot.whisper(help1)
     await bot.say(":inbox_tray: | The list of commands you have access to has been sent to your DMs.")
     print("help")
 
