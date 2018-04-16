@@ -17,7 +17,7 @@ import time
 with codecs.open("quotes.json", "r",encoding='utf-8', errors='ignore') as f:
     quotes= json.load(f)
 
-bot = commands.Bot(command_prefix=['-','asuna,',"Asuna,"])
+bot = commands.Bot(command_prefix=['-','asuna, ',"Asuna, "])
 client=discord.Client()
 
 #COMMANDS
