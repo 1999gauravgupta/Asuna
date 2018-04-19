@@ -486,9 +486,9 @@ async def cuddle(ctx, user: discord.Member=None):
 "https://cdn.discordapp.com/attachments/424460621053034497/436508843296423947/VBSyXo7VbTRkki3LE4oLvu2j7Tw.gif"]
     p=link[random.randint(0,len(link)-1)]      
     if user!=None:
-            embed=discord.Embed(title="{} cuddles {} :revolving_hearts:".format(ctx.message.author.name,user.name),color=0xf7d28c)
+            embed=discord.Embed(description="{} cuddles {} <:cuddle:436520636278374429>".format(ctx.message.author.name,user.name),color=0xf7d28c)
     else:
-            embed=discord.Embed(title="There there, i will cuddle you {} :revolving_hearts:".format(ctx.message.author.name),color=0xf7d28c)
+            embed=discord.Embed(description="There there, i will cuddle you {} <:cuddle:436520636278374429>".format(ctx.message.author.name),color=0xf7d28c)
     embed.set_image(url=p)
     await bot.say(embed=embed)
 
@@ -511,9 +511,9 @@ async def hug(ctx, user: discord.Member=None):
 "https://cdn.discordapp.com/attachments/429288271122792469/436511361636499457/PkwyV8KjIp2Mcsg5-X89uLVrPc0.gif"]
     p=link[random.randint(0,len(link)-1)]      
     if user!=None:
-            embed=discord.Embed(title="{} tightly hugs {} :heart:".format(ctx.message.author.name,user.name),color=0xf7d28c)
+            embed=discord.Embed(description="{} tightly hugs {} <:hug:436520609980219415>".format(ctx.message.author.name,user.name),color=0xf7d28c)
     else:
-            embed=discord.Embed(title="There there, i will hug you {} :heart:".format(ctx.message.author.name),color=0xf7d28c)
+            embed=discord.Embed(description="There there, i will hug you {} <:hug:436520609980219415>".format(ctx.message.author.name),color=0xf7d28c)
     embed.set_image(url=p)
     await bot.say(embed=embed)
 
