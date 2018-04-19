@@ -511,9 +511,9 @@ async def hug(ctx, user: discord.Member=None):
 "https://cdn.discordapp.com/attachments/429288271122792469/436511361636499457/PkwyV8KjIp2Mcsg5-X89uLVrPc0.gif"]
     p=link[random.randint(0,len(link)-1)]      
     if user!=None:
-            embed=discord.Embed(title="{} tightly hugs {} <:hugs:436513774208548872>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+            embed=discord.Embed(title="{} tightly hugs {} :heart:".format(ctx.message.author.name,user.name),color=0xf7d28c)
     else:
-            embed=discord.Embed(title="There there, i will hug you {} <:hugs:436513774208548872>".format(ctx.message.author.name),color=0xf7d28c)
+            embed=discord.Embed(title="There there, i will hug you {} :heart:".format(ctx.message.author.name),color=0xf7d28c)
     embed.set_image(url=p)
     await bot.say(embed=embed)
 
