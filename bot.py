@@ -220,7 +220,7 @@ async def invite(ctx):
     await bot.say(embed=embed)
     print("invite")
 
-@bot.command(name="ud",aliases="urban")
+@bot.command(name="ud",aliases=["urban"])
 async def ud(query=None):
     if query!=None:
         defs = udd.define(query)
