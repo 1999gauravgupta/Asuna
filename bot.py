@@ -220,23 +220,24 @@ async def invite(ctx):
     await bot.say(embed=embed)
     print("invite")
 
-@bot.command(name="ud",aliases=["urban"])
+@bot.command(name="ud",aliases="urban")
 async def ud(query=None):
     if query!=None:
-        defs = udd.define(query)
-        for d in range(1):
-            definition=defs[d].definition
-            word=defs[d].word
-            example=defs[d].example
-            upvotes=defs[d].upvotes
-            downvotes=defs[d].downvotes
-        embed = discord.Embed(title=word, description="Here's what I could find.", color=0xf7d28c)
-        embed.add_field(name="Defintion", value=definition, inline=False)
-        embed.add_field(name="Example",value=example,inline=False)
-        embed.add_field(name="Upvotes",value=str(upvotes)+":thumbsup:",inline=True)
-        embed.add_field(name="Downvotes",value=str(downvotes)+":thumbsdown:",inline=True)
-        await bot.say(embed=embed)
-        print("ud")
+            defs = udd.define(query)
+            for d in range(1):
+                definition=defs[d].definition
+                word=defs[d].word
+                example=defs[d].example
+                upvotes=defs[d].upvotes
+                downvotes=defs[d].downvotes
+            embed = discord.Embed(title=word, description="Here's what I could find.", color=0xf7d28c)
+            embed.add_field(name="Defintion", value=definition, inline=False)
+            embed.add_field(name="Example",value=example if example else "\u200b" ,inline=False)
+            embed.add_field(name="Upvotes",value=str(upvotes)+"👍",inline=True)
+            embed.add_field(name="Downvotes",value=str(downvotes)+"👎",inline=True)
+            await bot.say(embed=embed)
+        ##   await bot.say("Dear User, I could not find a definition for this word. in Urban Dictionary")
+    print("ud")
 
 @bot.command(pass_context = True,name="purge",aliases=["prune"])
 async def purge(ctx, number=2,):
@@ -345,85 +346,96 @@ async def whatif():
     await bot.say(link)
 
 @bot.command()
-async def weather(*,location):
-    location="-".join(location.split())
-    response = urllib.request.urlopen('https://cheeze.club/api/weather/'+location).read()
-    response = json.loads(response.decode('utf-8'))
-    namee=response["name"]
-    celsiuse=response["celsius"]
-    farenheite=response["fahrenheit"]
-    weathere=response["weather"]
-    link=response["icon"]
-    windspeede=response["windSpeed"]
-    embed=discord.Embed(tile="Weather",description="Here's what i could find: ",color=0xf7d28c)
-    embed.add_field(name="Location",value=namee)
-    embed.add_field(name="Temp in Celsius",value=celsiuse)
-    embed.add_field(name="Temp in Fahrenheit",value=farenheite)
-    embed.add_field(name="Weather",value=weathere)
-    embed.add_field(name="Wind Speed",value=windspeede)
-    embed.set_thumbnail(url=link)
-    await bot.say(embed=embed)
-    print("weather")
+async def weather(*,location=None):
+    if location!=None:
+        try:
+            location="-".join(location.split())
+            response = urllib.request.urlopen('https://cheeze.club/api/weather/'+location).read()
+            response = json.loads(response.decode('utf-8'))
+            namee=response["name"]
+            celsiuse=response["celsius"]
+            farenheite=response["fahrenheit"]
+            weathere=response["weather"]
+            link=response["icon"]
+            windspeede=response["windSpeed"]
+            embed=discord.Embed(tile="Weather",description="Here's what i could find: ",color=0xf7d28c)
+            embed.add_field(name="Location",value=namee)
+            embed.add_field(name="Temp in Celsius",value=celsiuse)
+            embed.add_field(name="Temp in Fahrenheit",value=farenheite)
+            embed.add_field(name="Weather",value=weathere)
+            embed.add_field(name="Wind Speed",value=windspeede)
+            embed.set_thumbnail(url=link)
+            await bot.say(embed=embed)
+            print("weather")
+        except KeyError:
+            await bot.say("Given location not found")
 
 @bot.command(name="pokemon",aliases=["poke"])
-async def pokemon(pokemon):
-    response=urllib.request.urlopen("https://cheeze.club/api/pokedex/"+pokemon).read()
-    response=json.loads(response.decode("utf-8"))
-    name=response["name"]
-    num=response["number"]
-    image=response["image"]
-    species=response["species"]
-    height=response["height"]
-    weight=response["weight"]
-    check1=response["types"]
-    types=""
-    for t in check1:
-        types+=(t+" ")
-    types=",".join(types.split())
-    check2=response["abilities"]
-    abilities=""
-    for t in check2:
-        abilities+=(t+" ")
-    abilities=",".join(abilities.split())
-    des=response["description"]
-    ts=response["baseStats"]["total"]
-    hp=response["baseStats"]["hp"]
-    attack=response["baseStats"]["attack"]
-    defense=response["baseStats"]["defense"]
-    spAttack=response["baseStats"]["spAttack"]
-    spDefense=response["baseStats"]["spDefense"]
-    speed=response["baseStats"]["speed"]
-    embed=discord.Embed(title="{}'s info".format(name),desciption="Here's what i could find: ",color=0xf7d28c)
-    embed.add_field(name="Pokedex Number",value=num)
-    embed.add_field(name="Species",value=species)
-    embed.add_field(name="Height",value=height)
-    embed.add_field(name="Weight",value=weight)
-    embed.add_field(name="Types",value=types)
-    embed.add_field(name="Abilities",value=abilities)
-    embed.add_field(name="Description",value=des)
-    embed.add_field(name="Total Stats",value=ts)
-    embed.add_field(name="Attack",value=attack)
-    embed.add_field(name="Defense",value=defense)
-    embed.add_field(name="Special Attack",value=spAttack)
-    embed.add_field(name="Special Defense",value=spDefense)
-    embed.add_field(name="Speed",value=speed)
-    embed.set_image(url=image)
-    await bot.say(embed=embed)
-    print("pokemon")
+async def pokemon(pokemon=None):
+    if pokemon!=None:
+        try:
+            response=urllib.request.urlopen("https://cheeze.club/api/pokedex/"+pokemon).read()
+            response=json.loads(response.decode("utf-8"))
+            name=response["name"]
+            num=response["number"]
+            image=response["image"]
+            species=response["species"]
+            height=response["height"]
+            weight=response["weight"]
+            check1=response["types"]
+            types=""
+            for t in check1:
+                types+=(t+" ")
+            types=",".join(types.split())
+            check2=response["abilities"]
+            abilities=""
+            for t in check2:
+                abilities+=(t+" ")
+            abilities=",".join(abilities.split())
+            des=response["description"]
+            ts=response["baseStats"]["total"]
+            hp=response["baseStats"]["hp"]
+            attack=response["baseStats"]["attack"]
+            defense=response["baseStats"]["defense"]
+            spAttack=response["baseStats"]["spAttack"]
+            spDefense=response["baseStats"]["spDefense"]
+            speed=response["baseStats"]["speed"]
+            embed=discord.Embed(title="{}'s info".format(name),desciption="Here's what i could find: ",color=0xf7d28c)
+            embed.add_field(name="Pokedex Number",value=num)
+            embed.add_field(name="Species",value=species)
+            embed.add_field(name="Height",value=height)
+            embed.add_field(name="Weight",value=weight)
+            embed.add_field(name="Types",value=types)
+            embed.add_field(name="Abilities",value=abilities)
+            embed.add_field(name="Description",value=des)
+            embed.add_field(name="Total Stats",value=ts)
+            embed.add_field(name="Attack",value=attack)
+            embed.add_field(name="Defense",value=defense)
+            embed.add_field(name="Special Attack",value=spAttack)
+            embed.add_field(name="Special Defense",value=spDefense)
+            embed.add_field(name="Speed",value=speed)
+            embed.set_image(url=image)
+            await bot.say(embed=embed)
+        except ValueError:
+            await bot.say("Given pokemon not found")
+        print("pokemon")
 
 @bot.command()
 async def define(*,word=None):
     if word!=None:
-        word=word.title()
-        response=urllib.request.urlopen("https://cheeze.club/api/dictionary/"+word).read()
-        response=json.loads(response.decode("utf-8"))
-        definition=response["noun"][0]["definition"]
-        example=response["noun"][0]["example"]
-        embed=discord.Embed(title="{}'s info".format(word),description="Here's what i could find",color=0xf7d28c)
-        embed.add_field(name="Definition",value=definition)
-        embed.add_field(name="Example",value=example)
-        await bot.say(embed=embed)
-        print("define")
+        try:
+            word=word.title()
+            response=urllib.request.urlopen("https://cheeze.club/api/dictionary/"+word).read()
+            response=json.loads(response.decode("utf-8"))
+            definition=response["noun"][0]["definition"]
+            example=response["noun"][0]["example"]
+            embed=discord.Embed(title="{}'s info".format(word),description="Here's what i could find",color=0xf7d28c)
+            embed.add_field(name="Definition",value=definition)
+            embed.add_field(name="Example",value=example)
+            await bot.say(embed=embed)
+            print("define")
+        except KeyError:
+            await bot.say("Dear User, I could not find a definition for this word.")
 
 @bot.command(name="yt",aliases=["youtube","Youtube"])
 async def yt(*,query=None):
