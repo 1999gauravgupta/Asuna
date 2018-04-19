@@ -474,7 +474,49 @@ async def pat(ctx, user: discord.Member=None):
             embed=discord.Embed(title="There there, i will pat you {}".format(ctx.message.author.name),color=0xf7d28c)
         embed.set_image(url=p)
         await bot.say(embed=embed)
-        
+
+@bot.command(pass_context=True,name="cuddle",aliases=["cuddles"])
+async def cuddle(ctx, user: discord.Member=None):
+    link= [
+"https://cdn.discordapp.com/attachments/424460621053034497/436497239221862400/S4WQfufMwrP33qaWTpUbY327OiY.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436496258249654272/TRcGA-wb3FBs39e7haOFTe-mA_s.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436495448396660737/zC4nmZRNAcR_HUz1idD6GE-V9iY.gif", "https://cdn.weeb.sh/images/BywGX8caZ.gif", "https://cdn.weeb.sh/images/BkTe8U7v-.gif", "https://cdn.weeb.sh/images/ryfyLL7D-.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436487630515994634/C-8H8sShkykA_pfng9WrWrGncHU.gif", "https://cdn.weeb.sh/images/SJbGLUQwZ.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436497045491154974/aW0d0t965qyCKT1gAbZkLJvIrKg.gif",
+"https://cdn.weeb.sh/images/SJLkLImPb.gif",
+"https://cdn.weeb.sh/images/BJCCd_7Pb.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436508238142242816/BbpmqdFoWtePuhOQu_AAvOey4i4.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436508843296423947/VBSyXo7VbTRkki3LE4oLvu2j7Tw.gif"]
+    p=link[random.randint(0,len(link)-1)]      
+    if user!=None:
+            embed=discord.Embed(title="{} cuddles {} :revolving_hearts:".format(ctx.message.author.name,user.name),color=0xf7d28c)
+    else:
+            embed=discord.Embed(title="There there, i will cuddle you {} :revolving_hearts:".format(ctx.message.author.name),color=0xf7d28c)
+    embed.set_image(url=p)
+    await bot.say(embed=embed)
+
+@bot.command(pass_context=True,name="hug",aliases=["hugs"])
+async def hug(ctx, user: discord.Member=None):
+    link= [
+"https://cdn.discordapp.com/attachments/424460621053034497/436488319438815232/OoEK1pufpxGvpfWA-qL8DuSoLtk.gif", 
+"https://cdn.discordapp.com/attachments/424460621053034497/436492112175824896/mqC9WtmX2LFyTRqw8ux26ziuSEE.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436488752869933056/y-Qzmrr1NMMFUqGTB3kDUSs0V1E.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436492528553033728/Njo4sAAJYsVV8vErcujEPQChhy0.gif",
+"https://cdn.weeb.sh/images/HyNJIaVCb.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436505988452057088/f8aqtullCnYLfTZ-sclVtyOiYUw.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436506633263251465/Yh2-H4-hgeOvI8E5bQBPvZQZTgk.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436507047392051200/Y1imtlb9MAhTxzhQz2ZyervdhQU.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436507914824318976/XpPkI_Q9y2bKiV8l3zVStJwUfws.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436509146448134144/jeOuIHlc_cWbxfHx8fcuIvAQ2eA.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436509947237236746/AjLRblhWqwoCH1E05C0I3zhOx74.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436510123217911808/v47c1jnQvxv3m3QQPg0LDEO7puA.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436510371931750410/2derXdykHPW1hVIrhKBsYvfjFkw.gif",
+"https://cdn.discordapp.com/attachments/424460621053034497/436510649770573845/nTphroCP85a9C4Ny77VnOStOc0.gif",
+"https://cdn.discordapp.com/attachments/429288271122792469/436511361636499457/PkwyV8KjIp2Mcsg5-X89uLVrPc0.gif"]
+    p=link[random.randint(0,len(link)-1)]      
+    if user!=None:
+            embed=discord.Embed(title="{} tightly hugs {} <:hugs:436513774208548872>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+    else:
+            embed=discord.Embed(title="There there, i will hug you {} <:hugs:436513774208548872>".format(ctx.message.author.name),color=0xf7d28c)
+    embed.set_image(url=p)
+    await bot.say(embed=embed)
+
 #Emoji commands
 @bot.group(pass_context=True)
 async def emoji(ctx):
