@@ -13,11 +13,11 @@ import xkcd as com
 import requests
 from googlesearch import search
 import time
-#for quotes
+#for files
 with codecs.open("quotes.json", "r",encoding='utf-8', errors='ignore') as f:
     quotes= json.load(f)
 
-bot = commands.Bot(command_prefix=['-','asuna, ',"Asuna, "])
+bot = commands.Bot(command_prefix=['-','asuna ',"Asuna "])
 client=discord.Client()
 
 #COMMANDS
@@ -93,7 +93,7 @@ async def spam(ctx,no=1,*,something=None):
     await bot.delete_message(ctx.message)
     print("Spam")
 
-@bot.command(pass_context=True)
+@bot.command(pass_context=True,name="pfp",aliases=["dp","avatar"])
 async def pfp(ctx,user:discord.Member=None):
     if user is None:
         user = ctx.message.author
@@ -102,7 +102,7 @@ async def pfp(ctx,user:discord.Member=None):
     await bot.say(embed=embed)
     print("Avatar")
 
-@bot.command(pass_context=True)
+@bot.command(pass_context=True,name="ask",aliases=["8ball"])
 async def ask(ctx,*,p=None):
     if p!=None:
         p=p.lower()
@@ -185,16 +185,16 @@ async def help(ctx):
 • -sebi → Display a random SebiSauce.
 
 **General Emoji Commands:**
-• -shrug → Appends a shrug emoji.
-• -sip → Appends a sip emoji.
-• -bang → Appends a bang emoji.
-• -wonder → Appends a wonder emoji.
-• -sweat → Appends a blob sweat emoji.
-• -blush → Appends a blob blush emoji.
-• -mikuyay → Appends a excited miku emoji.
-• -peek → Appends a peek emoji.
-• -dance → Appends a dance emoji (broken atm ).
-• -j → Appends a emoji (Tbh idk what that emoji is ).
+• -emoji shrug → Appends a shrug emoji.
+• -emoji sip → Appends a sip emoji.
+• -emoji bang → Appends a bang emoji.
+• -emoji wonder → Appends a wonder emoji.
+• -emoji sweat → Appends a blob sweat emoji.
+• -emoji blush → Appends a blob blush emoji.
+• -emoji mikuyay → Appends a excited miku emoji.
+• -emoji peek → Appends a peek emoji.
+• -emoji dance → Appends a dance emoji (broken atm ).
+• -emoji j → Appends a emoji (Tbh idk what that emoji is ).
 
 **Arguments in [] are optional but arguments in <> are necessary for given function to work**
 """
@@ -213,14 +213,14 @@ async def invite(ctx):
     Asuna = discord.utils.get(ctx.message.server.members, id="411566473350217748")
     embed=discord.Embed(title="Asuna's Invite Link",value="Add Asuna to your guild",color=0xf7d28c)
     embed.add_field(name="Name",value="Asuna")
-    embed.add_field(name="Prefix",value="-")
+    embed.add_field(name="Prefix",value="-, Asuna , asuna")
     embed.add_field(name="Link",value="https://discordapp.com/api/oauth2/authorize?client_id=411566473350217748&permissions=8&scope=bot")
     embed.set_footer(text="Feel free to uncheck some permissions")
     embed.set_thumbnail(url=Asuna.avatar_url)
     await bot.say(embed=embed)
     print("invite")
 
-@bot.command()
+@bot.command(name="ud",aliases="urban")
 async def ud(query=None):
     if query!=None:
         defs = udd.define(query)
@@ -238,7 +238,7 @@ async def ud(query=None):
         await bot.say(embed=embed)
         print("ud")
 
-@bot.command(pass_context = True)
+@bot.command(pass_context = True,name="purge",aliases=["prune"])
 async def purge(ctx, number=2,):
     if ctx.message.author.server_permissions.manage_messages:
         mgs = [] 
@@ -264,7 +264,7 @@ async def purge(ctx, number=2,):
         await bot.say("You do not have required permissions")
     print("purge")
 
-@bot.command(pass_context=True)
+@bot.command(pass_context=True,name="google",aliases=["g"])
 async def google(ctx,*,query=None):
        if query!=None:
            list1=[]
@@ -273,7 +273,7 @@ async def google(ctx,*,query=None):
            await bot.say(list1[0])
        print("google")
 
-@bot.command(pass_context=True)
+@bot.command(pass_context=True,name="wiki",aliases=["wikipedia"])
 async def wiki(ctx,*,query=None):
     if query!=None:
         list1=[]
@@ -284,7 +284,7 @@ async def wiki(ctx,*,query=None):
     print("wikipedia")
 
 
-@bot.command(pass_context=True)
+@bot.command(pass_context=True,name="emo",aliases=["emojify"])
 async def emo(ctx,*,word):
     if word!=None:
         str=""
@@ -296,7 +296,7 @@ async def emo(ctx,*,word):
         await bot.say(str.lower())
     print("emo")
 
-@bot.command(pass_context=True)
+@bot.command(pass_context=True,name="norris",aliases=["chuck","chuck norris"])
 async def norris(ctx, user: discord.Member=None):
     if user is None:
         user ="Chuck Norris"
@@ -365,7 +365,7 @@ async def weather(*,location):
     await bot.say(embed=embed)
     print("weather")
 
-@bot.command()
+@bot.command(name="pokemon",aliases=["poke"])
 async def pokemon(pokemon):
     response=urllib.request.urlopen("https://cheeze.club/api/pokedex/"+pokemon).read()
     response=json.loads(response.decode("utf-8"))
@@ -425,7 +425,7 @@ async def define(*,word=None):
         await bot.say(embed=embed)
         print("define")
 
-@bot.command()
+@bot.command(name="yt",aliases=["youtube","Youtube"])
 async def yt(*,query=None):
     if query!=None:
         query="-".join(query.split())
@@ -454,7 +454,7 @@ async def yt(*,query=None):
 #         print(response)
 #         await bot.say(response)
 
-@bot.command()
+@bot.command(name="sebi",aliases=["sebisauce","Sebi"])
 async def sebi():
     response=urllib.request.urlopen("https://sebisauce.herokuapp.com/api/random").read()
     response=json.loads(response.decode("utf-8"))
@@ -464,52 +464,59 @@ async def sebi():
     await bot.say(embed=embed)
     print("sebi")
 
-@bot.command(pass_context=True)
+@bot.command(pass_context=True,name="pat",aliases=["pats"])
+async def pat(ctx, user: discord.Member=None):
+        link=["https://media1.tenor.com/images/1e92c03121c0bd6688d17eef8d275ea7/tenor.gif","https://thumbs.gfycat.com/FoolhardyJoyousBear-max-1mb.gif","https://media1.tenor.com/images/f79a9ec48bde0e592e55447b17ecfbad/tenor.gif","https://cdn.weeb.sh/images/Sk2FyQHpZ.gif","https://cdn.weeb.sh/images/B1PnJJYP-.gif","https://cdn.weeb.sh/images/Sky1x1YwW.gif","https://cdn.weeb.sh/images/SktIxo20b.gif","https://cdn.weeb.sh/images/Sk2f7J39G.gif","https://cdn.weeb.sh/images/B1TQcTNCZ.gif","https://cdn.weeb.sh/images/SJLaWWRSG.gif"]  
+        p=link[random.randint(0,len(link)-1)]      
+        if user!=None:
+            embed=discord.Embed(title="{} gently pats {}".format(ctx.message.author.name,user.name),color=0xf7d28c)
+        else:
+            embed=discord.Embed(title="There there, i will pat you {}".format(ctx.message.author.name),color=0xf7d28c)
+        embed.set_image(url=p)
+        await bot.say(embed=embed)
+        
+#Emoji commands
+@bot.group(pass_context=True)
+async def emoji(ctx):
+    if ctx.invoked_subcommand is None:
+        await bot.say('Invalid emoji command passed...')
+@emoji.command(pass_context=True)
 async def shrug(ctx):
     await bot.say("¯\_(ツ)_/¯")
     await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
+@emoji.command(pass_context=True)
 async def mikuyay(ctx):
     await bot.say("<a:mikuyay:434019400073347072>")
     await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
+@emoji.command(pass_context=True)
 async def sip(ctx):
     await bot.say("<a:sip:434254079246467075>")
     await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
+@emoji.command(pass_context=True)
 async def j(ctx):
     await bot.say("<a:j_:434254490745569282>")
     await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
+@emoji.command(pass_context=True)
 async def blush(ctx):
     await bot.say("<a:BLUSH:435062664884912128>")
     await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
+@emoji.command(pass_context=True)
 async def dance(ctx):
     await bot.say("<a:dance:434236128904609796>")
     await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
+@emoji.command(pass_context=True)
 async def peek(ctx):
     await bot.say("<a:peeking:435149270518333460>")
     await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
+@emoji.command(pass_context=True)
 async def bang(ctx):
     await bot.say("<a:bang:435149143577460752>")
     await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
+@emoji.command(pass_context=True)
 async def sweat(ctx):
     await bot.say("<a:blobsweat:435149054528454670>")
     await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
+@emoji.command(pass_context=True)
 async def wonder(ctx):
     await bot.say("<a:wonder:435147959101947905>")
     await bot.delete_message(ctx.message)
