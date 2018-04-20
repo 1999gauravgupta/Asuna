@@ -57,8 +57,8 @@ async def info(ctx, user: discord.Member=None):
         embed.set_thumbnail(url=user.avatar_url)
         await bot.say(embed=embed)
         print("User Info")
-    except Exception:
-        await bot.say(Exception)
+    except Exception as e:
+        await bot.say(e)
 
 @bot.command(pass_context=True)
 async def svrinfo(ctx):
@@ -71,8 +71,8 @@ async def svrinfo(ctx):
         embed.set_thumbnail(url=ctx.message.server.icon_url)
         await bot.say(embed=embed)
         print("Server Info")
-    except Exception:
-        await bot.say(Exception)
+    except Exception as e:
+        await bot.say(e)
 
 @bot.command(pass_context=True)
 async def say(ctx,*,something=None):
@@ -108,8 +108,8 @@ async def pfp(ctx,user:discord.Member=None):
         embed.set_image(url=user.avatar_url)
         await bot.say(embed=embed)
         print("Avatar")
-    except Exception:
-        await bot.say(Exception)
+    except Exception as e:
+        await bot.say(e)
 
 @bot.command(pass_context=True,name="ask",aliases=["8ball"])
 async def ask(ctx,*,p=None):
@@ -212,8 +212,8 @@ async def quote():
     try:
         await bot.say("```"+random.choice(quotes)+"```")
         print("quote")
-    except Exception:
-        await bot.say(Exception)
+    except Exception as e:
+        await bot.say(e)
 
 @bot.command(pass_context=True)
 async def invite(ctx):
@@ -228,8 +228,8 @@ async def invite(ctx):
         embed.set_thumbnail(url=Asuna.avatar_url)
         await bot.say(embed=embed)
         print("invite")
-    except Exception:
-        await bot.say(Exception)
+    except Exception as e:
+        await bot.say(e)
 
 @bot.command(name="ud",aliases=["urban"])
 async def ud(query=None):
@@ -316,8 +316,8 @@ async def emo(ctx,*,word):
                 else:
                     str+=(char+"  ")
             await bot.say(str.lower())
-        except Exception:
-            await bot.say(Exception)
+        except Exception as e:
+            await bot.say(e)
     print("emo")
 
 @bot.command(pass_context=True,name="norris",aliases=["chuck","chuck norris"])
@@ -333,8 +333,8 @@ async def norris(ctx, user: discord.Member=None):
         embed.set_thumbnail(url="https://cdn.dribbble.com/users/24711/screenshots/1701350/chuck_norris_2x.png")
         await bot.say(embed=embed)
         print("norris")
-    except Exception:
-        await bot.say(Exception)
+    except Exception as e:
+        await bot.say(e)
 
 @bot.command()
 async def xkcd(number=None):
@@ -365,8 +365,8 @@ async def xkcd(number=None):
                 embed.set_image(url=link)
                 await bot.say(embed=embed)
         print("xkcd")
-    except Exception:
-        await bot.say(Exception)
+    except Exception as e:
+        await bot.say(e)
 
 @bot.command()
 async def whatif():
@@ -487,8 +487,8 @@ async def yt(*,query=None):
             embed.add_field(name=name3,value=link3)
             await bot.say(embed=embed)
             print("yt")
-        except Exception:
-            await bot.say(Exception)
+        except Exception as e:
+            await bot.say(e)
 
 # @bot.command()
 # async def translate(*,query=None):
@@ -508,8 +508,8 @@ async def sebi():
         embed.set_image(url=url)
         await bot.say(embed=embed)
         print("sebi")
-    except Exception:
-        await bot.say(Exception)
+    except Exception as e:
+        await bot.say(e)
 
 @bot.command(pass_context=True,name="pat",aliases=["pats"])
 async def pat(ctx, user: discord.Member=None):
@@ -522,8 +522,8 @@ async def pat(ctx, user: discord.Member=None):
             embed=discord.Embed(title="There there, i will pat you {} <:pats:436961578961600512>".format(ctx.message.author.name),color=0xf7d28c)
         embed.set_image(url=p)
         await bot.say(embed=embed)
-    except Exception:
-        await bot.say(Exception)
+    except Exception as e:
+        await bot.say(e)
 
 @bot.command(pass_context=True,name="cuddle",aliases=["cuddles"])
 async def cuddle(ctx, user: discord.Member=None):
@@ -542,8 +542,8 @@ async def cuddle(ctx, user: discord.Member=None):
                 embed=discord.Embed(description="Here {} have some cuddles <:cuddle:436520636278374429>".format(ctx.message.author.name),color=0xf7d28c)
         embed.set_image(url=p)
         await bot.say(embed=embed)
-    except Exception:
-        await bot.say(Exception)
+    except Exception as e:
+        await bot.say(e)
 
 @bot.command(pass_context=True,name="hug",aliases=["hugs"])
 async def hug(ctx, user: discord.Member=None):
@@ -570,8 +570,8 @@ async def hug(ctx, user: discord.Member=None):
                 embed=discord.Embed(description="There you go {} hugs <:hug:436520609980219415>".format(ctx.message.author.name),color=0xf7d28c)
         embed.set_image(url=p)
         await bot.say(embed=embed)
-    except Exception:
-        await bot.say(Exception)
+    except Exception as e:
+        await bot.say(e)
 
 @bot.command(pass_context=True,name="slap",aliases=["slaps"])
 async def slap(ctx, user: discord.Member=None):
@@ -584,8 +584,8 @@ async def slap(ctx, user: discord.Member=None):
                 embed=discord.Embed(description="Hmm {} is slapping themselves, what? :wave:".format(ctx.message.author.name),color=0xf7d28c)
         embed.set_image(url=p)
         await bot.say(embed=embed)
-    except Exception:
-        await bot.say(Exception)
+    except Exception as e:
+        await bot.say(e)
 
 #blob commands
 @bot.group(pass_context=True)
