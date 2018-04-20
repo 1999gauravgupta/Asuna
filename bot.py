@@ -219,6 +219,7 @@ async def invite(ctx):
 @bot.command(name="ud",aliases=["urban"])
 async def ud(query=None):
     if query!=None:
+        try:
             defs = udd.define(query)
             for d in range(1):
                 definition=defs[d].definition
@@ -232,7 +233,8 @@ async def ud(query=None):
             embed.add_field(name="Upvotes",value=str(upvotes)+"👍",inline=True)
             embed.add_field(name="Downvotes",value=str(downvotes)+"👎",inline=True)
             await bot.say(embed=embed)
-        ##   await bot.say("Dear User, I could not find a definition for this word. in Urban Dictionary")
+        except Exception:
+             await bot.say("Dear User, I could not find a definition for this word in Urban Dictionary")
     print("ud")
 
 @bot.command(pass_context = True,name="purge",aliases=["prune"])
