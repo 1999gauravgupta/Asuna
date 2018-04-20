@@ -46,27 +46,33 @@ async def ping(self):
 async def info(ctx, user: discord.Member=None):
     if user is None:
         user = ctx.message.author
-    embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color=0xf7d28c)
-    embed.add_field(name="Name", value=user.name)
-    embed.add_field(name="ID", value=user.id)
-    embed.add_field(name="Status", value=user.status)
-    embed.add_field(name="Highest role", value=user.top_role)
-    embed.add_field(name="Joined", value=user.joined_at)
-    embed.add_field(name="Created",value=user.created_at)
-    embed.set_thumbnail(url=user.avatar_url)
-    await bot.say(embed=embed)
-    print("User Info")
+    try:
+        embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color=0xf7d28c)
+        embed.add_field(name="Name", value=user.name)
+        embed.add_field(name="ID", value=user.id)
+        embed.add_field(name="Status", value=user.status)
+        embed.add_field(name="Highest role", value=user.top_role)
+        embed.add_field(name="Joined", value=user.joined_at)
+        embed.add_field(name="Created",value=user.created_at)
+        embed.set_thumbnail(url=user.avatar_url)
+        await bot.say(embed=embed)
+        print("User Info")
+    except Exception:
+        await bot.say(Exception)
 
 @bot.command(pass_context=True)
 async def svrinfo(ctx):
-    embed = discord.Embed(title= (ctx.message.server.name+" info"), description="Here's what I could find.", color=0xf7d28c)
-    embed.add_field(name="Name", value=ctx.message.server.name)
-    embed.add_field(name="ID", value=ctx.message.server.id)
-    embed.add_field(name="Roles", value=len(ctx.message.server.roles))
-    embed.add_field(name="Members", value=len(ctx.message.server.members))
-    embed.set_thumbnail(url=ctx.message.server.icon_url)
-    await bot.say(embed=embed)
-    print("Server Info")
+    try:
+        embed = discord.Embed(title= (ctx.message.server.name+" info"), description="Here's what I could find.", color=0xf7d28c)
+        embed.add_field(name="Name", value=ctx.message.server.name)
+        embed.add_field(name="ID", value=ctx.message.server.id)
+        embed.add_field(name="Roles", value=len(ctx.message.server.roles))
+        embed.add_field(name="Members", value=len(ctx.message.server.members))
+        embed.set_thumbnail(url=ctx.message.server.icon_url)
+        await bot.say(embed=embed)
+        print("Server Info")
+    except Exception:
+        await bot.say(Exception)
 
 @bot.command(pass_context=True)
 async def say(ctx,*,something=None):
@@ -97,10 +103,13 @@ async def spam(ctx,no=1,*,something=None):
 async def pfp(ctx,user:discord.Member=None):
     if user is None:
         user = ctx.message.author
-    embed=discord.Embed(title="{}'s avatar".format(user.name),color=0xf7d28c)
-    embed.set_image(url=user.avatar_url)
-    await bot.say(embed=embed)
-    print("Avatar")
+    try:
+        embed=discord.Embed(title="{}'s avatar".format(user.name),color=0xf7d28c)
+        embed.set_image(url=user.avatar_url)
+        await bot.say(embed=embed)
+        print("Avatar")
+    except Exception:
+        await bot.say(Exception)
 
 @bot.command(pass_context=True,name="ask",aliases=["8ball"])
 async def ask(ctx,*,p=None):
@@ -182,7 +191,7 @@ async def help(ctx):
 • -emo <text>→ Emojifies the text.
 • -norris [@user] → Display random chuck norris joke.
 • -xkcd [number] → Searches xkcd for your comic else prints a random comic.
-• -sebi → Display a random SebiSauce.[Service not available atm]
+• -sebi → Display a random SebiSauce.
 • -pat [@user]→ Pats somebody's head!.
 • -cuddle [@user]→Cuddle somebody with a picture!.
 • -slap [@user]→ Slap the baka.
@@ -200,21 +209,27 @@ async def help(ctx):
 
 @bot.command()
 async def quote():
-    await bot.say("```"+random.choice(quotes)+"```")
-    print("quote")
+    try:
+        await bot.say("```"+random.choice(quotes)+"```")
+        print("quote")
+    except Exception:
+        await bot.say(Exception)
 
 @bot.command(pass_context=True)
 async def invite(ctx):
-    member = discord.utils
-    Asuna = discord.utils.get(ctx.message.server.members, id="411566473350217748")
-    embed=discord.Embed(title="Asuna's Invite Link",value="Add Asuna to your guild",color=0xf7d28c)
-    embed.add_field(name="Name",value="Asuna")
-    embed.add_field(name="Prefix",value="-, Asuna , asuna")
-    embed.add_field(name="Link",value="https://discordapp.com/api/oauth2/authorize?client_id=411566473350217748&permissions=8&scope=bot")
-    embed.set_footer(text="Feel free to uncheck some permissions")
-    embed.set_thumbnail(url=Asuna.avatar_url)
-    await bot.say(embed=embed)
-    print("invite")
+    try:
+        member = discord.utils
+        Asuna = discord.utils.get(ctx.message.server.members, id="411566473350217748")
+        embed=discord.Embed(title="Asuna's Invite Link",value="Add Asuna to your guild",color=0xf7d28c)
+        embed.add_field(name="Name",value="Asuna")
+        embed.add_field(name="Prefix",value="-, Asuna , asuna")
+        embed.add_field(name="Link",value="https://discordapp.com/api/oauth2/authorize?client_id=411566473350217748&permissions=8&scope=bot")
+        embed.set_footer(text="Feel free to uncheck some permissions")
+        embed.set_thumbnail(url=Asuna.avatar_url)
+        await bot.say(embed=embed)
+        print("invite")
+    except Exception:
+        await bot.say(Exception)
 
 @bot.command(name="ud",aliases=["urban"])
 async def ud(query=None):
@@ -266,67 +281,66 @@ async def purge(ctx, number=2,):
 @bot.command(pass_context=True,name="google",aliases=["g","search"])
 async def google(ctx,*,query=None):
        if query!=None:
-           list1=[]
-           for url in search(query, stop=1):
-                list1.append(url)
-           await bot.say(list1[0])
+           try:
+                list1=[]
+                for url in search(query, stop=1):
+                        list1.append(url)
+                await bot.say(list1[0])
+           except Exception:
+                await bot.say("Service unavailable atm")
+        
        print("google")
 
 @bot.command(pass_context=True,name="wiki",aliases=["wikipedia"])
 async def wiki(ctx,*,query=None):
     if query!=None:
-        list1=[]
-        query+="wikipedia"
-        for url in search(query, stop=1):
-                list1.append(url)
-        await bot.say(list1[0])
+        try:
+            list1=[]
+            query+="wikipedia"
+            for url in search(query, stop=1):
+                    list1.append(url)
+            await bot.say(list1[0])
+        except Exception:
+            await bot.say("Service unavailable atm")
     print("wikipedia")
 
 
 @bot.command(pass_context=True,name="emo",aliases=["emojify"])
 async def emo(ctx,*,word):
     if word!=None:
-        str=""
-        for char in word:
-            if char.isalpha():
-                str+=":regional_indicator_"+char+":"
-            else:
-                str+=(char+"  ")
-        await bot.say(str.lower())
+        try:
+            str=""
+            for char in word:
+                if char.isalpha():
+                    str+=":regional_indicator_"+char+":"
+                else:
+                    str+=(char+"  ")
+            await bot.say(str.lower())
+        except Exception:
+            await bot.say(Exception)
     print("emo")
 
 @bot.command(pass_context=True,name="norris",aliases=["chuck","chuck norris"])
 async def norris(ctx, user: discord.Member=None):
-    if user is None:
-        user ="Chuck Norris"
-    else:
-        user=user.name
-    word=q.random(str(user))
-    embed=discord.Embed(name="Chuck Norris",color=0xf7d28c)
-    embed.add_field(name="Chuck Norris",value=word)
-    embed.set_thumbnail(url="https://cdn.dribbble.com/users/24711/screenshots/1701350/chuck_norris_2x.png")
-    await bot.say(embed=embed)
-    print("norris")
+    try:
+        if user is None:
+            user ="Chuck Norris"
+        else:
+            user=user.name
+        word=q.random(str(user))
+        embed=discord.Embed(name="Chuck Norris",color=0xf7d28c)
+        embed.add_field(name="Chuck Norris",value=word)
+        embed.set_thumbnail(url="https://cdn.dribbble.com/users/24711/screenshots/1701350/chuck_norris_2x.png")
+        await bot.say(embed=embed)
+        print("norris")
+    except Exception:
+        await bot.say(Exception)
 
 @bot.command()
 async def xkcd(number=None):
-    if number==None:
-        a=com.getRandomComic()
-        title=a.getTitle()
-        link=a.getImageLink()
-        exp=a.getExplanation()
-        embed=discord.Embed(title="Xkcd",color=0xf7d28c)
-        embed.add_field(name="Title",value=title,inline=False)
-        embed.set_footer(text=("For explanation refer to: "+exp))
-        embed.set_image(url=link)
-        await bot.say(embed=embed)
-    else:
-        number=int(number)
-        limit=com.getLatestComicNum()
-        if number<1 or number>limit:
-            await bot.say("Invalid comic number :sweat_smile:")
-        else:
-            a=com.getComic(number, silent=True)
+    try:
+        if number==None:
+            a=com.getRandomComic()
             title=a.getTitle()
             link=a.getImageLink()
             exp=a.getExplanation()
@@ -335,7 +349,24 @@ async def xkcd(number=None):
             embed.set_footer(text=("For explanation refer to: "+exp))
             embed.set_image(url=link)
             await bot.say(embed=embed)
-    print("xkcd")
+        else:
+            number=int(number)
+            limit=com.getLatestComicNum()
+            if number<1 or number>limit:
+                await bot.say("Invalid comic number :sweat_smile:")
+            else:
+                a=com.getComic(number, silent=True)
+                title=a.getTitle()
+                link=a.getImageLink()
+                exp=a.getExplanation()
+                embed=discord.Embed(title="Xkcd",color=0xf7d28c)
+                embed.add_field(name="Title",value=title,inline=False)
+                embed.set_footer(text=("For explanation refer to: "+exp))
+                embed.set_image(url=link)
+                await bot.say(embed=embed)
+        print("xkcd")
+    except Exception:
+        await bot.say(Exception)
 
 @bot.command()
 async def whatif():
@@ -365,7 +396,7 @@ async def weather(*,location=None):
             embed.set_thumbnail(url=link)
             await bot.say(embed=embed)
             print("weather")
-        except KeyError:
+        except Exception:
             await bot.say("Given location not found")
 
 @bot.command(name="pokemon",aliases=["poke"])
@@ -414,7 +445,7 @@ async def pokemon(pokemon=None):
             embed.add_field(name="Speed",value=speed)
             embed.set_image(url=image)
             await bot.say(embed=embed)
-        except ValueError:
+        except Exception:
             await bot.say("Given pokemon not found")
         print("pokemon")
 
@@ -432,29 +463,32 @@ async def define(*,word=None):
             embed.add_field(name="Example",value=example)
             await bot.say(embed=embed)
             print("define")
-        except KeyError:
+        except Exception:
             await bot.say("Dear User, I could not find a definition for this word.")
 
 @bot.command(name="yt",aliases=["youtube","Youtube"])
 async def yt(*,query=None):
     if query!=None:
-        query="-".join(query.split())
-        response=urllib.request.urlopen("https://cheeze.club/api/youtube/"+query).read()
-        response=json.loads(response.decode("utf-8"))
-        name1=response[0]["name"]
-        image=response[0]["thumbnail"]
-        link1=response[0]["link"]
-        name2=response[1]["name"]
-        name3=response[2]["name"]
-        link2=response[1]["link"]
-        link3=response[2]["link"]
-        embed=discord.Embed(title="YouTube",description="Here's what i could find",color=0xf7d28c)
-        embed.add_field(name=name1,value=link1)
-        embed.set_thumbnail(url=image)
-        embed.add_field(name=name2,value=link2)
-        embed.add_field(name=name3,value=link3)
-        await bot.say(embed=embed)
-        print("yt")
+        try:
+            query="-".join(query.split())
+            response=urllib.request.urlopen("https://cheeze.club/api/youtube/"+query).read()
+            response=json.loads(response.decode("utf-8"))
+            name1=response[0]["name"]
+            image=response[0]["thumbnail"]
+            link1=response[0]["link"]
+            name2=response[1]["name"]
+            name3=response[2]["name"]
+            link2=response[1]["link"]
+            link3=response[2]["link"]
+            embed=discord.Embed(title="YouTube",description="Here's what i could find",color=0xf7d28c)
+            embed.add_field(name=name1,value=link1)
+            embed.set_thumbnail(url=image)
+            embed.add_field(name=name2,value=link2)
+            embed.add_field(name=name3,value=link3)
+            await bot.say(embed=embed)
+            print("yt")
+        except Exception:
+            await bot.say(Exception)
 
 # @bot.command()
 # async def translate(*,query=None):
@@ -466,16 +500,20 @@ async def yt(*,query=None):
 
 @bot.command(name="sebi",aliases=["sebisauce","Sebi"])
 async def sebi():
-    response=urllib.request.urlopen("https://sebisauce.herokuapp.com/api/random").read()
-    response=json.loads(response.decode("utf-8"))
-    url=response["file"]
-    embed=discord.Embed(title="SebiSauce",color=0xf7d28c)
-    embed.set_image(url=url)
-    await bot.say(embed=embed)
-    print("sebi")
+    try:
+        response=urllib.request.urlopen("https://sebisauce.herokuapp.com/api/random").read()
+        response=json.loads(response.decode("utf-8"))
+        url=response["file"]
+        embed=discord.Embed(title="SebiSauce",color=0xf7d28c)
+        embed.set_image(url=url)
+        await bot.say(embed=embed)
+        print("sebi")
+    except Exception:
+        await bot.say(Exception)
 
 @bot.command(pass_context=True,name="pat",aliases=["pats"])
 async def pat(ctx, user: discord.Member=None):
+    try:
         link=["https://media1.tenor.com/images/1e92c03121c0bd6688d17eef8d275ea7/tenor.gif","https://thumbs.gfycat.com/FoolhardyJoyousBear-max-1mb.gif","https://media1.tenor.com/images/f79a9ec48bde0e592e55447b17ecfbad/tenor.gif","https://cdn.weeb.sh/images/Sk2FyQHpZ.gif","https://cdn.weeb.sh/images/B1PnJJYP-.gif","https://cdn.weeb.sh/images/Sky1x1YwW.gif","https://cdn.weeb.sh/images/SktIxo20b.gif","https://cdn.weeb.sh/images/Sk2f7J39G.gif","https://cdn.weeb.sh/images/B1TQcTNCZ.gif","https://cdn.weeb.sh/images/SJLaWWRSG.gif"]  
         p=link[random.randint(0,len(link)-1)]      
         if user!=None:
@@ -484,59 +522,70 @@ async def pat(ctx, user: discord.Member=None):
             embed=discord.Embed(title="There there, i will pat you {} <:pats:436961578961600512>".format(ctx.message.author.name),color=0xf7d28c)
         embed.set_image(url=p)
         await bot.say(embed=embed)
+    except Exception:
+        await bot.say(Exception)
 
 @bot.command(pass_context=True,name="cuddle",aliases=["cuddles"])
 async def cuddle(ctx, user: discord.Member=None):
-    link= [
-"https://cdn.discordapp.com/attachments/424460621053034497/436497239221862400/S4WQfufMwrP33qaWTpUbY327OiY.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436496258249654272/TRcGA-wb3FBs39e7haOFTe-mA_s.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436495448396660737/zC4nmZRNAcR_HUz1idD6GE-V9iY.gif", "https://cdn.weeb.sh/images/BywGX8caZ.gif", "https://cdn.weeb.sh/images/BkTe8U7v-.gif", "https://cdn.weeb.sh/images/ryfyLL7D-.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436487630515994634/C-8H8sShkykA_pfng9WrWrGncHU.gif", "https://cdn.weeb.sh/images/SJbGLUQwZ.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436497045491154974/aW0d0t965qyCKT1gAbZkLJvIrKg.gif",
-"https://cdn.weeb.sh/images/SJLkLImPb.gif",
-"https://cdn.weeb.sh/images/BJCCd_7Pb.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436508238142242816/BbpmqdFoWtePuhOQu_AAvOey4i4.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436508843296423947/VBSyXo7VbTRkki3LE4oLvu2j7Tw.gif"]
-    p=link[random.randint(0,len(link)-1)]      
-    if user!=None:
-            embed=discord.Embed(description="{} cuddles {} <:cuddle:436520636278374429>".format(ctx.message.author.name,user.name),color=0xf7d28c)
-    else:
-            embed=discord.Embed(description="Here {} have some cuddles <:cuddle:436520636278374429>".format(ctx.message.author.name),color=0xf7d28c)
-    embed.set_image(url=p)
-    await bot.say(embed=embed)
+    try:
+        link= [
+    "https://cdn.discordapp.com/attachments/424460621053034497/436497239221862400/S4WQfufMwrP33qaWTpUbY327OiY.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436496258249654272/TRcGA-wb3FBs39e7haOFTe-mA_s.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436495448396660737/zC4nmZRNAcR_HUz1idD6GE-V9iY.gif", "https://cdn.weeb.sh/images/BywGX8caZ.gif", "https://cdn.weeb.sh/images/BkTe8U7v-.gif", "https://cdn.weeb.sh/images/ryfyLL7D-.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436487630515994634/C-8H8sShkykA_pfng9WrWrGncHU.gif", "https://cdn.weeb.sh/images/SJbGLUQwZ.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436497045491154974/aW0d0t965qyCKT1gAbZkLJvIrKg.gif",
+    "https://cdn.weeb.sh/images/SJLkLImPb.gif",
+    "https://cdn.weeb.sh/images/BJCCd_7Pb.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436508238142242816/BbpmqdFoWtePuhOQu_AAvOey4i4.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436508843296423947/VBSyXo7VbTRkki3LE4oLvu2j7Tw.gif"]
+        p=link[random.randint(0,len(link)-1)]      
+        if user!=None:
+                embed=discord.Embed(description="{} cuddles {} <:cuddle:436520636278374429>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+        else:
+                embed=discord.Embed(description="Here {} have some cuddles <:cuddle:436520636278374429>".format(ctx.message.author.name),color=0xf7d28c)
+        embed.set_image(url=p)
+        await bot.say(embed=embed)
+    except Exception:
+        await bot.say(Exception)
 
 @bot.command(pass_context=True,name="hug",aliases=["hugs"])
 async def hug(ctx, user: discord.Member=None):
-    link= [
-"https://cdn.discordapp.com/attachments/424460621053034497/436488319438815232/OoEK1pufpxGvpfWA-qL8DuSoLtk.gif", 
-"https://cdn.discordapp.com/attachments/424460621053034497/436492112175824896/mqC9WtmX2LFyTRqw8ux26ziuSEE.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436488752869933056/y-Qzmrr1NMMFUqGTB3kDUSs0V1E.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436492528553033728/Njo4sAAJYsVV8vErcujEPQChhy0.gif",
-"https://cdn.weeb.sh/images/HyNJIaVCb.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436505988452057088/f8aqtullCnYLfTZ-sclVtyOiYUw.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436506633263251465/Yh2-H4-hgeOvI8E5bQBPvZQZTgk.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436507047392051200/Y1imtlb9MAhTxzhQz2ZyervdhQU.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436507914824318976/XpPkI_Q9y2bKiV8l3zVStJwUfws.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436509146448134144/jeOuIHlc_cWbxfHx8fcuIvAQ2eA.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436509947237236746/AjLRblhWqwoCH1E05C0I3zhOx74.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436510123217911808/v47c1jnQvxv3m3QQPg0LDEO7puA.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436510371931750410/2derXdykHPW1hVIrhKBsYvfjFkw.gif",
-"https://cdn.discordapp.com/attachments/424460621053034497/436510649770573845/nTphroCP85a9C4Ny77VnOStOc0.gif",
-"https://cdn.discordapp.com/attachments/429288271122792469/436511361636499457/PkwyV8KjIp2Mcsg5-X89uLVrPc0.gif"]
-    p=link[random.randint(0,len(link)-1)]      
-    if user!=None:
-            embed=discord.Embed(description="{} tightly hugs {} <:hug:436520609980219415>".format(ctx.message.author.name,user.name),color=0xf7d28c)
-    else:
-            embed=discord.Embed(description="There you go {} hugs <:hug:436520609980219415>".format(ctx.message.author.name),color=0xf7d28c)
-    embed.set_image(url=p)
-    await bot.say(embed=embed)
+    try:
+        link= [
+    "https://cdn.discordapp.com/attachments/424460621053034497/436488319438815232/OoEK1pufpxGvpfWA-qL8DuSoLtk.gif", 
+    "https://cdn.discordapp.com/attachments/424460621053034497/436492112175824896/mqC9WtmX2LFyTRqw8ux26ziuSEE.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436488752869933056/y-Qzmrr1NMMFUqGTB3kDUSs0V1E.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436492528553033728/Njo4sAAJYsVV8vErcujEPQChhy0.gif",
+    "https://cdn.weeb.sh/images/HyNJIaVCb.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436505988452057088/f8aqtullCnYLfTZ-sclVtyOiYUw.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436506633263251465/Yh2-H4-hgeOvI8E5bQBPvZQZTgk.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436507047392051200/Y1imtlb9MAhTxzhQz2ZyervdhQU.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436507914824318976/XpPkI_Q9y2bKiV8l3zVStJwUfws.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436509146448134144/jeOuIHlc_cWbxfHx8fcuIvAQ2eA.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436509947237236746/AjLRblhWqwoCH1E05C0I3zhOx74.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436510123217911808/v47c1jnQvxv3m3QQPg0LDEO7puA.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436510371931750410/2derXdykHPW1hVIrhKBsYvfjFkw.gif",
+    "https://cdn.discordapp.com/attachments/424460621053034497/436510649770573845/nTphroCP85a9C4Ny77VnOStOc0.gif",
+    "https://cdn.discordapp.com/attachments/429288271122792469/436511361636499457/PkwyV8KjIp2Mcsg5-X89uLVrPc0.gif"]
+        p=link[random.randint(0,len(link)-1)]      
+        if user!=None:
+                embed=discord.Embed(description="{} tightly hugs {} <:hug:436520609980219415>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+        else:
+                embed=discord.Embed(description="There you go {} hugs <:hug:436520609980219415>".format(ctx.message.author.name),color=0xf7d28c)
+        embed.set_image(url=p)
+        await bot.say(embed=embed)
+    except Exception:
+        await bot.say(Exception)
 
 @bot.command(pass_context=True,name="slap",aliases=["slaps"])
 async def slap(ctx, user: discord.Member=None):
-    link= ["https://cdn.weeb.sh/images/ByTR7kFwW.gif","https://cdn.weeb.sh/images/HkK2mkYPZ.gif","https://cdn.weeb.sh/images/SJ-CQytvW.gif","https://cdn.weeb.sh/images/BJLCX1Kw-.gif","https://cdn.weeb.sh/images/ry2tWxcyf.gif","https://cdn.weeb.sh/images/HyPjmytDW.gif","https://cdn.weeb.sh/images/HJKiX1tPW.gif","https://cdn.weeb.sh/images/HJfXM0KYZ.gif","https://cdn.weeb.sh/images/BJSpWec1M.gif","https://cdn.weeb.sh/images/HyV5mJtDb.gif","https://media.giphy.com/media/t1CsJ1o1sdOHm/giphy.gif","https://media.giphy.com/media/3eKfsCZKKb3c4/giphy.gif","https://m.popkey.co/d5f999/4Vv51_s-200x150.gif","https://m.popkey.co/1121ac/16jO8_s-200x150.gif","http://www.teampwnicorn.com/wp-content/uploads/2013/03/Joffrey-gets-slapped-5.gif"]
-    p=link[random.randint(0,len(link)-1)]      
-    if user!=None:
-            embed=discord.Embed(description="{} slapped {}... Must have been a real baka :wave:".format(ctx.message.author.name,user.name),color=0xf7d28c)
-    else:
-            embed=discord.Embed(description="Hmm {} is slapping themselves, what? :wave:".format(ctx.message.author.name),color=0xf7d28c)
-    embed.set_image(url=p)
-    await bot.say(embed=embed)
+    try:
+        link= ["https://cdn.weeb.sh/images/ByTR7kFwW.gif","https://cdn.weeb.sh/images/HkK2mkYPZ.gif","https://cdn.weeb.sh/images/SJ-CQytvW.gif","https://cdn.weeb.sh/images/BJLCX1Kw-.gif","https://cdn.weeb.sh/images/ry2tWxcyf.gif","https://cdn.weeb.sh/images/HyPjmytDW.gif","https://cdn.weeb.sh/images/HJKiX1tPW.gif","https://cdn.weeb.sh/images/HJfXM0KYZ.gif","https://cdn.weeb.sh/images/BJSpWec1M.gif","https://cdn.weeb.sh/images/HyV5mJtDb.gif","https://media.giphy.com/media/t1CsJ1o1sdOHm/giphy.gif","https://media.giphy.com/media/3eKfsCZKKb3c4/giphy.gif","https://m.popkey.co/d5f999/4Vv51_s-200x150.gif","https://m.popkey.co/1121ac/16jO8_s-200x150.gif","http://www.teampwnicorn.com/wp-content/uploads/2013/03/Joffrey-gets-slapped-5.gif"]
+        p=link[random.randint(0,len(link)-1)]      
+        if user!=None:
+                embed=discord.Embed(description="{} slapped {}... Must have been a real baka :wave:".format(ctx.message.author.name,user.name),color=0xf7d28c)
+        else:
+                embed=discord.Embed(description="Hmm {} is slapping themselves, what? :wave:".format(ctx.message.author.name),color=0xf7d28c)
+        embed.set_image(url=p)
+        await bot.say(embed=embed)
+    except Exception:
+        await bot.say(Exception)
 
 #blob commands
 @bot.group(pass_context=True)
