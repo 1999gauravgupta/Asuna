@@ -4,3 +4,4 @@ urbandictionary
 google
 chucknorris
 spice_api
+lxml
