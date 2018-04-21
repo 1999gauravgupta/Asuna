@@ -660,8 +660,9 @@ async def anime(ctx,*,query):
                 await bot.say(embed=embed)
         else:
             await bot.say("Given Anime not found")
-    except Exception:
+    except Exception as e:
         await bot.say("Service unavailable atm")
+        print(e)
 
 
 @bot.command(pass_context=True)
@@ -715,8 +716,9 @@ async def manga(ctx,*,query):
             await bot.say(embed=embed)
         else:
             await bot.say("Given Manga not found")
-    except Exception:
+    except Exception as e:
         await bot.say("Service unavailable atm")
+        print(e)
 
 #blob commands
 @bot.group(pass_context=True)
