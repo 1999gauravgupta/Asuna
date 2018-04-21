@@ -608,10 +608,13 @@ async def anime(ctx,*,query):
             m =await bot.wait_for_message(author=ctx.message.author, timeout=30)
             m=int(m.content)
             m=m-1
-            mgs = [] 
-            async for x in bot.logs_from(ctx.message.channel, limit = 2):
-                mgs.append(x)
-            await bot.delete_messages(mgs)
+            try:
+                mgs = [] 
+                async for x in bot.logs_from(ctx.message.channel, limit = 2):
+                    mgs.append(x)
+                await bot.delete_messages(mgs)
+            except:
+                pass
             ids=test[m].id
             title=test[m].title
             episode=test[m].episodes
@@ -644,7 +647,7 @@ async def anime(ctx,*,query):
                 embed.add_field(name="Episodes",value=episode,inline=True)
                 embed.add_field(name="Status",value=status)
                 embed.add_field(name="Started",value=date[0])
-                embed.add_field(name="Score",value=(score+" "+emoji))
+                embed.add_field(name="Score",value=(str(score)+" "+emoji))
                 embed.set_thumbnail(url=link)
                 await bot.say(embed=embed)
             else:
@@ -679,10 +682,13 @@ async def manga(ctx,*,query):
             m =await bot.wait_for_message(author=ctx.message.author, timeout=30)
             m=int(m.content)
             m=m-1
-            mgs = [] 
-            async for x in bot.logs_from(ctx.message.channel, limit = 2):
-                mgs.append(x)
-            await bot.delete_messages(mgs)
+            try:
+                mgs = [] 
+                async for x in bot.logs_from(ctx.message.channel, limit = 2):
+                    mgs.append(x)
+                await bot.delete_messages(mgs)
+            except:
+                pass
             ids=test[m].id
             title=test[m].title
             episode=test[m].chapters
