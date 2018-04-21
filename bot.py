@@ -20,18 +20,20 @@ with codecs.open("quotes.json", "r",encoding='utf-8', errors='ignore') as f:
 bot = commands.Bot(command_prefix=['-','asuna ',"Asuna "])
 client=discord.Client()
 
+bot.load_extension("executer")
 #COMMANDS
-
 @bot.event
 async def on_ready():
     print("ready")
     print ("I am running on " + bot.user.name)
     print ("With the ID: " + bot.user.id)
 
+
 @bot.event
 async def on_ready():
     await bot.change_presence(game=discord.Game(name='Listening to -help'))
     print("status changing done")
+
 
 @bot.command(pass_context=True)
 async def ping(self):
@@ -519,7 +521,7 @@ async def pat(ctx, user: discord.Member=None):
         if user!=None:
             embed=discord.Embed(description="{} gently pats {} <:pats:436961578961600512>".format(ctx.message.author.name,user.name),color=0xf7d28c)
         else:
-            embed=discord.Embed(title="There there, i will pat you {} <:pats:436961578961600512>".format(ctx.message.author.name),color=0xf7d28c)
+            embed=discord.Embed(description="There there, i will pat you {} <:pats:436961578961600512>".format(ctx.message.author.name),color=0xf7d28c)
         embed.set_image(url=p)
         await bot.say(embed=embed)
     except Exception as e:
