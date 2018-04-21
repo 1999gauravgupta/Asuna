@@ -13,9 +13,12 @@ import xkcd as com
 import requests
 from googlesearch import search
 import time
+import spice_api as spice
 #for files
 with codecs.open("quotes.json", "r",encoding='utf-8', errors='ignore') as f:
     quotes= json.load(f)
+
+creds=spice.init_auth("gauravgupta", "gj111999")
 
 bot = commands.Bot(command_prefix=['-','asuna ',"Asuna "])
 client=discord.Client()
@@ -186,6 +189,8 @@ async def help(ctx):
 • -pokemon <query> → Gives some data about queried pokemon.
 • -ud <word> → Searches Urban Dictionary for your word.
 • -define <word> → Searches Dictionary for your word.
+• -anime <query> → Searches for given anime details.
+• -manga <query> → Searches for given manga details.
 
 **General Fun Commands:**
 • -quote → Display random motivational code to make your day.
@@ -588,6 +593,130 @@ async def slap(ctx, user: discord.Member=None):
         await bot.say(embed=embed)
     except Exception as e:
         await bot.say(e)
+
+@bot.command(pass_context=True)
+async def anime(ctx,*,query):
+    try:
+        test=spice.search(query, spice.get_medium('anime'),creds)
+        list1=""
+        count=1
+        for i in test:
+            list1+=(str(count)+". "+i.title+"\n")
+            count+=1
+        if list1!="":
+            await bot.say("```\n"+list1+"\n```")
+            m =await bot.wait_for_message(author=ctx.message.author, timeout=30)
+            m=int(m.content)
+            m=m-1
+            mgs = [] 
+            async for x in bot.logs_from(ctx.message.channel, limit = 2):
+                mgs.append(x)
+            await bot.delete_messages(mgs)
+            ids=test[m].id
+            title=test[m].title
+            episode=test[m].episodes
+            score=float(test[m].score)
+            typea=test[m].anime_type
+            status=test[m].status
+            date=test[m].dates
+            date=list(date)
+            syno1=test[m].synopsis
+            syno2=syno1.replace('<br />', '')
+            syno3=syno2.replace("[Written by MAL Rewrite]", "")
+            syno4=syno3.replace("[i]","")
+            syno5=syno4.replace("[/i]","")
+            syno=syno5.replace("&#039;","'")
+            link=test[m].image_url
+            if score>=0 and score<2:
+                emoji=":disappointed:"
+            elif score>=2 and score<4:
+                emoji=":grimacing:"
+            elif score>=4 and score<6:
+                emoji=":neutral_face:"
+            elif score>=6 and score<9:
+                emoji=":smiley:"
+            else:
+                emoji=":heart_eyes:"
+            if status=="Currently Airing":
+                embed=discord.Embed(title="{}".format(title),color=0xf7d28c)
+                embed.add_field(name="Synopsis",value=syno)
+                embed.add_field(name="Type",value=typea)
+                embed.add_field(name="Episodes",value=episode,inline=True)
+                embed.add_field(name="Status",value=status)
+                embed.add_field(name="Started",value=date[0])
+                embed.add_field(name="Score",value=(score+" "+emoji))
+                embed.set_thumbnail(url=link)
+                await bot.say(embed=embed)
+            else:
+                embed=discord.Embed(title="{}".format(title),color=0xf7d28c)
+                embed.add_field(name="Synopsis",value=syno)
+                embed.add_field(name="Type",value=typea)
+                embed.add_field(name="Episodes",value=episode,inline=True)
+                embed.add_field(name="Status",value=status)
+                embed.add_field(name="Started",value=date[0])
+                embed.add_field(name="Finished",value=date[1])
+                embed.add_field(name="Score",value=(str(score)+" "+emoji))
+                embed.set_thumbnail(url=link)
+                await bot.say(embed=embed)
+        else:
+            await bot.say("Given Anime not found")
+    except Exception:
+        await bot.say("Service unavailable atm")
+
+
+@bot.command(pass_context=True)
+async def manga(ctx,*,query):
+    try:
+        test=spice.search(query, spice.get_medium('manga'),creds)
+        list1=""
+        count=1
+        for i in test:
+            list1+=(str(count)+". "+i.title+"\n")
+            count+=1
+        if list1!="":
+            await bot.say("```\n"+list1+"\n```")
+            m =await bot.wait_for_message(author=ctx.message.author, timeout=30)
+            m=int(m.content)
+            m=m-1
+            mgs = [] 
+            async for x in bot.logs_from(ctx.message.channel, limit = 2):
+                mgs.append(x)
+            await bot.delete_messages(mgs)
+            ids=test[m].id
+            title=test[m].title
+            episode=test[m].chapters
+            score=float(test[m].score)
+            typea=test[m].manga_type
+            status=test[m].status
+            syno1=test[m].synopsis
+            syno2=syno1.replace('<br />', '')
+            syno3=syno2.replace("[Written by MAL Rewrite]", "")
+            syno4=syno3.replace("[i]","")
+            syno5=syno4.replace("[/i]","")
+            syno=syno5.replace("&#039;","'")
+            link=test[m].image_url
+            if score>=0 and score<2:
+                emoji=":disappointed:"
+            elif score>=2 and score<4:
+                emoji=":grimacing:"
+            elif score>=4 and score<6:
+                emoji=":neutral_face:"
+            elif score>=6 and score<9:
+                emoji=":smiley:"
+            else:
+                emoji=":heart_eyes:"
+            embed=discord.Embed(title="{}".format(title),color=0xf7d28c)
+            embed.add_field(name="Synopsis",value=syno)
+            embed.add_field(name="Type",value=typea)
+            embed.add_field(name="Chapters",value=episode,inline=True)
+            embed.add_field(name="Status",value=status)
+            embed.add_field(name="Score",value=(str(score)+" "+emoji))
+            embed.set_thumbnail(url=link)
+            await bot.say(embed=embed)
+        else:
+            await bot.say("Given Manga not found")
+    except Exception:
+        await bot.say("Service unavailable atm")
 
 #blob commands
 @bot.group(pass_context=True)
