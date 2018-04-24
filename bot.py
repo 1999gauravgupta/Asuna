@@ -20,7 +20,7 @@ with codecs.open("quotes.json", "r",encoding='utf-8', errors='ignore') as f:
 
 creds=spice.init_auth("gauravgupta", "gj111999")
 
-bot = commands.Bot(command_prefix=['-','asuna ',"Asuna "])
+bot = commands.Bot(command_prefix=['-','asuna ',"Asuna ","Asuna, ","asuna, ","@411566473350217748 "])
 client=discord.Client()
 
 bot.load_extension("executer")
@@ -203,6 +203,9 @@ async def help(ctx):
 • -cuddle [@user]→Cuddle somebody with a picture!.
 • -slap [@user]→ Slap the baka.
 • -hug [@user]→ Hug somebody with a picture!
+• -kiss [@user]→ Show some love.
+• -tickle [@user]→ Don't stop until they cry.
+• -sleepy [@user]→ Why not sleeping then?.
 
 **General Emoji Commands:**
 • -emoji <shrug,sip,bang,wonder,mikuyay,peek,dance,j> → Appends that emoji in chat.
@@ -535,13 +538,7 @@ async def pat(ctx, user: discord.Member=None):
 @bot.command(pass_context=True,name="cuddle",aliases=["cuddles"])
 async def cuddle(ctx, user: discord.Member=None):
     try:
-        link= [
-    "https://cdn.discordapp.com/attachments/424460621053034497/436497239221862400/S4WQfufMwrP33qaWTpUbY327OiY.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436496258249654272/TRcGA-wb3FBs39e7haOFTe-mA_s.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436495448396660737/zC4nmZRNAcR_HUz1idD6GE-V9iY.gif", "https://cdn.weeb.sh/images/BywGX8caZ.gif", "https://cdn.weeb.sh/images/BkTe8U7v-.gif", "https://cdn.weeb.sh/images/ryfyLL7D-.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436487630515994634/C-8H8sShkykA_pfng9WrWrGncHU.gif", "https://cdn.weeb.sh/images/SJbGLUQwZ.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436497045491154974/aW0d0t965qyCKT1gAbZkLJvIrKg.gif",
-    "https://cdn.weeb.sh/images/SJLkLImPb.gif",
-    "https://cdn.weeb.sh/images/BJCCd_7Pb.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436508238142242816/BbpmqdFoWtePuhOQu_AAvOey4i4.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436508843296423947/VBSyXo7VbTRkki3LE4oLvu2j7Tw.gif"]
+        link= ["https://cdn.weeb.sh/images/BywGX8caZ.gif", "https://cdn.weeb.sh/images/BkTe8U7v-.gif", "https://cdn.weeb.sh/images/ryfyLL7D-.gif",  "https://cdn.weeb.sh/images/SJbGLUQwZ.gif","https://cdn.weeb.sh/images/SJLkLImPb.gif","https://cdn.weeb.sh/images/BJCCd_7Pb.gif","https://cdn.weeb.sh/images/B1SzeshCW.gif","https://cdn.weeb.sh/images/r1Q0HImPZ.gif","https://cdn.weeb.sh/images/r17lwymiZ.gif","https://cdn.weeb.sh/images/By03IkXsZ.gif","https://cdn.weeb.sh/images/S1T91Att-.gif","https://cdn.weeb.sh/images/r1s9RqB7G.gif","https://cdn.weeb.sh/images/SJceIU7wZ.gif","https://cdn.weeb.sh/images/Hyxo1CFtb.gif"]
         p=link[random.randint(0,len(link)-1)]      
         if user!=None:
                 embed=discord.Embed(description="{} cuddles {} <:cuddle:436520636278374429>".format(ctx.message.author.name,user.name),color=0xf7d28c)
@@ -555,22 +552,8 @@ async def cuddle(ctx, user: discord.Member=None):
 @bot.command(pass_context=True,name="hug",aliases=["hugs"])
 async def hug(ctx, user: discord.Member=None):
     try:
-        link= [
-    "https://cdn.discordapp.com/attachments/424460621053034497/436488319438815232/OoEK1pufpxGvpfWA-qL8DuSoLtk.gif", 
-    "https://cdn.discordapp.com/attachments/424460621053034497/436492112175824896/mqC9WtmX2LFyTRqw8ux26ziuSEE.gif", "https://cdn.discordapp.com/attachments/424460621053034497/436488752869933056/y-Qzmrr1NMMFUqGTB3kDUSs0V1E.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436492528553033728/Njo4sAAJYsVV8vErcujEPQChhy0.gif",
-    "https://cdn.weeb.sh/images/HyNJIaVCb.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436505988452057088/f8aqtullCnYLfTZ-sclVtyOiYUw.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436506633263251465/Yh2-H4-hgeOvI8E5bQBPvZQZTgk.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436507047392051200/Y1imtlb9MAhTxzhQz2ZyervdhQU.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436507914824318976/XpPkI_Q9y2bKiV8l3zVStJwUfws.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436509146448134144/jeOuIHlc_cWbxfHx8fcuIvAQ2eA.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436509947237236746/AjLRblhWqwoCH1E05C0I3zhOx74.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436510123217911808/v47c1jnQvxv3m3QQPg0LDEO7puA.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436510371931750410/2derXdykHPW1hVIrhKBsYvfjFkw.gif",
-    "https://cdn.discordapp.com/attachments/424460621053034497/436510649770573845/nTphroCP85a9C4Ny77VnOStOc0.gif",
-    "https://cdn.discordapp.com/attachments/429288271122792469/436511361636499457/PkwyV8KjIp2Mcsg5-X89uLVrPc0.gif"]
-        p=link[random.randint(0,len(link)-1)]      
+        link= ["https://cdn.weeb.sh/images/HyNJIaVCb.gif","https://cdn.weeb.sh/images/HkfgF_QvW.gif","https://cdn.weeb.sh/images/BkZngAYtb.gif","https://cdn.weeb.sh/images/SJebhd1Ob.gif","https://cdn.weeb.sh/images/BJF5_uXvZ.gif","https://cdn.weeb.sh/images/ryPix0Ft-.gif","https://cdn.weeb.sh/images/ByPGRkFVz.gif","https://cdn.weeb.sh/images/SyQ0_umD-.gif","https://cdn.weeb.sh/images/BkuUhO1OW.gif","https://cdn.weeb.sh/images/B10Tfknqf.gif","https://cdn.weeb.sh/images/SJZ-Qy35f.gif","https://cdn.weeb.sh/images/B11CDkhqM.gif","https://cdn.weeb.sh/images/HytoudXwW.gif","https://cdn.weeb.sh/images/Sk2gmRZZG.gif","https://cdn.weeb.sh/images/S14ju_7Pb.gif","https://cdn.weeb.sh/images/r1v2_uXP-.gif"]
+        p=link[random.randint(0,len(link)-1)]     
         if user!=None:
                 embed=discord.Embed(description="{} tightly hugs {} <:hug:436520609980219415>".format(ctx.message.author.name,user.name),color=0xf7d28c)
         else:
@@ -584,11 +567,53 @@ async def hug(ctx, user: discord.Member=None):
 async def slap(ctx, user: discord.Member=None):
     try:
         link= ["https://cdn.weeb.sh/images/ByTR7kFwW.gif","https://cdn.weeb.sh/images/HkK2mkYPZ.gif","https://cdn.weeb.sh/images/SJ-CQytvW.gif","https://cdn.weeb.sh/images/BJLCX1Kw-.gif","https://cdn.weeb.sh/images/ry2tWxcyf.gif","https://cdn.weeb.sh/images/HyPjmytDW.gif","https://cdn.weeb.sh/images/HJKiX1tPW.gif","https://cdn.weeb.sh/images/HJfXM0KYZ.gif","https://cdn.weeb.sh/images/BJSpWec1M.gif","https://cdn.weeb.sh/images/HyV5mJtDb.gif","https://media.giphy.com/media/t1CsJ1o1sdOHm/giphy.gif","https://media.giphy.com/media/3eKfsCZKKb3c4/giphy.gif","https://m.popkey.co/d5f999/4Vv51_s-200x150.gif","https://m.popkey.co/1121ac/16jO8_s-200x150.gif","http://www.teampwnicorn.com/wp-content/uploads/2013/03/Joffrey-gets-slapped-5.gif"]
-        p=link[random.randint(0,len(link)-1)]      
+        p=link[random.randint(0,len(link)-1)]   
         if user!=None:
                 embed=discord.Embed(description="{} slapped {}... Must have been a real baka :wave:".format(ctx.message.author.name,user.name),color=0xf7d28c)
         else:
                 embed=discord.Embed(description="Hmm {} is slapping themselves, what? :wave:".format(ctx.message.author.name),color=0xf7d28c)
+        embed.set_image(url=p)
+        await bot.say(embed=embed)
+    except Exception as e:
+        await bot.say(e)
+
+@bot.command(pass_context=True,name="kiss",aliases=["kisses"])
+async def kiss(ctx, user: discord.Member=None):
+    try:
+        link=["https://cdn.weeb.sh/images/BydoCy9yG.gif","https://cdn.weeb.sh/images/BJSdQRtFZ.gif","https://cdn.weeb.sh/images/ryoW3T_vW.gif","https://cdn.weeb.sh/images/Sy6Ai6ODb.gif","https://cdn.weeb.sh/images/HklBtCvTZ.gif","https://cdn.weeb.sh/images/SkKL3adPb.gif","https://cdn.weeb.sh/images/SJ7b26_PW.gif","https://cdn.weeb.sh/images/HJ5khTOP-.gif","https://cdn.weeb.sh/images/Skc42pdv-.gif","https://cdn.weeb.sh/images/SJQRoTdDZ.gif","https://cdn.weeb.sh/images/BJv0o6uDZ.gif","https://cdn.weeb.sh/images/Sksk4l51z.gif","https://cdn.weeb.sh/images/Bkuk26uvb.gif","https://cdn.weeb.sh/images/r1cB3aOwW.gif","https://cdn.weeb.sh/images/ByTBhp_vZ.gif","https://cdn.weeb.sh/images/rJ_U2p_Pb.gif","https://cdn.weeb.sh/images/rJ6PWohA-.gif"]
+        p=link[random.randint(0,len(link)-1)]      
+        if user!=None:
+                embed=discord.Embed(description="{} is kissing {}, they are so cute together :kiss:".format(ctx.message.author.name,user.name),color=0xf7d28c)
+        else:
+                embed=discord.Embed(description="Kissing yourself {}? Sorry for that :kiss:".format(ctx.message.author.name),color=0xf7d28c)
+        embed.set_image(url=p)
+        await bot.say(embed=embed)
+    except Exception as e:
+        await bot.say(e)
+
+@bot.command(pass_context=True,name="tickle",aliases=["tickles"])
+async def tickle(ctx, user: discord.Member=None):
+    try:
+        link=["https://cdn.ram.moe/H1ChowIDx.gif","https://cdn.ram.moe/rJmioDLPl.gif","https://cdn.ram.moe/S1idjvIPx.gif","https://cdn.ram.moe/SJFisw8wx.gif","https://cdn.ram.moe/H1FqsDLPl.gif","https://cdn.ram.moe/rJQ2jvLDg.gif","https://cdn.weeb.sh/images/HyPyUymsb.gif","https://cdn.weeb.sh/images/HyjNLkXiZ.gif","https://cdn.weeb.sh/images/H1p0ByQo-.gif","https://cdn.weeb.sh/images/SyGQIk7i-.gif","https://cdn.weeb.sh/images/SyQHUy7oW.gif","https://cdn.weeb.sh/images/rkPzIyQi-.gif","https://cdn.weeb.sh/images/rybRByXjZ.gif"]
+        p=link[random.randint(0,len(link)-1)]      
+        if user!=None:
+                embed=discord.Embed(description="{} is tickling {} <:epicsmile:428602772351614996>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+        else:
+                embed=discord.Embed(description="Tickles for you, {}! <:epicsmile:428602772351614996>".format(ctx.message.author.name),color=0xf7d28c)
+        embed.set_image(url=p)
+        await bot.say(embed=embed)
+    except Exception as e:
+        await bot.say(e)
+
+@bot.command(pass_context=True,name="sleep",aliases=["sleepy"])
+async def sleep(ctx, user: discord.Member=None):
+    try:
+        link=["https://cdn.weeb.sh/images/ryBb41Kvb.gif","https://cdn.weeb.sh/images/SJKW4kYvZ.gif","https://cdn.weeb.sh/images/HJAx4ktD-.gif","https://cdn.weeb.sh/images/H1_-U6--f.gif","https://cdn.weeb.sh/images/HkGZVkKDW.gif","https://cdn.weeb.sh/images/rkxkM41tPW.gif","https://cdn.weeb.sh/images/rJ7ZNyKDW.gif","https://cdn.weeb.sh/images/SJYxNJKDZ.gif","https://cdn.weeb.sh/images/r1yzV1tPZ.gif","https://cdn.weeb.sh/images/rk3-NkKDb.gif","https://cdn.weeb.sh/images/By5ZNktDW.gif"]
+        p=link[random.randint(0,len(link)-1)]      
+        if user!=None:
+                embed=discord.Embed(description="{} it seems like {} is sleepy, why not help them? <:gn:433510143095734273>".format(user.name,ctx.message.author.name),color=0xf7d28c)
+        else:
+                embed=discord.Embed(description="{} seems to be feeling sleepy, why not go sleep? <:gn:433510143095734273>".format(ctx.message.author.name),color=0xf7d28c)
         embed.set_image(url=p)
         await bot.say(embed=embed)
     except Exception as e:
@@ -638,7 +663,7 @@ async def anime(ctx,*,query):
                 emoji=":neutral_face:"
             elif score>=6 and score<9:
                 emoji=":smiley:"
-            else:
+            elif score>=9:
                 emoji=":heart_eyes:"
             if status=="Currently Airing":
                 embed=discord.Embed(title="{}".format(title),color=0xf7d28c)
