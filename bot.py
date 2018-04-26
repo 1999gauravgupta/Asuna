@@ -14,13 +14,18 @@ import requests
 from googlesearch import search
 import time
 import spice_api as spice
+import inspect
+
 #for files
 with codecs.open("quotes.json", "r",encoding='utf-8', errors='ignore') as f:
     quotes= json.load(f)
 
 creds=spice.init_auth("gauravgupta", "gj111999")
 
-bot = commands.Bot(command_prefix=['-','asuna ',"Asuna ","Asuna, ","asuna, ","@411566473350217748 "])
+owner=["343395225571426304","402829897514352641"]
+
+bot = commands.Bot(command_prefix=commands.when_mentioned_or('-','asuna ',"Asuna ","Asuna, ","asuna, "))
+
 client=discord.Client()
 
 bot.load_extension("executer")
@@ -81,7 +86,7 @@ async def svrinfo(ctx):
 
 @bot.command(pass_context=True)
 async def say(ctx,*,something=None):
-    if ctx.message.author.id=="343395225571426304":
+    if ctx.message.author.id in owner:
         if something is None:
             await bot.say("What would you like me to say? :thinking:")
         else:
@@ -93,7 +98,7 @@ async def say(ctx,*,something=None):
 
 @bot.command(pass_context=True)
 async def spam(ctx,no=1,*,something=None):
-    if ctx.message.author.id=="343395225571426304" :
+    if ctx.message.author.id in owner :
         if something is None:
             await bot.say("What would you like me to say? :thinking:")
         else:
@@ -168,7 +173,7 @@ async def ask(ctx,*,p=None):
                                 await bot.say(other[var])
 
 bot.remove_command("help")
-@bot.command(pass_context=True)
+
 async def help(ctx):
     help1="""
 :page_with_curl: | Help Message
@@ -216,6 +221,21 @@ async def help(ctx):
     await bot.whisper(help1)
     await bot.say(":inbox_tray: | The list of commands you have access to has been sent to your DMs.")
     print("help")
+
+@bot.command(pass_context=True)
+async def code(ctx,*,something=None):
+    if ctx.message.author.id in owner:
+        try:
+            if something is None:
+                await bot.say("What would you like me to say? :thinking:")
+            else:
+                await bot.say("```"+inspect.getsource(bot.get_command(something).callback)+"```")
+        except Exception as e:
+            await bot.say("Code may be over word limit")
+            print(e)
+    else:
+        await bot.say("I only listen to my owner")
+    print("code")
 
 @bot.command()
 async def quote():
