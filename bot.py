@@ -173,7 +173,7 @@ async def ask(ctx,*,p=None):
                                 await bot.say(other[var])
 
 bot.remove_command("help")
-@bot.command()
+@bot.command(pass_context=True)
 async def help(ctx):
     help1="""
 :page_with_curl: | Help Message
