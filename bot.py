@@ -389,7 +389,7 @@ async def weather(*,location=None):
     if location!=None:
         try:
             location="-".join(location.split())
-            response = urllib.request.urlopen('https://cheeze.club/api/weather/'+location).read()
+            response = urllib.request.urlopen('http://api.tanvis.xyz/weather/'+location).read()
             response = json.loads(response.decode('utf-8'))
             namee=response["name"]
             celsiuse=response["celsius"]
@@ -413,7 +413,7 @@ async def weather(*,location=None):
 async def pokemon(pokemon=None):
     if pokemon!=None:
         try:
-            response=urllib.request.urlopen("https://cheeze.club/api/pokedex/"+pokemon).read()
+            response=urllib.request.urlopen("http://api.tanvis.xyz/pokedex/"+pokemon).read()
             response=json.loads(response.decode("utf-8"))
             name=response["name"]
             num=response["number"]
@@ -464,7 +464,7 @@ async def define(*,word=None):
     if word!=None:
         try:
             word=word.title()
-            response=urllib.request.urlopen("https://cheeze.club/api/dictionary/"+word).read()
+            response=urllib.request.urlopen("http://api.tanvis.xyz/dictionary/"+word).read()
             response=json.loads(response.decode("utf-8"))
             definition=response["noun"][0]["definition"]
             example=response["noun"][0]["example"]
@@ -473,15 +473,16 @@ async def define(*,word=None):
             embed.add_field(name="Example",value=example)
             await bot.say(embed=embed)
             print("define")
-        except Exception:
+        except Exception as e:
             await bot.say("Dear User, I could not find a definition for this word.")
+            print(e)
 
 @bot.command(name="yt",aliases=["youtube","Youtube"])
 async def yt(*,query=None):
     if query!=None:
         try:
             query="-".join(query.split())
-            response=urllib.request.urlopen("https://cheeze.club/api/youtube/"+query).read()
+            response=urllib.request.urlopen("http://api.tanvis.xyz/youtube/"+query).read()
             response=json.loads(response.decode("utf-8"))
             name1=response[0]["name"]
             image=response[0]["thumbnail"]
@@ -750,7 +751,26 @@ async def manga(ctx,*,query):
     except Exception as e:
         await bot.say("Service unavailable atm")
         print(e)
-
+@bot.group(pass_context=True)
+async def groot(ctx):
+    if ctx.invoked_subcommand is None:
+        await bot.say("Invalid groot command passed...")
+@groot.command(pass_context=True)
+async def cool(ctx):
+    await bot.say("<:grootcool:439097733178195980>")
+    await bot.delete_message(ctx.message)
+@groot.command(pass_context=True)
+async def thinking(ctx):
+    await bot.say("<:Groot_Thinking:439097418680631297>")
+    await bot.delete_message(ctx.message)
+@groot.command(pass_context=True)
+async def hi(ctx):
+    await bot.say("<:Groot_Hi:439097354378018833>")
+    await bot.delete_message(ctx.message)
+@groot.command(pass_context=True)
+async def walk(ctx):
+    await bot.say("<:Groot_walk:439097403145191426>")
+    await bot.delete_message(ctx.message)
 #blob commands
 @bot.group(pass_context=True)
 async def blob(ctx):
