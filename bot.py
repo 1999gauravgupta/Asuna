@@ -640,6 +640,20 @@ async def sleep(ctx, user: discord.Member=None):
     except Exception as e:
         await bot.say(e)
 
+@bot.command(pass_context=True,name="butterfly",aliases=["butterflies","butterfli","buterfly","buterfli"])
+async def butterfly(ctx, user: discord.Member=None):
+    try:
+        link=["https://media.giphy.com/media/7OM8aqLAr2xQ4/giphy.gif","https://media.giphy.com/media/ErZOqoVIdI7zW/giphy.gif","http://bestanimations.com/Animals/Insects/Butterflys/butterfly-animated-gif-45.gif","http://bestanimations.com/Animals/Insects/Butterflys/butterfly-animated.gif","https://media.giphy.com/media/26BkLyXww5BZoL13q/giphy.gif","https://media3.giphy.com/media/OreKkqmHu1m6Y/giphy-downsized.gif","http://bestanimations.com/Animals/Insects/Butterflys/butterfly-animated-gif-21.gif","https://zippy.gfycat.com/NeighboringCompleteBluegill.gif","https://i.pinimg.com/originals/af/7c/2e/af7c2eb4f863774e70565d471d775cdf.gif","https://img1.picmix.com/output/stamp/normal/8/7/3/6/856378_b6e78.gif","https://img1.picmix.com/output/stamp/normal/1/4/9/7/857941_9b2a0.gif","https://i.pinimg.com/originals/77/18/c9/7718c92df8735c423ea3c01009bcfa14.gif","http://www.dilsecomments.com/uploads/glitter/large_glitter_1514530989.gif","https://media.giphy.com/media/EH5IYP7DPyYeI/giphy.gif","https://78.media.tumblr.com/a3cb1cc41b991f6116b5c99544fee773/tumblr_osx6fcHQtJ1uzomqmo1_500.gif","http://www.animatedimages.org/data/media/291/animated-butterfly-image-0389.gif","https://i.pinimg.com/originals/cc/cd/f4/cccdf4420d21abdb313ca419fd0d8271.gif"]
+        p=link[random.randint(0,len(link)-1)]      
+        if user!=None:
+                embed=discord.Embed(description="{} wants {} to enjoy butterflies with you :butterfly:".format(ctx.message.author.name,user.name),color=0xf7d28c)
+        else:
+                embed=discord.Embed(description="{} here are your butterflies :butterfly:".format(ctx.message.author.name),color=0xf7d28c)
+        embed.set_image(url=p)
+        await bot.say(embed=embed)
+    except Exception as e:
+        await bot.say(e)
+
 @bot.command(pass_context=True)
 async def anime(ctx,*,query):
     try:
