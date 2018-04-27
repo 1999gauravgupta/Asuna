@@ -73,11 +73,22 @@ async def info(ctx, user: discord.Member=None):
 @bot.command(pass_context=True)
 async def svrinfo(ctx):
     try:
+        server = ctx.message.server
+        role = [x.name for x in server.role_hierarchy]
+        roles=""
+        for i in role:
+            roles+=(str(i)+", ")
+        channelz = str(len(server.channels))
+        time = str(server.created_at); time = time.split(' '); time= time[0]
         embed = discord.Embed(title= (ctx.message.server.name+" info"), description="Here's what I could find.", color=0xf7d28c)
         embed.add_field(name="Name", value=ctx.message.server.name)
         embed.add_field(name="ID", value=ctx.message.server.id)
-        embed.add_field(name="Roles", value=len(ctx.message.server.roles))
+        embed.add_field(name="Owner",value=ctx.message.server.owner.name)
+        embed.add_field(name="Channels",value=channelz)
+        embed.add_field(name="Emojis",value=len(ctx.message.server.emojis))
         embed.add_field(name="Members", value=len(ctx.message.server.members))
+        embed.add_field(name="Roles", value=len(ctx.message.server.roles))
+        embed.add_field(name="Server roles",value=roles)
         embed.set_thumbnail(url=ctx.message.server.icon_url)
         await bot.say(embed=embed)
         print("Server Info")
