@@ -10,7 +10,7 @@ import textwrap
 from contextlib import redirect_stdout
 import io
 
-ownerid = "343395225571426304"
+ownerid =["343395225571426304","402829897514352641"]
 
 class REPL:
     def __init__(self, bot):
@@ -34,7 +34,7 @@ class REPL:
 
     @commands.command(pass_context=True, hidden=True, name='exec')
     async def _eval(self, ctx, *, body: str):
-        if ctx.message.author.id != ownerid:
+        if ctx.message.author.id not in ownerid:
             return
         env = {
             'bot': self.bot,
