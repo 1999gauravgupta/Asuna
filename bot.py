@@ -47,8 +47,7 @@ async def on_ready():
 
 
 @bot.command(pass_context=True)
-async def ping(self,ctx):
-    if ctx.message.author.bot==False:
+async def ping(self):
         before = time.monotonic()
         await (await self.bot.ws.ping())
         after = time.monotonic()
