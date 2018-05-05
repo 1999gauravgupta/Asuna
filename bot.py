@@ -191,56 +191,56 @@ async def ask(ctx,*,p=None):
                                     check=len(other)
                                     var=random.randint(0,check)
                                     await bot.say(other[var])
-
 bot.remove_command("help")
 @bot.command(pass_context=True)
 async def help(ctx):
-        help1="""
-        :page_with_curl: | Help Message
+    help1="""
+:page_with_curl: | Help Message
 
-        **General User/Server/Bot Info Commands:**
-        • -info [@user]→ Provides some information about the user who invoked the command or of mentioned user.
-        • -svrinfo → Provides some information about the server in which the command is invoked.
-        • -pfp [@user] → Display avatar of yours or mentioned user.
-        • -invite → Add Asuna to your guild.
-        • -ping → Runs a connection test to Discord.
-        • -help → Display this message.
+**General User/Server/Bot Info Commands:**
+• -info [@user]→ Provides some information about the user who invoked the command or of mentioned user.
+• -svrinfo → Provides some information about the server in which the command is invoked.
+• -pfp [@user] → Display avatar of yours or mentioned user.
+• -invite → Add Asuna to your guild.
+• -ping → Runs a connection test to Discord.
+• -help → Display this message.
 
-        **General Query Commands:**
-        • -google <query> → Searches Google for your query.
-        • -wiki <query> → Searches Wikipedia for your query.
-        • -yt <query> → Searches YouTube for your query.
-        • -weather <location> → Displays weather of given location.
-        • -pokemon <query> → Gives some data about queried pokemon.
-        • -ud <word> → Searches Urban Dictionary for your word.
-        • -define <word> → Searches Dictionary for your word.
-        • -anime <query> → Searches for given anime details.
-        • -manga <query> → Searches for given manga details.
+**General Query Commands:**
+• -google <query> → Searches Google for your query.
+• -wiki <query> → Searches Wikipedia for your query.
+• -yt <query> → Searches YouTube for your query.
+• -weather <location> → Displays weather of given location.
+• -pokemon <query> → Gives some data about queried pokemon.
+• -ud <word> → Searches Urban Dictionary for your word.
+• -define <word> → Searches Dictionary for your word.
+• -anime <query> → Searches for given anime details.
+• -manga <query> → Searches for given manga details.
 
-        **General Fun Commands:**
-        • -quote → Display random motivational code to make your day.
-        • -ask <question>→ Asuna helps you with your questions.
-        • -emo <text>→ Emojifies the text.
-        • -norris [@user] → Display random chuck norris joke.
-        • -xkcd [number] → Searches xkcd for your comic else prints a random comic.
-        • -sebi → Display a random SebiSauce.
-        • -pat [@user]→ Pats somebody's head!.
-        • -cuddle [@user]→Cuddle somebody with a picture!.
-        • -slap [@user]→ Slap the baka.
-        • -hug [@user]→ Hug somebody with a picture!
-        • -kiss [@user]→ Show some love.
-        • -tickle [@user]→ Don't stop until they cry.
-        • -sleepy [@user]→ Why not sleeping then?.
+**General Fun Commands:**
+• -quote → Display random motivational code to make your day.
+• -ask <question>→ Asuna helps you with your questions.
+• -emo <text>→ Emojifies the text.
+• -norris [@user] → Display random chuck norris joke.
+• -xkcd [number] → Searches xkcd for your comic else prints a random comic.
+• -sebi → Display a random SebiSauce.
+• -pat [@user]→ Pats somebody's head!.
+• -cuddle [@user]→Cuddle somebody with a picture!.
+• -slap [@user]→ Slap the baka.
+• -hug [@user]→ Hug somebody with a picture!
+• -kiss [@user]→ Show some love.
+• -tickle [@user]→ Don't stop until they cry.
+• -sleepy [@user]→ Why not sleeping then?.
 
-        **General Emoji Commands:**
-        • -emoji <shrug,sip,bang,wonder,mikuyay,peek,dance,j> → Appends that emoji in chat.
-        • -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,notlike,kiss,grr,sob,toj> → Appends your favorite Google blob stickers in chat.
+**General Emoji Commands:**
+• -emoji <shrug,sip,bang,wonder,mikuyay,peek,dance,j> → Appends that emoji in chat.
+• -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,notlike,kiss,grr,sob,toj> → Appends your favorite Google blob stickers in chat.
 
-        **Arguments in [] are optional but arguments in <> are necessary for given function to work**
-        """
-        await bot.whisper(help1)
-        await bot.say(":inbox_tray: | The list of commands you have access to has been sent to your DMs.")
-        print("help")
+**Arguments in [] are optional but arguments in <> are necessary for given function to work**
+"""
+    await bot.whisper(help1)
+    await bot.say(":inbox_tray: | The list of commands you have access to has been sent to your DMs.")
+    print("help")
+
 
 @bot.command(pass_context=True)
 async def code(ctx,*,something=None):
