@@ -195,7 +195,6 @@ async def ask(ctx,*,p=None):
 bot.remove_command("help")
 @bot.command(pass_context=True)
 async def help(ctx):
-    if ctx.message.author.bot==False:
         help1="""
         :page_with_curl: | Help Message
 
