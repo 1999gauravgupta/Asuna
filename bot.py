@@ -45,7 +45,6 @@ async def on_ready():
     await bot.change_presence(game=discord.Game(name='Listening to -help'))
     print("status changing done")
 
-
 @bot.command(pass_context=True)
 async def ping(self):
         before = time.monotonic()
@@ -145,6 +144,7 @@ async def ask(ctx,*,p=None):
     if ctx.message.author.bot==False:
         if p!=None:
             p=p.lower()
+            q=p.replace("?","")
             when= ['Soon™', 'Maybe tomorrow.', 'Maybe next year...', 'Right now.', 'In a few months.']
             what= ['A plane.', 'What? Ask again.', 'A gift.', 'Nothing.', 'A ring.', 'I do not know', "Maybe something."]
             howmuch= ['A lot.', 'A bit.', 'A few.', 'Ask me tomorrow.', 'I do not know, ask a physicist.', 'Nothing.', "2 or 3 liters, I don't remember.", 'Infinity.', '1010 liters.']
@@ -152,13 +152,13 @@ async def ask(ctx,*,p=None):
             why= ['Maybe genetics.', 'Because somebody decided it.', 'For the glory of satan, of course!', 'I do not know, maybe destiny.', 'Because I said so.', 'I have no idea.', 'Harambe did nothing wrong.', 'Ask the owner of this server.', 'Ask again.', 'To get to the other side.', 'It says so in the Bible.']
             who= ['A human.', 'A robot.', 'An airplane.', 'A bird.', 'A carbon composition.', 'A bunch of zeroes and ones.', 'I have no clue, is it material?', 'That is not logical.']
             other= ['Most likely.', 'Nope.', 'YES!', 'Maybe.']
-            result1 = p.find('when')
-            result2 = p.find('what')
-            result3 = p.find('how much')
-            result4 = p.find('how many')
-            result5 = p.find('why')
-            result6 = p.find('who')
-            if result1!=-1: 
+            result1 = q.find('when')
+            result2 = q.find('what')
+            result3 = q.find('how much')
+            result4 = q.find('how many')
+            result5 = q.find('why')
+            result6 = q.find('who')
+            if result1!=-1:
                 check=len(when)
                 var=random.randint(0,check)
                 await bot.say(when[var])
@@ -285,7 +285,7 @@ async def invite(ctx):
             await bot.say(e)
 
 @bot.command(pass_context=True,name="ud",aliases=["urban"])
-async def ud(ctx,query=None):
+async def ud(ctx,*,query=None):
     if ctx.message.author.bot==False:
         if query!=None:
             try:
@@ -310,7 +310,7 @@ async def ud(ctx,query=None):
 async def purge(ctx, number=2,):
     if ctx.message.author.bot==False:
         if ctx.message.author.server_permissions.manage_messages:
-            mgs = [] 
+            mgs = []
             number = int(number)
             if number<2:
                 number=2
@@ -327,7 +327,7 @@ async def purge(ctx, number=2,):
                         if temp>number:
                             break
                     await bot.delete_messages(mgs)
-                print(temp)        
+                print(temp)
 
         else:
             await bot.say("You do not have required permissions")
@@ -344,7 +344,7 @@ async def google(ctx,*,query=None):
                 await bot.say(list1[0])
            except Exception:
                 await bot.say("Service unavailable atm")
-        
+
        print("google")
 
 @bot.command(pass_context=True,name="wiki",aliases=["wikipedia"])
@@ -537,7 +537,7 @@ async def yt(ctx,*,query=None):
                 await bot.say(e)
 
 @bot.command(pass_context=True,name="define",aliases=["dict","dictionary"])
-async def define(ctx,word=None):
+async def define(ctx,*,word=None):
     if ctx.message.author.bot==False:
         if word!=None:
             try:
@@ -572,8 +572,8 @@ async def sebi(ctx):
 async def pat(ctx, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
-            link=["https://media1.tenor.com/images/1e92c03121c0bd6688d17eef8d275ea7/tenor.gif","https://thumbs.gfycat.com/FoolhardyJoyousBear-max-1mb.gif","https://media1.tenor.com/images/f79a9ec48bde0e592e55447b17ecfbad/tenor.gif","https://cdn.weeb.sh/images/Sk2FyQHpZ.gif","https://cdn.weeb.sh/images/B1PnJJYP-.gif","https://cdn.weeb.sh/images/Sky1x1YwW.gif","https://cdn.weeb.sh/images/SktIxo20b.gif","https://cdn.weeb.sh/images/Sk2f7J39G.gif","https://cdn.weeb.sh/images/B1TQcTNCZ.gif","https://cdn.weeb.sh/images/SJLaWWRSG.gif"]  
-            p=link[random.randint(0,len(link)-1)]      
+            link=["https://media1.tenor.com/images/1e92c03121c0bd6688d17eef8d275ea7/tenor.gif","https://thumbs.gfycat.com/FoolhardyJoyousBear-max-1mb.gif","https://media1.tenor.com/images/f79a9ec48bde0e592e55447b17ecfbad/tenor.gif","https://cdn.weeb.sh/images/Sk2FyQHpZ.gif","https://cdn.weeb.sh/images/B1PnJJYP-.gif","https://cdn.weeb.sh/images/Sky1x1YwW.gif","https://cdn.weeb.sh/images/SktIxo20b.gif","https://cdn.weeb.sh/images/Sk2f7J39G.gif","https://cdn.weeb.sh/images/B1TQcTNCZ.gif","https://cdn.weeb.sh/images/SJLaWWRSG.gif"]
+            p=link[random.randint(0,len(link)-1)]
             if user!=None:
                 embed=discord.Embed(description="{} gently pats {} <:pats:436961578961600512>".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
@@ -588,7 +588,7 @@ async def cuddle(ctx, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link= ["https://cdn.weeb.sh/images/BywGX8caZ.gif", "https://cdn.weeb.sh/images/BkTe8U7v-.gif", "https://cdn.weeb.sh/images/ryfyLL7D-.gif",  "https://cdn.weeb.sh/images/SJbGLUQwZ.gif","https://cdn.weeb.sh/images/SJLkLImPb.gif","https://cdn.weeb.sh/images/BJCCd_7Pb.gif","https://cdn.weeb.sh/images/B1SzeshCW.gif","https://cdn.weeb.sh/images/r1Q0HImPZ.gif","https://cdn.weeb.sh/images/r17lwymiZ.gif","https://cdn.weeb.sh/images/By03IkXsZ.gif","https://cdn.weeb.sh/images/S1T91Att-.gif","https://cdn.weeb.sh/images/r1s9RqB7G.gif","https://cdn.weeb.sh/images/SJceIU7wZ.gif","https://cdn.weeb.sh/images/Hyxo1CFtb.gif"]
-            p=link[random.randint(0,len(link)-1)]      
+            p=link[random.randint(0,len(link)-1)]
             if user!=None:
                     embed=discord.Embed(description="{} cuddles {} <:cuddle:436520636278374429>".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
@@ -603,7 +603,7 @@ async def hug(ctx, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link= ["https://cdn.weeb.sh/images/HyNJIaVCb.gif","https://cdn.weeb.sh/images/HkfgF_QvW.gif","https://cdn.weeb.sh/images/BkZngAYtb.gif","https://cdn.weeb.sh/images/SJebhd1Ob.gif","https://cdn.weeb.sh/images/BJF5_uXvZ.gif","https://cdn.weeb.sh/images/ryPix0Ft-.gif","https://cdn.weeb.sh/images/ByPGRkFVz.gif","https://cdn.weeb.sh/images/SyQ0_umD-.gif","https://cdn.weeb.sh/images/BkuUhO1OW.gif","https://cdn.weeb.sh/images/B10Tfknqf.gif","https://cdn.weeb.sh/images/SJZ-Qy35f.gif","https://cdn.weeb.sh/images/B11CDkhqM.gif","https://cdn.weeb.sh/images/HytoudXwW.gif","https://cdn.weeb.sh/images/Sk2gmRZZG.gif","https://cdn.weeb.sh/images/S14ju_7Pb.gif","https://cdn.weeb.sh/images/r1v2_uXP-.gif"]
-            p=link[random.randint(0,len(link)-1)]     
+            p=link[random.randint(0,len(link)-1)]
             if user!=None:
                     embed=discord.Embed(description="{} tightly hugs {} <:hug:436520609980219415>".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
@@ -618,7 +618,7 @@ async def slap(ctx, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link= ["https://cdn.weeb.sh/images/ByTR7kFwW.gif","https://cdn.weeb.sh/images/HkK2mkYPZ.gif","https://cdn.weeb.sh/images/SJ-CQytvW.gif","https://cdn.weeb.sh/images/BJLCX1Kw-.gif","https://cdn.weeb.sh/images/ry2tWxcyf.gif","https://cdn.weeb.sh/images/HyPjmytDW.gif","https://cdn.weeb.sh/images/HJKiX1tPW.gif","https://cdn.weeb.sh/images/HJfXM0KYZ.gif","https://cdn.weeb.sh/images/BJSpWec1M.gif","https://cdn.weeb.sh/images/HyV5mJtDb.gif","https://media.giphy.com/media/t1CsJ1o1sdOHm/giphy.gif","https://media.giphy.com/media/3eKfsCZKKb3c4/giphy.gif","https://m.popkey.co/d5f999/4Vv51_s-200x150.gif","https://m.popkey.co/1121ac/16jO8_s-200x150.gif","http://www.teampwnicorn.com/wp-content/uploads/2013/03/Joffrey-gets-slapped-5.gif"]
-            p=link[random.randint(0,len(link)-1)]   
+            p=link[random.randint(0,len(link)-1)]
             if user!=None:
                     embed=discord.Embed(description="{} slapped {}... Must have been a real baka :wave:".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
@@ -633,7 +633,7 @@ async def kiss(ctx, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link=["https://cdn.weeb.sh/images/BydoCy9yG.gif","https://cdn.weeb.sh/images/BJSdQRtFZ.gif","https://cdn.weeb.sh/images/ryoW3T_vW.gif","https://cdn.weeb.sh/images/Sy6Ai6ODb.gif","https://cdn.weeb.sh/images/HklBtCvTZ.gif","https://cdn.weeb.sh/images/SkKL3adPb.gif","https://cdn.weeb.sh/images/SJ7b26_PW.gif","https://cdn.weeb.sh/images/HJ5khTOP-.gif","https://cdn.weeb.sh/images/Skc42pdv-.gif","https://cdn.weeb.sh/images/SJQRoTdDZ.gif","https://cdn.weeb.sh/images/BJv0o6uDZ.gif","https://cdn.weeb.sh/images/Sksk4l51z.gif","https://cdn.weeb.sh/images/Bkuk26uvb.gif","https://cdn.weeb.sh/images/r1cB3aOwW.gif","https://cdn.weeb.sh/images/ByTBhp_vZ.gif","https://cdn.weeb.sh/images/rJ_U2p_Pb.gif","https://cdn.weeb.sh/images/rJ6PWohA-.gif"]
-            p=link[random.randint(0,len(link)-1)]      
+            p=link[random.randint(0,len(link)-1)]
             if user!=None:
                     embed=discord.Embed(description="{} is kissing {}, they are so cute together :kiss:".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
@@ -648,7 +648,7 @@ async def tickle(ctx, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link=["https://cdn.ram.moe/H1ChowIDx.gif","https://cdn.ram.moe/rJmioDLPl.gif","https://cdn.ram.moe/S1idjvIPx.gif","https://cdn.ram.moe/SJFisw8wx.gif","https://cdn.ram.moe/H1FqsDLPl.gif","https://cdn.ram.moe/rJQ2jvLDg.gif","https://cdn.weeb.sh/images/HyPyUymsb.gif","https://cdn.weeb.sh/images/HyjNLkXiZ.gif","https://cdn.weeb.sh/images/H1p0ByQo-.gif","https://cdn.weeb.sh/images/SyGQIk7i-.gif","https://cdn.weeb.sh/images/SyQHUy7oW.gif","https://cdn.weeb.sh/images/rkPzIyQi-.gif","https://cdn.weeb.sh/images/rybRByXjZ.gif"]
-            p=link[random.randint(0,len(link)-1)]      
+            p=link[random.randint(0,len(link)-1)]
             if user!=None:
                     embed=discord.Embed(description="{} is tickling {} <:epicsmile:428602772351614996>".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
@@ -663,7 +663,7 @@ async def sleep(ctx, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link=["https://cdn.weeb.sh/images/ryBb41Kvb.gif","https://cdn.weeb.sh/images/SJKW4kYvZ.gif","https://cdn.weeb.sh/images/HJAx4ktD-.gif","https://cdn.weeb.sh/images/H1_-U6--f.gif","https://cdn.weeb.sh/images/HkGZVkKDW.gif","https://cdn.weeb.sh/images/rkxkM41tPW.gif","https://cdn.weeb.sh/images/rJ7ZNyKDW.gif","https://cdn.weeb.sh/images/SJYxNJKDZ.gif","https://cdn.weeb.sh/images/r1yzV1tPZ.gif","https://cdn.weeb.sh/images/rk3-NkKDb.gif","https://cdn.weeb.sh/images/By5ZNktDW.gif"]
-            p=link[random.randint(0,len(link)-1)]      
+            p=link[random.randint(0,len(link)-1)]
             if user!=None:
                     embed=discord.Embed(description="{} it seems like {} is sleepy, why not help them? <:gn:433510143095734273>".format(user.name,ctx.message.author.name),color=0xf7d28c)
             else:
@@ -678,7 +678,7 @@ async def butterfly(ctx, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link=["https://media.giphy.com/media/7OM8aqLAr2xQ4/giphy.gif","https://media.giphy.com/media/ErZOqoVIdI7zW/giphy.gif","http://bestanimations.com/Animals/Insects/Butterflys/butterfly-animated-gif-45.gif","http://bestanimations.com/Animals/Insects/Butterflys/butterfly-animated.gif","https://media.giphy.com/media/26BkLyXww5BZoL13q/giphy.gif","https://media3.giphy.com/media/OreKkqmHu1m6Y/giphy-downsized.gif","http://bestanimations.com/Animals/Insects/Butterflys/butterfly-animated-gif-21.gif","https://zippy.gfycat.com/NeighboringCompleteBluegill.gif","https://i.pinimg.com/originals/af/7c/2e/af7c2eb4f863774e70565d471d775cdf.gif","https://img1.picmix.com/output/stamp/normal/8/7/3/6/856378_b6e78.gif","https://img1.picmix.com/output/stamp/normal/1/4/9/7/857941_9b2a0.gif","https://i.pinimg.com/originals/77/18/c9/7718c92df8735c423ea3c01009bcfa14.gif","http://www.dilsecomments.com/uploads/glitter/large_glitter_1514530989.gif","https://media.giphy.com/media/EH5IYP7DPyYeI/giphy.gif","https://78.media.tumblr.com/a3cb1cc41b991f6116b5c99544fee773/tumblr_osx6fcHQtJ1uzomqmo1_500.gif","http://www.animatedimages.org/data/media/291/animated-butterfly-image-0389.gif","https://i.pinimg.com/originals/cc/cd/f4/cccdf4420d21abdb313ca419fd0d8271.gif"]
-            p=link[random.randint(0,len(link)-1)]      
+            p=link[random.randint(0,len(link)-1)]
             if user!=None:
                     embed=discord.Embed(description="{} wants {} to enjoy butterflies together :butterfly:".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
@@ -704,7 +704,7 @@ async def anime(ctx,*,query):
                 m=int(m.content)
                 m=m-1
                 try:
-                    mgs = [] 
+                    mgs = []
                     async for x in bot.logs_from(ctx.message.channel, limit = 2):
                         mgs.append(x)
                     await bot.delete_messages(mgs)
@@ -779,7 +779,7 @@ async def manga(ctx,*,query):
                 m=int(m.content)
                 m=m-1
                 try:
-                    mgs = [] 
+                    mgs = []
                     async for x in bot.logs_from(ctx.message.channel, limit = 2):
                         mgs.append(x)
                     await bot.delete_messages(mgs)
@@ -968,5 +968,5 @@ async def wonder(ctx):
     if ctx.message.author.bot==False:
         await bot.say("<a:wonder:435147959101947905>")
         await bot.delete_message(ctx.message)
-    
+
 bot.run("NDExNTY2NDczMzUwMjE3NzQ4.DWRS8A.U2VKbHmJAbktNhhgOhSNcpgwGt4")
