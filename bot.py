@@ -658,6 +658,21 @@ async def tickle(ctx, user: discord.Member=None):
         except Exception as e:
             await bot.say(e)
 
+@bot.command(pass_context=True,name="punch",aliases=["punches"])
+async def punch(ctx, user: discord.Member=None):
+    if ctx.message.author.bot==False:
+        try:
+            link=["https://media1.tenor.com/images/6afcfbc435b698fa5ceb2ff019718e6d/tenor.gif","https://media1.tenor.com/images/c621075def6ca41785ef4aaea20cc3a2/tenor.gif","https://media1.tenor.com/images/6d77cf1fdaa2e7c6a32c370240a7b77c/tenor.gif","https://media1.tenor.com/images/2487a7679b3d7d23cadcd51381635467/tenor.gif","https://media1.tenor.com/images/7d43687195b86c8ce2411484eb1951fc/tenor.gif","https://media1.tenor.com/images/b2db2a7fe0b9f68f2869b4e0d11a9490/tenor.gif","https://media1.tenor.com/images/892831a51c11f30b4efd726763c3babe/tenor.gif","https://media1.tenor.com/images/2fe2e31bd486f36dd552f4d6e2e5b602/tenor.gif","https://media1.tenor.com/images/cff010b188084e1faed2905c0f1634c2/tenor.gif","https://media1.tenor.com/images/7a9723858a49246426158ac3f2993e1a/tenor.gif","https://media1.tenor.com/images/ffb0334ce56be6bd880db1d7a02ac5db/tenor.gif","https://media1.tenor.com/images/1a82719c62e19ab0495e5d49ce0d0053/tenor.gif"]
+            p=link[random.randint(0,len(link)-1)]
+            if user!=None:
+                    embed=discord.Embed(description="{} punched {}... Must have been a real baka :punch:".format(ctx.message.author.name,user.name),color=0xf7d28c)
+            else:
+                    embed=discord.Embed(description="Hmm {} is punching themselves, what? :punch:".format(ctx.message.author.name),color=0xf7d28c)
+            embed.set_image(url=p)
+            await bot.say(embed=embed)
+        except Exception as e:
+            await bot.say(e)
+
 @bot.command(pass_context=True,name="sleep",aliases=["sleepy"])
 async def sleep(ctx, user: discord.Member=None):
     if ctx.message.author.bot==False:
