@@ -334,39 +334,29 @@ async def purge(ctx, number=2,):
         print("purge")
 
 @bot.command(pass_context=True,name="google",aliases=["g","search"])
-async def google(ctx,number=1,*,query=None):
+async def google(ctx,*,query=None):
     if ctx.message.author.bot==False:
        if query!=None:
            try:
-                number=int(number)
-                if number>8:
-                    number=8
                 query="-".join(query.split())
                 response=urllib.request.urlopen("http://api.tanvis.xyz/search/"+query).read()
                 response=json.loads(response.decode("utf-8"))
-                print(response)
-                for i in range(number):
-                        await bot.say(response[i]["link"])
+                await bot.say(response[0]["link"])
            except Exception:
                 await bot.say("Service unavailable atm")
        print("google")
 
 @bot.command(pass_context=True,name="wiki",aliases=["wikipedia"])
-async def wiki(ctx,number=1,*,query=None):
+async def wiki(ctx,*,query=None):
     if ctx.message.author.bot==False:
         if query!=None:
             try:
-                number=int(number)
-                if number>8:
-                    number=8
                 query="-".join(query.split())
                 response=urllib.request.urlopen("http://api.tanvis.xyz/search/"+"wiki"+query).read()
                 response=json.loads(response.decode("utf-8"))
-                print(response)
-                for i in range(number):
-                        await bot.say(response[i]["link"])
-                print("wikipedia")
-
+                await bot.say(response[0]["link"])
+            except Exception:
+                 await bot.say("Service unavailable atm")
 
 @bot.command(pass_context=True,name="emo",aliases=["emojify"])
 async def emo(ctx,*,word):
