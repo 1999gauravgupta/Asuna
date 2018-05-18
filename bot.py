@@ -365,7 +365,7 @@ async def wiki(ctx,number=1,*,query=None):
                 print(response)
                 for i in range(number):
                         await bot.say(response[i]["link"])
-        print("wikipedia")
+                print("wikipedia")
 
 
 @bot.command(pass_context=True,name="emo",aliases=["emojify"])
