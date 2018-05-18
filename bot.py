@@ -358,6 +358,15 @@ async def wiki(ctx,*,query=None):
             except Exception:
                  await bot.say("Service unavailable atm")
 
+@bot.command(pass_context=True,name="translate",aliases=["trans"])
+async def translate(ctx,*,query=None):
+    if ctx.message.author.bot==False:
+        if query!=None:
+            query="-".join(query.split())
+            response=urllib.request.urlopen("http://api.tanvis.xyz/translate/"+query).read()
+            response=json.loads(response.decode("utf-8"))
+            await bot.say(response["to"]["text"])
+
 @bot.command(pass_context=True,name="emo",aliases=["emojify"])
 async def emo(ctx,*,word):
     if ctx.message.author.bot==False:
