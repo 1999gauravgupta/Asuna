@@ -11,7 +11,6 @@ import string
 import chucknorris.quips as q
 import xkcd as com
 import requests
-from googlesearch import search
 import time
 import spice_api as spice
 import inspect
@@ -226,6 +225,7 @@ async def help(ctx):
 • -pat [@user]→ Pats somebody's head!.
 • -cuddle [@user]→Cuddle somebody with a picture!.
 • -slap [@user]→ Slap the baka.
+• -punch [@user]→ Give them what they deserve.
 • -hug [@user]→ Hug somebody with a picture!
 • -kiss [@user]→ Show some love.
 • -tickle [@user]→ Don't stop until they cry.
@@ -334,31 +334,37 @@ async def purge(ctx, number=2,):
         print("purge")
 
 @bot.command(pass_context=True,name="google",aliases=["g","search"])
-async def google(ctx,*,query=None):
+async def google(ctx,number=1,*,query=None):
     if ctx.message.author.bot==False:
        if query!=None:
            try:
-                list1=[]
-                for url in search(query, stop=1):
-                        list1.append(url)
-                await bot.say(list1[0])
+                number=int(number)
+                if number>8:
+                    number=8
+                query="-".join(query.split())
+                response=urllib.request.urlopen("http://api.tanvis.xyz/search/"+query).read()
+                response=json.loads(response.decode("utf-8"))
+                print(response)
+                for i in range(number):
+                        await bot.say(response[i]["link"])
            except Exception:
                 await bot.say("Service unavailable atm")
-
        print("google")
 
 @bot.command(pass_context=True,name="wiki",aliases=["wikipedia"])
-async def wiki(ctx,*,query=None):
+async def wiki(ctx,number=1,*,query=None):
     if ctx.message.author.bot==False:
         if query!=None:
             try:
-                list1=[]
-                query+="wikipedia"
-                for url in search(query, stop=1):
-                        list1.append(url)
-                await bot.say(list1[0])
-            except Exception:
-                await bot.say("Service unavailable atm")
+                number=int(number)
+                if number>8:
+                    number=8
+                query="-".join(query.split())
+                response=urllib.request.urlopen("http://api.tanvis.xyz/search/"+"wiki"+query).read()
+                response=json.loads(response.decode("utf-8"))
+                print(response)
+                for i in range(number):
+                        await bot.say(response[i]["link"])
         print("wikipedia")
 
 
@@ -536,7 +542,7 @@ async def yt(ctx,*,query=None):
             except Exception as e:
                 await bot.say(e)
 
-@bot.command(pass_context=True,name="define",aliases=["dict","dictionary"])
+@bot.command(pass_context=True,name="define",aliases=["def","dict","dictionary"])
 async def define(ctx,*,word=None):
     if ctx.message.author.bot==False:
         if word!=None:
@@ -683,6 +689,21 @@ async def sleep(ctx, user: discord.Member=None):
                     embed=discord.Embed(description="{} it seems like {} is sleepy, why not help them? <:gn:433510143095734273>".format(user.name,ctx.message.author.name),color=0xf7d28c)
             else:
                     embed=discord.Embed(description="{} seems to be feeling sleepy, why not go sleep? <:gn:433510143095734273>".format(ctx.message.author.name),color=0xf7d28c)
+            embed.set_image(url=p)
+            await bot.say(embed=embed)
+        except Exception as e:
+            await bot.say(e)
+
+@bot.command(pass_context=True,name="dance",aliases=["dances"])
+async def dance(ctx, user: discord.Member=None):
+    if ctx.message.author.bot==False:
+        try:
+            link=["https://cdn.weeb.sh/images/ryBb41Kvb.gif","https://cdn.weeb.sh/images/SJKW4kYvZ.gif","https://cdn.weeb.sh/images/HJAx4ktD-.gif","https://cdn.weeb.sh/images/H1_-U6--f.gif","https://cdn.weeb.sh/images/HkGZVkKDW.gif","https://cdn.weeb.sh/images/rkxkM41tPW.gif","https://cdn.weeb.sh/images/rJ7ZNyKDW.gif","https://cdn.weeb.sh/images/SJYxNJKDZ.gif","https://cdn.weeb.sh/images/r1yzV1tPZ.gif","https://cdn.weeb.sh/images/rk3-NkKDb.gif","https://cdn.weeb.sh/images/By5ZNktDW.gif"]
+            p=link[random.randint(0,len(link)-1)]
+            if user!=None:
+                    embed=discord.Embed(description="{} it seems like {} is sleepy, why not help them? <a:dance:444207775434932242>".format(user.name,ctx.message.author.name),color=0xf7d28c)
+            else:
+                    embed=discord.Embed(description="{} seems to be feeling sleepy, why not go sleep? <a:dance:444207775434932242>".format(ctx.message.author.name),color=0xf7d28c)
             embed.set_image(url=p)
             await bot.say(embed=embed)
         except Exception as e:
