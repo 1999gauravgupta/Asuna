@@ -54,7 +54,7 @@ async def ping(self):
         print("ping")
 
 @bot.command(pass_context=True)
-async def info(ctx, user: discord.Member=None):
+async def info(ctx,name="info",aliases=["user","userinfo"], user: discord.Member=None):
     if ctx.message.author.bot==False:
         if user is None:
             user = ctx.message.author
@@ -73,7 +73,7 @@ async def info(ctx, user: discord.Member=None):
             await bot.say(e)
 
 @bot.command(pass_context=True)
-async def svrinfo(ctx):
+async def svrinfo(ctx,name="svrinfo",aliases=["serverinfo"]):
     if ctx.message.author.bot==False:
         try:
             server = ctx.message.server
@@ -214,6 +214,7 @@ async def help(ctx):
 • -define <word> → Searches Dictionary for your word.
 • -anime <query> → Searches for given anime details.
 • -manga <query> → Searches for given manga details.
+• -translate <query> → Translates your input text.
 
 **General Fun Commands:**
 • -quote → Display random motivational code to make your day.
@@ -230,6 +231,7 @@ async def help(ctx):
 • -kiss [@user]→ Show some love.
 • -tickle [@user]→ Don't stop until they cry.
 • -sleepy [@user]→ Why not sleeping then?.
+• -cry [@user]→ Did someone hurt you?.
 
 **General Emoji Commands:**
 • -emoji <shrug,sip,bang,wonder,mikuyay,peek,dance,j> → Appends that emoji in chat.
@@ -351,7 +353,7 @@ async def wiki(ctx,*,query=None):
     if ctx.message.author.bot==False:
         if query!=None:
             try:
-                query="-".join(query.split())
+                query=("-".join(query.split())).encode('utf-8').strip()
                 response=urllib.request.urlopen("http://api.tanvis.xyz/search/"+"wiki"+query).read()
                 response=json.loads(response.decode("utf-8"))
                 await bot.say(response[0]["link"])
@@ -363,9 +365,12 @@ async def translate(ctx,*,query=None):
     if ctx.message.author.bot==False:
         if query!=None:
             query="-".join(query.split())
+            query=query.encode('ascii', 'ignore').decode('ascii')
+
             response=urllib.request.urlopen("http://api.tanvis.xyz/translate/"+query).read()
             response=json.loads(response.decode("utf-8"))
             await bot.say(response["to"]["text"])
+            await bot.say("The input text language is "+response["from"]["lang"])
 
 @bot.command(pass_context=True,name="emo",aliases=["emojify"])
 async def emo(ctx,*,word):
@@ -580,9 +585,9 @@ async def pat(ctx, user: discord.Member=None):
             link=["https://media1.tenor.com/images/1e92c03121c0bd6688d17eef8d275ea7/tenor.gif","https://thumbs.gfycat.com/FoolhardyJoyousBear-max-1mb.gif","https://media1.tenor.com/images/f79a9ec48bde0e592e55447b17ecfbad/tenor.gif","https://cdn.weeb.sh/images/Sk2FyQHpZ.gif","https://cdn.weeb.sh/images/B1PnJJYP-.gif","https://cdn.weeb.sh/images/Sky1x1YwW.gif","https://cdn.weeb.sh/images/SktIxo20b.gif","https://cdn.weeb.sh/images/Sk2f7J39G.gif","https://cdn.weeb.sh/images/B1TQcTNCZ.gif","https://cdn.weeb.sh/images/SJLaWWRSG.gif"]
             p=link[random.randint(0,len(link)-1)]
             if user!=None:
-                embed=discord.Embed(description="{} gently pats {} <:pats:436961578961600512>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+                embed=discord.Embed(description="{} gently pats {} <a:patgif:447681206155214859>".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
-                embed=discord.Embed(description="There there, i will pat you {} <:pats:436961578961600512>".format(ctx.message.author.name),color=0xf7d28c)
+                embed=discord.Embed(description="There there, i will pat you {} <a:patgif:447681206155214859>".format(ctx.message.author.name),color=0xf7d28c)
             embed.set_image(url=p)
             await bot.say(embed=embed)
         except Exception as e:
@@ -595,9 +600,9 @@ async def cuddle(ctx, user: discord.Member=None):
             link= ["https://cdn.weeb.sh/images/BywGX8caZ.gif", "https://cdn.weeb.sh/images/BkTe8U7v-.gif", "https://cdn.weeb.sh/images/ryfyLL7D-.gif",  "https://cdn.weeb.sh/images/SJbGLUQwZ.gif","https://cdn.weeb.sh/images/SJLkLImPb.gif","https://cdn.weeb.sh/images/BJCCd_7Pb.gif","https://cdn.weeb.sh/images/B1SzeshCW.gif","https://cdn.weeb.sh/images/r1Q0HImPZ.gif","https://cdn.weeb.sh/images/r17lwymiZ.gif","https://cdn.weeb.sh/images/By03IkXsZ.gif","https://cdn.weeb.sh/images/S1T91Att-.gif","https://cdn.weeb.sh/images/r1s9RqB7G.gif","https://cdn.weeb.sh/images/SJceIU7wZ.gif","https://cdn.weeb.sh/images/Hyxo1CFtb.gif"]
             p=link[random.randint(0,len(link)-1)]
             if user!=None:
-                    embed=discord.Embed(description="{} cuddles {} <:cuddle:436520636278374429>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+                    embed=discord.Embed(description="{} cuddles {} <a:cuddlegif:447689079979769856>".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
-                    embed=discord.Embed(description="Here {} have some cuddles <:cuddle:436520636278374429>".format(ctx.message.author.name),color=0xf7d28c)
+                    embed=discord.Embed(description="Here {} have some cuddles <a:cuddlegif:447689079979769856>".format(ctx.message.author.name),color=0xf7d28c)
             embed.set_image(url=p)
             await bot.say(embed=embed)
         except Exception as e:
@@ -610,9 +615,9 @@ async def hug(ctx, user: discord.Member=None):
             link= ["https://cdn.weeb.sh/images/HyNJIaVCb.gif","https://cdn.weeb.sh/images/HkfgF_QvW.gif","https://cdn.weeb.sh/images/BkZngAYtb.gif","https://cdn.weeb.sh/images/SJebhd1Ob.gif","https://cdn.weeb.sh/images/BJF5_uXvZ.gif","https://cdn.weeb.sh/images/ryPix0Ft-.gif","https://cdn.weeb.sh/images/ByPGRkFVz.gif","https://cdn.weeb.sh/images/SyQ0_umD-.gif","https://cdn.weeb.sh/images/BkuUhO1OW.gif","https://cdn.weeb.sh/images/B10Tfknqf.gif","https://cdn.weeb.sh/images/SJZ-Qy35f.gif","https://cdn.weeb.sh/images/B11CDkhqM.gif","https://cdn.weeb.sh/images/HytoudXwW.gif","https://cdn.weeb.sh/images/Sk2gmRZZG.gif","https://cdn.weeb.sh/images/S14ju_7Pb.gif","https://cdn.weeb.sh/images/r1v2_uXP-.gif"]
             p=link[random.randint(0,len(link)-1)]
             if user!=None:
-                    embed=discord.Embed(description="{} tightly hugs {} <:hug:436520609980219415>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+                    embed=discord.Embed(description="{} tightly hugs {} <a:huggif:447681180943384576>".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
-                    embed=discord.Embed(description="There you go {} hugs <:hug:436520609980219415>".format(ctx.message.author.name),color=0xf7d28c)
+                    embed=discord.Embed(description="There you go {} hugs <a:huggif:447681180943384576>".format(ctx.message.author.name),color=0xf7d28c)
             embed.set_image(url=p)
             await bot.say(embed=embed)
         except Exception as e:
@@ -640,9 +645,9 @@ async def kiss(ctx, user: discord.Member=None):
             link=["https://cdn.weeb.sh/images/BydoCy9yG.gif","https://cdn.weeb.sh/images/BJSdQRtFZ.gif","https://cdn.weeb.sh/images/ryoW3T_vW.gif","https://cdn.weeb.sh/images/Sy6Ai6ODb.gif","https://cdn.weeb.sh/images/HklBtCvTZ.gif","https://cdn.weeb.sh/images/SkKL3adPb.gif","https://cdn.weeb.sh/images/SJ7b26_PW.gif","https://cdn.weeb.sh/images/HJ5khTOP-.gif","https://cdn.weeb.sh/images/Skc42pdv-.gif","https://cdn.weeb.sh/images/SJQRoTdDZ.gif","https://cdn.weeb.sh/images/BJv0o6uDZ.gif","https://cdn.weeb.sh/images/Sksk4l51z.gif","https://cdn.weeb.sh/images/Bkuk26uvb.gif","https://cdn.weeb.sh/images/r1cB3aOwW.gif","https://cdn.weeb.sh/images/ByTBhp_vZ.gif","https://cdn.weeb.sh/images/rJ_U2p_Pb.gif","https://cdn.weeb.sh/images/rJ6PWohA-.gif"]
             p=link[random.randint(0,len(link)-1)]
             if user!=None:
-                    embed=discord.Embed(description="{} is kissing {}, they are so cute together :kiss:".format(ctx.message.author.name,user.name),color=0xf7d28c)
+                    embed=discord.Embed(description="{} is kissing {}, they are so cute together <a:kissgif:447689034970562562>".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
-                    embed=discord.Embed(description="Kissing yourself {}? Sorry for that :kiss:".format(ctx.message.author.name),color=0xf7d28c)
+                    embed=discord.Embed(description="Kissing yourself {}? Sorry for that <a:kissgif:447689034970562562>".format(ctx.message.author.name),color=0xf7d28c)
             embed.set_image(url=p)
             await bot.say(embed=embed)
         except Exception as e:
@@ -655,9 +660,9 @@ async def tickle(ctx, user: discord.Member=None):
             link=["https://cdn.ram.moe/H1ChowIDx.gif","https://cdn.ram.moe/rJmioDLPl.gif","https://cdn.ram.moe/S1idjvIPx.gif","https://cdn.ram.moe/SJFisw8wx.gif","https://cdn.ram.moe/H1FqsDLPl.gif","https://cdn.ram.moe/rJQ2jvLDg.gif","https://cdn.weeb.sh/images/HyPyUymsb.gif","https://cdn.weeb.sh/images/HyjNLkXiZ.gif","https://cdn.weeb.sh/images/H1p0ByQo-.gif","https://cdn.weeb.sh/images/SyGQIk7i-.gif","https://cdn.weeb.sh/images/SyQHUy7oW.gif","https://cdn.weeb.sh/images/rkPzIyQi-.gif","https://cdn.weeb.sh/images/rybRByXjZ.gif"]
             p=link[random.randint(0,len(link)-1)]
             if user!=None:
-                    embed=discord.Embed(description="{} is tickling {} <:epicsmile:428602772351614996>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+                    embed=discord.Embed(description="{} is tickling {} <a:smile:447681122977972236>".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
-                    embed=discord.Embed(description="Tickles for you, {}! <:epicsmile:428602772351614996>".format(ctx.message.author.name),color=0xf7d28c)
+                    embed=discord.Embed(description="Tickles for you, {}! <a:smile:447681122977972236>".format(ctx.message.author.name),color=0xf7d28c)
             embed.set_image(url=p)
             await bot.say(embed=embed)
         except Exception as e:
@@ -693,16 +698,16 @@ async def sleep(ctx, user: discord.Member=None):
         except Exception as e:
             await bot.say(e)
 
-@bot.command(pass_context=True,name="dance",aliases=["dances"])
-async def dance(ctx, user: discord.Member=None):
+@bot.command(pass_context=True,name="cry",aliases=["cries","cri"])
+async def cry(ctx, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
-            link=["https://cdn.weeb.sh/images/ryBb41Kvb.gif","https://cdn.weeb.sh/images/SJKW4kYvZ.gif","https://cdn.weeb.sh/images/HJAx4ktD-.gif","https://cdn.weeb.sh/images/H1_-U6--f.gif","https://cdn.weeb.sh/images/HkGZVkKDW.gif","https://cdn.weeb.sh/images/rkxkM41tPW.gif","https://cdn.weeb.sh/images/rJ7ZNyKDW.gif","https://cdn.weeb.sh/images/SJYxNJKDZ.gif","https://cdn.weeb.sh/images/r1yzV1tPZ.gif","https://cdn.weeb.sh/images/rk3-NkKDb.gif","https://cdn.weeb.sh/images/By5ZNktDW.gif"]
+            link=["https://cdn.weeb.sh/images/Sk5a01cyf.gif","https://cdn.weeb.sh/images/H16Wkl5yf.gif","https://cdn.weeb.sh/images/ByF7REgdf.gif","https://cdn.weeb.sh/images/r1WMmLQvW.gif","https://cdn.weeb.sh/images/HJIpry35M.gif","https://cdn.weeb.sh/images/rJ5IX8XPZ.gif","https://cdn.weeb.sh/images/Sy1EUa-Zz.gif","https://cdn.weeb.sh/images/SJHw6yFVf.gif","https://cdn.weeb.sh/images/rknUmIXD-.gif","https://cdn.weeb.sh/images/rk8DrJhcf.gif","https://cdn.weeb.sh/images/HyiGQUmPb.gif","https://cdn.weeb.sh/images/Hk6EmLmDZ.gif","https://cdn.weeb.sh/images/BJJPXLQPW.gif"]
             p=link[random.randint(0,len(link)-1)]
             if user!=None:
-                    embed=discord.Embed(description="{} it seems like {} is sleepy, why not help them? <a:dance:444207775434932242>".format(user.name,ctx.message.author.name),color=0xf7d28c)
+                    embed=discord.Embed(description="Awww look {}, you made {} sad <a:crygif:447681152044498964>".format(user.name,ctx.message.author.name),color=0xf7d28c)
             else:
-                    embed=discord.Embed(description="{} seems to be feeling sleepy, why not go sleep? <a:dance:444207775434932242>".format(ctx.message.author.name),color=0xf7d28c)
+                    embed=discord.Embed(description="{} seems to be sad <a:crygif:447681152044498964>".format(ctx.message.author.name),color=0xf7d28c)
             embed.set_image(url=p)
             await bot.say(embed=embed)
         except Exception as e:
