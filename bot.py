@@ -54,7 +54,7 @@ async def ping(self):
         print("ping")
 
 @bot.command(pass_context=True)
-async def info(ctx,name="info",aliases=["user","userinfo"], user: discord.Member=None):
+async def info(ctx,name="info",aliases=["user","userinfo"],*,user: discord.Member=None):
     if ctx.message.author.bot==False:
         if user is None:
             user = ctx.message.author
