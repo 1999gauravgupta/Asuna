@@ -53,8 +53,8 @@ async def ping(self):
         await self.bot.say("**Pong 🏓, took {0:.0f}ms**".format(tim))
         print("ping")
 
-@bot.command(pass_context=True)
-async def info(ctx,name="info",aliases=["user","userinfo"],*,user: discord.Member=None):
+@bot.command(pass_context=True,name="info",aliases=["user","userinfo"])
+async def info(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         if user is None:
             user = ctx.message.author
@@ -126,7 +126,7 @@ async def spam(ctx,no=1,*,something=None):
         print("Spam")
 
 @bot.command(pass_context=True,name="pfp",aliases=["dp","avatar"])
-async def pfp(ctx,user:discord.Member=None):
+async def pfp(ctx,*,user:discord.Member=None):
     if ctx.message.author.bot==False:
         if user is None:
             user = ctx.message.author
@@ -200,6 +200,7 @@ async def help(ctx):
 • -info [@user]→ Provides some information about the user who invoked the command or of mentioned user.
 • -svrinfo → Provides some information about the server in which the command is invoked.
 • -pfp [@user] → Display avatar of yours or mentioned user.
+• -perms [@user] → Display user perms in that server.
 • -invite → Add Asuna to your guild.
 • -ping → Runs a connection test to Discord.
 • -help → Display this message.
@@ -214,8 +215,8 @@ async def help(ctx):
 • -define <word> → Searches Dictionary for your word.
 • -anime <query> → Searches for given anime details.
 • -manga <query> → Searches for given manga details.
-• -translate <query> → Translates your input text.
-
+• -translate <query> → Translates your input text."""
+    help2="""
 **General Fun Commands:**
 • -quote → Display random motivational code to make your day.
 • -ask <question>→ Asuna helps you with your questions.
@@ -240,6 +241,7 @@ async def help(ctx):
 **Arguments in [] are optional but arguments in <> are necessary for given function to work**
 """
     await bot.whisper(help1)
+    await bot.whisper(help2)
     await bot.say(":inbox_tray: | The list of commands you have access to has been sent to your DMs.")
     print("help")
 
@@ -364,13 +366,25 @@ async def wiki(ctx,*,query=None):
 async def translate(ctx,*,query=None):
     if ctx.message.author.bot==False:
         if query!=None:
-            query="-".join(query.split())
-            query=query.encode('ascii', 'ignore').decode('ascii')
-
             response=urllib.request.urlopen("http://api.tanvis.xyz/translate/"+query).read()
             response=json.loads(response.decode("utf-8"))
             await bot.say(response["to"]["text"])
             await bot.say("The input text language is "+response["from"]["lang"])
+
+@bot.command(pass_context=True,name="perms",aliases=["permissions","permission"])
+async def perms(ctx,*, user: discord.Member=None):
+    if user==None:
+        user=ctx.message.author
+    var=dict(user.server_permissions)
+    str1=""
+    for i in var:
+        j=i.replace("_"," ")
+        if var[i]==True:
+             str1+=":small_blue_diamond:"+j.title()+"\n"
+        else:
+              str1+=":small_orange_diamond:"+j.title()+"\n"
+    embed=discord.Embed(title=" Permissions for {} in this server".format(user.name),description=str1,color=0xf7d28c)
+    await bot.say(embed=embed)
 
 @bot.command(pass_context=True,name="emo",aliases=["emojify"])
 async def emo(ctx,*,word):
@@ -389,7 +403,7 @@ async def emo(ctx,*,word):
         print("emo")
 
 @bot.command(pass_context=True,name="norris",aliases=["chuck","chuck norris"])
-async def norris(ctx, user: discord.Member=None):
+async def norris(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             if user is None:
@@ -579,7 +593,7 @@ async def sebi(ctx):
             await bot.say(e)
 
 @bot.command(pass_context=True,name="pat",aliases=["pats"])
-async def pat(ctx, user: discord.Member=None):
+async def pat(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link=["https://media1.tenor.com/images/1e92c03121c0bd6688d17eef8d275ea7/tenor.gif","https://thumbs.gfycat.com/FoolhardyJoyousBear-max-1mb.gif","https://media1.tenor.com/images/f79a9ec48bde0e592e55447b17ecfbad/tenor.gif","https://cdn.weeb.sh/images/Sk2FyQHpZ.gif","https://cdn.weeb.sh/images/B1PnJJYP-.gif","https://cdn.weeb.sh/images/Sky1x1YwW.gif","https://cdn.weeb.sh/images/SktIxo20b.gif","https://cdn.weeb.sh/images/Sk2f7J39G.gif","https://cdn.weeb.sh/images/B1TQcTNCZ.gif","https://cdn.weeb.sh/images/SJLaWWRSG.gif"]
@@ -594,7 +608,7 @@ async def pat(ctx, user: discord.Member=None):
             await bot.say(e)
 
 @bot.command(pass_context=True,name="cuddle",aliases=["cuddles"])
-async def cuddle(ctx, user: discord.Member=None):
+async def cuddle(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link= ["https://cdn.weeb.sh/images/BywGX8caZ.gif", "https://cdn.weeb.sh/images/BkTe8U7v-.gif", "https://cdn.weeb.sh/images/ryfyLL7D-.gif",  "https://cdn.weeb.sh/images/SJbGLUQwZ.gif","https://cdn.weeb.sh/images/SJLkLImPb.gif","https://cdn.weeb.sh/images/BJCCd_7Pb.gif","https://cdn.weeb.sh/images/B1SzeshCW.gif","https://cdn.weeb.sh/images/r1Q0HImPZ.gif","https://cdn.weeb.sh/images/r17lwymiZ.gif","https://cdn.weeb.sh/images/By03IkXsZ.gif","https://cdn.weeb.sh/images/S1T91Att-.gif","https://cdn.weeb.sh/images/r1s9RqB7G.gif","https://cdn.weeb.sh/images/SJceIU7wZ.gif","https://cdn.weeb.sh/images/Hyxo1CFtb.gif"]
@@ -609,22 +623,22 @@ async def cuddle(ctx, user: discord.Member=None):
             await bot.say(e)
 
 @bot.command(pass_context=True,name="hug",aliases=["hugs"])
-async def hug(ctx, user: discord.Member=None):
+async def hug(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link= ["https://cdn.weeb.sh/images/HyNJIaVCb.gif","https://cdn.weeb.sh/images/HkfgF_QvW.gif","https://cdn.weeb.sh/images/BkZngAYtb.gif","https://cdn.weeb.sh/images/SJebhd1Ob.gif","https://cdn.weeb.sh/images/BJF5_uXvZ.gif","https://cdn.weeb.sh/images/ryPix0Ft-.gif","https://cdn.weeb.sh/images/ByPGRkFVz.gif","https://cdn.weeb.sh/images/SyQ0_umD-.gif","https://cdn.weeb.sh/images/BkuUhO1OW.gif","https://cdn.weeb.sh/images/B10Tfknqf.gif","https://cdn.weeb.sh/images/SJZ-Qy35f.gif","https://cdn.weeb.sh/images/B11CDkhqM.gif","https://cdn.weeb.sh/images/HytoudXwW.gif","https://cdn.weeb.sh/images/Sk2gmRZZG.gif","https://cdn.weeb.sh/images/S14ju_7Pb.gif","https://cdn.weeb.sh/images/r1v2_uXP-.gif"]
             p=link[random.randint(0,len(link)-1)]
             if user!=None:
-                    embed=discord.Embed(description="{} tightly hugs {} <a:huggif:447681180943384576>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+                    embed=discord.Embed(description="{} tightly hugs {} <:hug:436520609980219415>".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
-                    embed=discord.Embed(description="There you go {} hugs <a:huggif:447681180943384576>".format(ctx.message.author.name),color=0xf7d28c)
+                    embed=discord.Embed(description="There you go {} hugs <:hug:436520609980219415>".format(ctx.message.author.name),color=0xf7d28c)
             embed.set_image(url=p)
             await bot.say(embed=embed)
         except Exception as e:
             await bot.say(e)
 
 @bot.command(pass_context=True,name="slap",aliases=["slaps"])
-async def slap(ctx, user: discord.Member=None):
+async def slap(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link= ["https://cdn.weeb.sh/images/ByTR7kFwW.gif","https://cdn.weeb.sh/images/HkK2mkYPZ.gif","https://cdn.weeb.sh/images/SJ-CQytvW.gif","https://cdn.weeb.sh/images/BJLCX1Kw-.gif","https://cdn.weeb.sh/images/ry2tWxcyf.gif","https://cdn.weeb.sh/images/HyPjmytDW.gif","https://cdn.weeb.sh/images/HJKiX1tPW.gif","https://cdn.weeb.sh/images/HJfXM0KYZ.gif","https://cdn.weeb.sh/images/BJSpWec1M.gif","https://cdn.weeb.sh/images/HyV5mJtDb.gif","https://media.giphy.com/media/t1CsJ1o1sdOHm/giphy.gif","https://media.giphy.com/media/3eKfsCZKKb3c4/giphy.gif","https://m.popkey.co/d5f999/4Vv51_s-200x150.gif","https://m.popkey.co/1121ac/16jO8_s-200x150.gif","http://www.teampwnicorn.com/wp-content/uploads/2013/03/Joffrey-gets-slapped-5.gif"]
@@ -639,7 +653,7 @@ async def slap(ctx, user: discord.Member=None):
             await bot.say(e)
 
 @bot.command(pass_context=True,name="kiss",aliases=["kisses"])
-async def kiss(ctx, user: discord.Member=None):
+async def kiss(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link=["https://cdn.weeb.sh/images/BydoCy9yG.gif","https://cdn.weeb.sh/images/BJSdQRtFZ.gif","https://cdn.weeb.sh/images/ryoW3T_vW.gif","https://cdn.weeb.sh/images/Sy6Ai6ODb.gif","https://cdn.weeb.sh/images/HklBtCvTZ.gif","https://cdn.weeb.sh/images/SkKL3adPb.gif","https://cdn.weeb.sh/images/SJ7b26_PW.gif","https://cdn.weeb.sh/images/HJ5khTOP-.gif","https://cdn.weeb.sh/images/Skc42pdv-.gif","https://cdn.weeb.sh/images/SJQRoTdDZ.gif","https://cdn.weeb.sh/images/BJv0o6uDZ.gif","https://cdn.weeb.sh/images/Sksk4l51z.gif","https://cdn.weeb.sh/images/Bkuk26uvb.gif","https://cdn.weeb.sh/images/r1cB3aOwW.gif","https://cdn.weeb.sh/images/ByTBhp_vZ.gif","https://cdn.weeb.sh/images/rJ_U2p_Pb.gif","https://cdn.weeb.sh/images/rJ6PWohA-.gif"]
@@ -654,7 +668,7 @@ async def kiss(ctx, user: discord.Member=None):
             await bot.say(e)
 
 @bot.command(pass_context=True,name="tickle",aliases=["tickles"])
-async def tickle(ctx, user: discord.Member=None):
+async def tickle(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link=["https://cdn.ram.moe/H1ChowIDx.gif","https://cdn.ram.moe/rJmioDLPl.gif","https://cdn.ram.moe/S1idjvIPx.gif","https://cdn.ram.moe/SJFisw8wx.gif","https://cdn.ram.moe/H1FqsDLPl.gif","https://cdn.ram.moe/rJQ2jvLDg.gif","https://cdn.weeb.sh/images/HyPyUymsb.gif","https://cdn.weeb.sh/images/HyjNLkXiZ.gif","https://cdn.weeb.sh/images/H1p0ByQo-.gif","https://cdn.weeb.sh/images/SyGQIk7i-.gif","https://cdn.weeb.sh/images/SyQHUy7oW.gif","https://cdn.weeb.sh/images/rkPzIyQi-.gif","https://cdn.weeb.sh/images/rybRByXjZ.gif"]
@@ -669,7 +683,7 @@ async def tickle(ctx, user: discord.Member=None):
             await bot.say(e)
 
 @bot.command(pass_context=True,name="punch",aliases=["punches"])
-async def punch(ctx, user: discord.Member=None):
+async def punch(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link=["https://media1.tenor.com/images/6afcfbc435b698fa5ceb2ff019718e6d/tenor.gif","https://media1.tenor.com/images/c621075def6ca41785ef4aaea20cc3a2/tenor.gif","https://media1.tenor.com/images/6d77cf1fdaa2e7c6a32c370240a7b77c/tenor.gif","https://media1.tenor.com/images/2487a7679b3d7d23cadcd51381635467/tenor.gif","https://media1.tenor.com/images/7d43687195b86c8ce2411484eb1951fc/tenor.gif","https://media1.tenor.com/images/b2db2a7fe0b9f68f2869b4e0d11a9490/tenor.gif","https://media1.tenor.com/images/892831a51c11f30b4efd726763c3babe/tenor.gif","https://media1.tenor.com/images/2fe2e31bd486f36dd552f4d6e2e5b602/tenor.gif","https://media1.tenor.com/images/cff010b188084e1faed2905c0f1634c2/tenor.gif","https://media1.tenor.com/images/7a9723858a49246426158ac3f2993e1a/tenor.gif","https://media1.tenor.com/images/ffb0334ce56be6bd880db1d7a02ac5db/tenor.gif","https://media1.tenor.com/images/1a82719c62e19ab0495e5d49ce0d0053/tenor.gif"]
@@ -684,7 +698,7 @@ async def punch(ctx, user: discord.Member=None):
             await bot.say(e)
 
 @bot.command(pass_context=True,name="sleep",aliases=["sleepy"])
-async def sleep(ctx, user: discord.Member=None):
+async def sleep(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link=["https://cdn.weeb.sh/images/ryBb41Kvb.gif","https://cdn.weeb.sh/images/SJKW4kYvZ.gif","https://cdn.weeb.sh/images/HJAx4ktD-.gif","https://cdn.weeb.sh/images/H1_-U6--f.gif","https://cdn.weeb.sh/images/HkGZVkKDW.gif","https://cdn.weeb.sh/images/rkxkM41tPW.gif","https://cdn.weeb.sh/images/rJ7ZNyKDW.gif","https://cdn.weeb.sh/images/SJYxNJKDZ.gif","https://cdn.weeb.sh/images/r1yzV1tPZ.gif","https://cdn.weeb.sh/images/rk3-NkKDb.gif","https://cdn.weeb.sh/images/By5ZNktDW.gif"]
@@ -699,7 +713,7 @@ async def sleep(ctx, user: discord.Member=None):
             await bot.say(e)
 
 @bot.command(pass_context=True,name="cry",aliases=["cries","cri"])
-async def cry(ctx, user: discord.Member=None):
+async def cry(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link=["https://cdn.weeb.sh/images/Sk5a01cyf.gif","https://cdn.weeb.sh/images/H16Wkl5yf.gif","https://cdn.weeb.sh/images/ByF7REgdf.gif","https://cdn.weeb.sh/images/r1WMmLQvW.gif","https://cdn.weeb.sh/images/HJIpry35M.gif","https://cdn.weeb.sh/images/rJ5IX8XPZ.gif","https://cdn.weeb.sh/images/Sy1EUa-Zz.gif","https://cdn.weeb.sh/images/SJHw6yFVf.gif","https://cdn.weeb.sh/images/rknUmIXD-.gif","https://cdn.weeb.sh/images/rk8DrJhcf.gif","https://cdn.weeb.sh/images/HyiGQUmPb.gif","https://cdn.weeb.sh/images/Hk6EmLmDZ.gif","https://cdn.weeb.sh/images/BJJPXLQPW.gif"]
@@ -714,7 +728,7 @@ async def cry(ctx, user: discord.Member=None):
             await bot.say(e)
 
 @bot.command(pass_context=True,name="butterfly",aliases=["butterflies","butterfli","buterfly","buterfli"])
-async def butterfly(ctx, user: discord.Member=None):
+async def butterfly(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
             link=["https://media.giphy.com/media/7OM8aqLAr2xQ4/giphy.gif","https://media.giphy.com/media/ErZOqoVIdI7zW/giphy.gif","http://bestanimations.com/Animals/Insects/Butterflys/butterfly-animated-gif-45.gif","http://bestanimations.com/Animals/Insects/Butterflys/butterfly-animated.gif","https://media.giphy.com/media/26BkLyXww5BZoL13q/giphy.gif","https://media3.giphy.com/media/OreKkqmHu1m6Y/giphy-downsized.gif","http://bestanimations.com/Animals/Insects/Butterflys/butterfly-animated-gif-21.gif","https://zippy.gfycat.com/NeighboringCompleteBluegill.gif","https://i.pinimg.com/originals/af/7c/2e/af7c2eb4f863774e70565d471d775cdf.gif","https://img1.picmix.com/output/stamp/normal/8/7/3/6/856378_b6e78.gif","https://img1.picmix.com/output/stamp/normal/1/4/9/7/857941_9b2a0.gif","https://i.pinimg.com/originals/77/18/c9/7718c92df8735c423ea3c01009bcfa14.gif","http://www.dilsecomments.com/uploads/glitter/large_glitter_1514530989.gif","https://media.giphy.com/media/EH5IYP7DPyYeI/giphy.gif","https://78.media.tumblr.com/a3cb1cc41b991f6116b5c99544fee773/tumblr_osx6fcHQtJ1uzomqmo1_500.gif","http://www.animatedimages.org/data/media/291/animated-butterfly-image-0389.gif","https://i.pinimg.com/originals/cc/cd/f4/cccdf4420d21abdb313ca419fd0d8271.gif"]
