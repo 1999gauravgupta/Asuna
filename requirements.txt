@@ -5,3 +5,4 @@ chucknorris
 spice_api
 lxml
 py_thesaurus
+lyricwikia
