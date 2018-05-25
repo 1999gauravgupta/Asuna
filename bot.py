@@ -21,8 +21,6 @@ from py_thesaurus import Thesaurus
 with codecs.open("quotes.json", "r",encoding='utf-8', errors='ignore') as f:
     quotes= json.load(f)
 
-creds=spice.init_auth("gauravgupta", "gj111999@")
-
 owner=["343395225571426304","402829897514352641"]
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or('-','asuna ',"Asuna ","Asuna, ","asuna, "))
@@ -746,6 +744,7 @@ async def butterfly(ctx,*, user: discord.Member=None):
 async def anime(ctx,*,query):
     if ctx.message.author.bot==False:
         try:
+            creds=spice.init_auth("gauravgupta", "gj111999@")
             test=spice.search(query, spice.get_medium('anime'),creds)
             list1=""
             count=1
@@ -821,6 +820,7 @@ async def anime(ctx,*,query):
 async def manga(ctx,*,query):
     if ctx.message.author.bot==False:
         try:
+            creds=spice.init_auth("gauravgupta", "gj111999@")
             test=spice.search(query, spice.get_medium('manga'),creds)
             list1=""
             count=1
