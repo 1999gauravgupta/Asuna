@@ -14,8 +14,8 @@ import requests
 import time
 import spice_api as spice
 import inspect
-from discord.voice_client import VoiceClient
 from py_thesaurus import Thesaurus
+import lyricwikia
 
 #for files
 with codecs.open("quotes.json", "r",encoding='utf-8', errors='ignore') as f:
@@ -213,7 +213,9 @@ async def help(ctx):
 • -define <word> → Searches Dictionary for your word.
 • -anime <query> → Searches for given anime details.
 • -manga <query> → Searches for given manga details.
+• -lyrics <song name> → Fetches your favourite song lyrics.
 • -translate <query> → Translates your input text."""
+
     help2="""
 **General Fun Commands:**
 • -quote → Display random motivational code to make your day.
@@ -876,6 +878,24 @@ async def manga(ctx,*,query):
             await bot.say("Service unavailable atm")
             print(e)
 
+@bot.command(pass_context=True,name="lyrics",aliases=["lyric","lines"])
+async def lyrics(ctx,*,song):
+    if ctx.message.author.bot==False:
+        try:
+            await bot.say(":mag: Singer Name")
+            singer =await bot.wait_for_message(author=ctx.message.author, timeout=30)
+            singer=str(singer.content)
+            print(song,singer)
+            l = lyricwikia.get_lyrics(singer, song)
+            str1=""
+            ls=l.split("\n\n")
+            embed=discord.Embed(title="{}".format(song.title()),color=0xf7d28c)
+            for a in ls:
+                    embed.add_field(name="\u200b",value=a+"\n")
+            await bot.say(embed=embed)
+        except Exception as e:
+            await bot.say("Lyrics not available for this song. Are you sure you entered correct details?")
+            print(e)
 
 @bot.group(pass_context=True)
 async def groot(ctx):
