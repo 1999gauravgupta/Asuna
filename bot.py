@@ -46,7 +46,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if "stfu" in message.content.lower():
-        await bot.delete_message(ctx.message)
+        await bot.delete_message(message)
         await bot.say("|:x:| Pardon, dear user, you said something that is not allowed in this server")
     await bot.process_commands(message)
 
