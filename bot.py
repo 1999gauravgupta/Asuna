@@ -16,6 +16,7 @@ import spice_api as spice
 import inspect
 from py_thesaurus import Thesaurus
 import lyricwikia
+import pickle
 
 #for files
 with codecs.open("quotes.json", "r",encoding='utf-8', errors='ignore') as f:
@@ -41,6 +42,14 @@ async def on_ready():
 async def on_ready():
     await bot.change_presence(game=discord.Game(name='Listening to -help'))
     print("status changing done")
+
+@bot.event
+async def on_message(message):
+    if "stfu" in message.content.lower():
+        await bot.delte_message(ctx.message)
+        await bot.say("|:x:| Pardon, dear user, you said something that is not allowed in this server")
+    await bot.process_commands(message)
+
 
 @bot.command(pass_context=True)
 async def ping(self):
