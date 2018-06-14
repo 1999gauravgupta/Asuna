@@ -2,6 +2,7 @@ import discord
 import codecs
 from discord.ext import commands
 from discord.ext.commands import Bot
+from discord.voice_client import VoiceClient
 import asyncio
 import random
 import json
@@ -18,6 +19,13 @@ from py_thesaurus import Thesaurus
 import lyricwikia
 import pickle
 
+
+
+#for loading music.py
+startup_extensions = ["Music"]
+
+
+
 #for files
 with codecs.open("quotes.json", "r",encoding='utf-8', errors='ignore') as f:
     quotes= json.load(f)
@@ -30,6 +38,18 @@ client=discord.Client()
 
 bot.load_extension("executer")
 
+#for music command class
+class Main_Commands():
+    def __init__(self, bot):
+        self.bot = bot
+    #for Music extension
+if __name__ == "__main__":
+    for extension in startup_extensions:
+        try:
+            bot.load_extension(extension)
+        except Exception as e:
+            exe = '{}: {}'.format(type(e).__name__, e)
+            print("Failed to load extension {}\n{}".format(extension, exe))
 #COMMANDS
 @bot.event
 async def on_ready():
@@ -631,6 +651,7 @@ async def cuddle(ctx,*, user: discord.Member=None):
         except Exception as e:
             await bot.say(e)
 
+
 @bot.command(pass_context=True,name="hug",aliases=["hugs"])
 async def hug(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
@@ -746,6 +767,20 @@ async def butterfly(ctx,*, user: discord.Member=None):
                     embed=discord.Embed(description="{} wants {} to enjoy butterflies together :butterfly:".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
                     embed=discord.Embed(description="{} here are your butterflies :butterfly:".format(ctx.message.author.name),color=0xf7d28c)
+            embed.set_image(url=p)
+            await bot.say(embed=embed)
+        except Exception as e:
+            await bot.say(e)
+@bot.command(pass_context=True,name="nom",aliases=["noms"])
+async def nom(ctx,*, user: discord.Member=None):
+    if ctx.message.author.bot==False:
+        try:
+            link=link=["https://cdn.weeb.sh/images/SJu1y1FPZ.gif","https://cdn.weeb.sh/images/SyI7yJKw-.gif","https://cdn.weeb.sh/images/SJPgk1Ywb.gif","https://cdn.weeb.sh/images/HJKQkktP-.gif","https://cdn.weeb.sh/images/ryDX1JKwW.gif","https://cdn.weeb.sh/images/HJtZJJYvb.gif","https://cdn.weeb.sh/images/SJAEkkFwb.gif","https://cdn.weeb.sh/images/HkGGy1Yvb.gif","https://cdn.weeb.sh/images/ryQ0AR_D-.gif","https://cdn.weeb.sh/images/BJyCCROP-.gif","https://cdn.weeb.sh/images/SklByktD-.gif","https://cdn.weeb.sh/images/HyXleWRSz.gif","https://cdn.weeb.sh/images/SJS-K64R-.gif","https://cdn.weeb.sh/images/rJ46ITVRb.gif","https://cdn.weeb.sh/images/rJZikZCBM.gif","https://cdn.weeb.sh/images/S12ACAdPZ.gif","https://cdn.weeb.sh/images/HJ_RAAuvb.gif","https://cdn.weeb.sh/images/rk7f1yFDW.gif"]
+            p=link[random.randint(0,len(link)-1)]
+            if user!=None:
+                    embed=discord.Embed(description="{} feeds {}... Must have been really hungry...<a:nom:456715700845674509>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+            else:
+                    embed=discord.Embed(description=" {} here's some food for you,eat up <a:nom:456715700845674509>".format(ctx.message.author.name),color=0xf7d28c)
             embed.set_image(url=p)
             await bot.say(embed=embed)
         except Exception as e:
