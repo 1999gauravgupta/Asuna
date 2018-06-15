@@ -778,9 +778,9 @@ async def nom(ctx,*, user: discord.Member=None):
             link=link=["https://cdn.weeb.sh/images/SJu1y1FPZ.gif","https://cdn.weeb.sh/images/SyI7yJKw-.gif","https://cdn.weeb.sh/images/SJPgk1Ywb.gif","https://cdn.weeb.sh/images/HJKQkktP-.gif","https://cdn.weeb.sh/images/ryDX1JKwW.gif","https://cdn.weeb.sh/images/HJtZJJYvb.gif","https://cdn.weeb.sh/images/SJAEkkFwb.gif","https://cdn.weeb.sh/images/HkGGy1Yvb.gif","https://cdn.weeb.sh/images/ryQ0AR_D-.gif","https://cdn.weeb.sh/images/BJyCCROP-.gif","https://cdn.weeb.sh/images/SklByktD-.gif","https://cdn.weeb.sh/images/HyXleWRSz.gif","https://cdn.weeb.sh/images/SJS-K64R-.gif","https://cdn.weeb.sh/images/rJ46ITVRb.gif","https://cdn.weeb.sh/images/rJZikZCBM.gif","https://cdn.weeb.sh/images/S12ACAdPZ.gif","https://cdn.weeb.sh/images/HJ_RAAuvb.gif","https://cdn.weeb.sh/images/rk7f1yFDW.gif"]
             p=link[random.randint(0,len(link)-1)]
             if user!=None:
-                    embed=discord.Embed(description="{} feeds {}... Must have been really hungry...<a:nomgif:455755842310897665>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+                    embed=discord.Embed(description="{} feeds {}... Must have been really hungry...<a:nom:456715700845674509>".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
-                    embed=discord.Embed(description=" {} here's some food for you,eat up <a:nomgif:455755842310897665>".format(ctx.message.author.name),color=0xf7d28c)
+                    embed=discord.Embed(description=" {} here's some food for you,eat up <a:nom:456715700845674509>".format(ctx.message.author.name),color=0xf7d28c)
             embed.set_image(url=p)
             await bot.say(embed=embed)
         except Exception as e:
@@ -812,6 +812,38 @@ async def blush(ctx,*, user: discord.Member=None):
                     embed=discord.Embed(description="Aaawww {} you made {} blush,its so kawaii <:ehehe:452892342178021376>".format(user.name,ctx.message.author.name),color=0xf7d28c)
             else:
                     embed=discord.Embed(description="{} seems to be blushing,wonder why :3 <:ehehe:452892342178021376>".format(ctx.message.author.name),color=0xf7d28c)
+            embed.set_image(url=p)
+            await bot.say(embed=embed)
+        except Exception as e:
+            await bot.say(e)
+
+@bot.command(pass_context=True,name="gaze",aliases=["stare","stares"])
+async def gaze(ctx,*, user: discord.Member=None):
+    if ctx.message.author.bot==False:
+        try:
+            link=["https://cdn.weeb.sh/images/HyYuG-CBf.gif",
+"https://cdn.weeb.sh/images/BkkqI1YPZ.jpeg",
+"https://cdn.weeb.sh/images/HyWnLyKPZ.gif",
+"https://cdn.weeb.sh/images/SyzsU1twZ.gif",
+"https://cdn.weeb.sh/images/BJ88vLvd-.gif",
+"https://cdn.weeb.sh/images/Hk22hAo9M.gif",
+"https://cdn.weeb.sh/images/Sk5BOdQIG.gif",
+"https://cdn.weeb.sh/images/ry7KIJYD-.gif",
+"https://cdn.weeb.sh/images/rJao8JKv-.gif",
+"https://cdn.weeb.sh/images/H1P_LyFPb.gif",
+"https://cdn.weeb.sh/images/SkH3Uytwb.gif",
+"https://cdn.weeb.sh/images/Hk768JtP-.gif",
+"https://cdn.weeb.sh/images/rk23UyYP-.gif",
+"https://cdn.weeb.sh/images/SkPoLJKwZ.gif",
+"https://cdn.weeb.sh/images/rk5tI1Yv-.gif",
+"https://cdn.weeb.sh/images/ryc3I1tv-.gif",
+"https://cdn.weeb.sh/images/B1WpLJKwW.gif",
+"https://cdn.weeb.sh/images/B1xpnU1YPZ.gif"]
+            p=link[random.randint(0,len(link)-1)]
+            if user!=None:
+                    embed=discord.Embed(description="{}, {} is staring at you,what did you do? <a:gaze:457228137856499714>".format(user.name,ctx.message.author.name),color=0xf7d28c)
+            else:
+                    embed=discord.Embed(description=" hmm.... :thinking: {} is staring at something,I wonder what it is <a:gaze:457228137856499714>".format(ctx.message.author.name),color=0xf7d28c)
             embed.set_image(url=p)
             await bot.say(embed=embed)
         except Exception as e:
