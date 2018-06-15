@@ -778,13 +778,45 @@ async def nom(ctx,*, user: discord.Member=None):
             link=link=["https://cdn.weeb.sh/images/SJu1y1FPZ.gif","https://cdn.weeb.sh/images/SyI7yJKw-.gif","https://cdn.weeb.sh/images/SJPgk1Ywb.gif","https://cdn.weeb.sh/images/HJKQkktP-.gif","https://cdn.weeb.sh/images/ryDX1JKwW.gif","https://cdn.weeb.sh/images/HJtZJJYvb.gif","https://cdn.weeb.sh/images/SJAEkkFwb.gif","https://cdn.weeb.sh/images/HkGGy1Yvb.gif","https://cdn.weeb.sh/images/ryQ0AR_D-.gif","https://cdn.weeb.sh/images/BJyCCROP-.gif","https://cdn.weeb.sh/images/SklByktD-.gif","https://cdn.weeb.sh/images/HyXleWRSz.gif","https://cdn.weeb.sh/images/SJS-K64R-.gif","https://cdn.weeb.sh/images/rJ46ITVRb.gif","https://cdn.weeb.sh/images/rJZikZCBM.gif","https://cdn.weeb.sh/images/S12ACAdPZ.gif","https://cdn.weeb.sh/images/HJ_RAAuvb.gif","https://cdn.weeb.sh/images/rk7f1yFDW.gif"]
             p=link[random.randint(0,len(link)-1)]
             if user!=None:
-                    embed=discord.Embed(description="{} feeds {}... Must have been really hungry...<a:nom:456715700845674509>".format(ctx.message.author.name,user.name),color=0xf7d28c)
+                    embed=discord.Embed(description="{} feeds {}... Must have been really hungry...<a:nomgif:455755842310897665>".format(ctx.message.author.name,user.name),color=0xf7d28c)
             else:
-                    embed=discord.Embed(description=" {} here's some food for you,eat up <a:nom:456715700845674509>".format(ctx.message.author.name),color=0xf7d28c)
+                    embed=discord.Embed(description=" {} here's some food for you,eat up <a:nomgif:455755842310897665>".format(ctx.message.author.name),color=0xf7d28c)
             embed.set_image(url=p)
             await bot.say(embed=embed)
         except Exception as e:
             await bot.say(e)
+
+@bot.command(pass_context=True,name="blush",aliases=["blushes"])
+async def blush(ctx,*, user: discord.Member=None):
+    if ctx.message.author.bot==False:
+        try:
+            link=["https://cdn.weeb.sh/images/ryhfGI7vZ.gif",
+            "https://cdn.weeb.sh/images/SJkffIXw-.gif",
+"https://cdn.weeb.sh/images/r1U7G87vZ.gif%",
+"https://cdn.weeb.sh/images/rJa-zUmv-.gif",
+"https://cdn.weeb.sh/images/SyIbfImDb.gif",
+"https://cdn.weeb.sh/images/r19GfI7vW.gif",
+"https://cdn.weeb.sh/images/BkalMI7Db.gif",
+"https://cdn.weeb.sh/images/S1X7GIXw-.gif",
+"https://cdn.weeb.sh/images/SJ8lf8Xwb.gif",
+"https://cdn.weeb.sh/images/rkXur1ncz.gif",
+"https://cdn.weeb.sh/images/B1NWGUmvb.gif",
+"https://cdn.weeb.sh/images/Hy-GGIXvb.gif",
+"https://cdn.weeb.sh/images/HklJGIXPW.gif",
+"https://cdn.weeb.sh/images/rkYmGIXPb.gif",
+"https://cdn.weeb.sh/images/rkQMGLmvZ.gif",
+"https://cdn.weeb.sh/images/Sy1-ML7vW.gif",
+"https://cdn.weeb.sh/images/r1n7M87wW.gif"]
+            p=link[random.randint(0,len(link)-1)]
+            if user!=None:
+                    embed=discord.Embed(description="Aaawww {} you made {} blush,its so kawaii <:ehehe:452892342178021376>".format(user.name,ctx.message.author.name),color=0xf7d28c)
+            else:
+                    embed=discord.Embed(description="{} seems to be blushing,wonder why :3 <:ehehe:452892342178021376>".format(ctx.message.author.name),color=0xf7d28c)
+            embed.set_image(url=p)
+            await bot.say(embed=embed)
+        except Exception as e:
+            await bot.say(e)
+
 
 @bot.command(pass_context=True)
 async def anime(ctx,*,query):
