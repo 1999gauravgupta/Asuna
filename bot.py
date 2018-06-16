@@ -63,14 +63,14 @@ async def on_message(message):
     Words=["dick","pussy","motherfucker","asshole","son of a bitch","dickhead","bitch","dick head","cunt","faggot","fag","nigga","niger","nigger","slut"]
 
     if  message.author.bot==False:
-        if message.author.id in owner:
-            pass
-        else:
+        #if message.author.id in owner:
+        #    pass
+        #else:
             try:
-                if  message.content.lower() in Words:
+                for i in Words:
+                 if  i in message.content.lower():
                     await bot.send_message(message.channel, "|:x:| Pardon, dear {}, you said something that is not allowed in this server".format(message.author))
                     await bot.delete_message(message)
-                    await bot.process_commands(message)
             except Exception as e:
                 print(e)
     await bot.process_commands(message)
