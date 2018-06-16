@@ -63,6 +63,7 @@ async def on_message(message):
     Words=["dick","pussy","motherfucker","asshole","son of a bitch","dickhead","bitch","dick head","cunt","faggot","fag","nigga","niger","nigger","slut"]
 
     if  message.author.bot==False:
+       if message.guild.id != 281793428793196544 or message.guild.id !=265828729970753537:
         if message.author.id in owner:
             pass
         else:
