@@ -63,9 +63,9 @@ async def on_message(message):
     Words=["dick","pussy","motherfucker","asshole","son of a bitch","dickhead","bitch","dick head","cunt","faggot","fag","nigga","niger","nigger","slut"]
 
     if  message.author.bot==False:
-        #if message.author.id in owner:
-        #    pass
-        #else:
+        if message.author.id in owner:
+            pass
+        else:
             try:
                 for i in Words:
                  if  i in message.content.lower():
