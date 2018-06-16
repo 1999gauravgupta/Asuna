@@ -20,7 +20,6 @@ import lyricwikia
 import pickle
 
 
-
 #for loading music.py
 startup_extensions = ["Music"]
 
@@ -56,18 +55,24 @@ async def on_ready():
     print("ready")
     print ("I am running on " + bot.user.name)
     print ("With the ID: " + bot.user.id)
-
-
-@bot.event
-async def on_ready():
     await bot.change_presence(game=discord.Game(name='Listening to -help'))
     print("status changing done")
 
 @bot.event
 async def on_message(message):
-    if "stfu" in message.content.lower():
-        await bot.delete_message(message)
-        await bot.say("|:x:| Pardon, dear user, you said something that is not allowed in this server")
+    Words=["dick","pussy","motherfucker","asshole","son of a bitch","dickhead","bitch","dick head","cunt","faggot","fag","nigga","niger","nigger","slut"]
+
+    if  message.author.bot==False:
+        if message.author.id in owner:
+            pass
+        else:
+            try:
+                if  message.content.lower() in Words:
+                    await bot.send_message(message.channel, "|:x:| Pardon, dear {}, you said something that is not allowed in this server".format(message.author))
+                    await bot.delete_message(message)
+                    await bot.process_commands(message)
+            except Exception as e:
+                print(e)
     await bot.process_commands(message)
 
 
