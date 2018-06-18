@@ -20,6 +20,7 @@ import lyricwikia
 import pickle
 
 
+
 #for loading music.py
 startup_extensions = ["Music"]
 
@@ -55,6 +56,10 @@ async def on_ready():
     print("ready")
     print ("I am running on " + bot.user.name)
     print ("With the ID: " + bot.user.id)
+
+
+@bot.event
+async def on_ready():
     await bot.change_presence(game=discord.Game(name='Listening to -help'))
     print("status changing done")
 
@@ -78,7 +83,6 @@ async def on_message(message):
                         except Exception as e:
                             print(e)
     await bot.process_commands(message)
-
 @bot.command(pass_context=True)
 async def filter(ctx,state=1):
     if state==1:
@@ -96,6 +100,7 @@ async def filter(ctx,state=1):
                 f.write(line)
         f.close()
         await bot.say("Filter turned off successfully.")
+
 
 @bot.command(pass_context=True)
 async def ping(self):
@@ -254,10 +259,10 @@ async def help(ctx):
 • -svrinfo → Provides some information about the server in which the command is invoked.
 • -pfp [@user] → Display avatar of yours or mentioned user.
 • -perms [@user] → Display user perms in that server.
+• -filter [state] → Use this command to setup filter on your server. Set it off using -filter 0.
 • -invite → Add Asuna to your guild.
 • -ping → Runs a connection test to Discord.
 • -help → Display this message.
-• -filter [state] → Use this command to setup filter on your server. Set it off using -filter 0. 
 
 **General Query Commands:**
 • -google <query> → Searches Google for your query.
@@ -269,7 +274,6 @@ async def help(ctx):
 • -define <word> → Searches Dictionary for your word.
 • -anime <query> → Searches for given anime details.
 • -manga <query> → Searches for given manga details.
-• -lyrics <song name> → Fetches your favourite song lyrics.
 • -translate <query> → Translates your input text."""
 
     help2="""
@@ -289,13 +293,26 @@ async def help(ctx):
 • -tickle [@user]→ Don't stop until they cry.
 • -sleepy [@user]→ Why not sleeping then?.
 • -cry [@user]→ Did someone hurt you?.
-• -nom [@user]→ Are you hungry?.
-• -blush [@user]→ OwO whats the reason behind those pink cheeks?.
-• -stare [@user]→ Hmm, i think you have got some enemies.
-
+• -nom [@user]→ Hungry? have something to eat.
+• -gaze [@user]→ Glare at someone.
+• -cry [@user]→ Aaawww,did someone make you feel flushed?.
 **General Emoji Commands:**
 • -emoji <shrug,sip,bang,wonder,mikuyay,peek,dance,j> → Appends that emoji in chat.
-• -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,notlike,kiss,grr,sob,toj> → Appends your favorite Google blob stickers in chat.
+• -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,notlike,kiss,grr,sob,toj> → Appends your favorite Google blob stickers in chat."""
+
+    help3="""
+**General Music Commands:**
+• -join <query> → Make the bot join a voice channel.
+• -play <query> → Name of the song/url you want to play.
+• -playing → Shows info about the currently played songself.
+• -volume <value> → Sets the volume of the currently playing song.
+• -skip → Vote to skip a song. The song requester can automatically skip.
+3 skip votes are needed for the song to be skipped.
+• -pause → Pauses the currently played song.
+• -resume → Resume the currently played song.
+• -leave → Stops playing audio and leaves the voice channel.
+This also clears the queue.
+*Music commands not working atm*
 
 **Arguments in [] are optional but arguments in <> are necessary for given function to work**
 """
