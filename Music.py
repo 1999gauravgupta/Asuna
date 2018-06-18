@@ -50,7 +50,7 @@ class VoiceState:
         self.skip_votes.clear()
         if self.is_playing():
             self.player.stop()
-            
+
     def repeat(self):
         if self.is_playing():
             self.player.repeat()
@@ -101,18 +101,22 @@ class Music:
         try:
             await self.create_voice_client(channel)
         except discord.ClientException:
-            await self.bot.say('Already in a voice channel...')
+            embed=discord.Embed(description='Already in a voice channel...',color=0xf7d28c)
+            await self.bot.say(embed=embed)
         except discord.InvalidArgument:
-            await self.bot.say('This is not a voice channel...')
+            embed=discord.Embed(description='This is not a voice channel...',color=0xf7d28c)
+            await self.bot.say(embed=embed)
         else:
-            await self.bot.say('Ready to play audio in **' + channel.name)
+            embed=discord.Embed(description='Ready to play audio in **',color=0xf7d28c)
+            await self.bot.say(emed=embed + channel.name)
 
     @commands.command(pass_context=True, no_pm=True)
     async def summon(self, ctx):
         """Summons the bot to join your voice channel."""
         summoned_channel = ctx.message.author.voice_channel
         if summoned_channel is None:
-            await self.bot.say('Are you sure your in a channel?')
+            embed=discord.Embed(description="Are you sure you are in a voice chaneel? :thinking:",color=0xf7d28c)
+            await self.bot.say(embed=embed)
             return False
 
         state = self.get_voice_state(ctx.message.server)
@@ -140,7 +144,8 @@ class Music:
 
         if state.voice is None:
             success = await ctx.invoke(self.summon)
-            await self.bot.say("Loading the song please be patient..")
+            embed=discord.Embed(description="Loading the song,please be patient...",color=0xf7d28c)
+            await self.bot.say(embed=embed)
             if not success:
                 return
 
@@ -152,7 +157,8 @@ class Music:
         else:
             player.volume = 0.6
             entry = VoiceEntry(ctx.message, player)
-            await self.bot.say('Enqueued ' + str(entry))
+            embed=discord.Embed(description='Enqueued ' + str(entry),color=0xf7d28c)
+            await self.bot.say(embed=embed)
             await state.songs.put(entry)
 
     @commands.command(pass_context=True, no_pm=True)
@@ -163,7 +169,8 @@ class Music:
         if state.is_playing():
             player = state.player
             player.volume = value / 100
-            await self.bot.say('Set the volume to {:.0%}'.format(player.volume))
+            embed=discord.Embed(description='Set the volume to {:.0%}'.format(player.volume),color=0xf7d28c)
+            await self.bot.say(embed=embed)
 
     @commands.command(pass_context=True, no_pm=True)
     async def resume(self, ctx):
@@ -179,8 +186,8 @@ class Music:
         state = self.get_voice_state(ctx.message.server)
         if state.is_playing():
             player = state.player
-            player.pause()        
-        
+            player.pause()
+
 
     @commands.command(pass_context=True, no_pm=True)
     async def leave(self, ctx):
@@ -198,20 +205,22 @@ class Music:
             state.audio_player.cancel()
             del self.voice_states[server.id]
             await state.voice.disconnect()
-            await self.bot.say("Cleared the queue and disconnected from voice channel ")
+            embed=discord.Embed(description="Cleared the queue and disconnected from voice channel ",color=0xf7d28c)
+            await self.bot.say(embed=embed)
         except:
             pass
 
-    
+
     @commands.command(pass_context=True, no_pm=True)
     async def repeat(self, ctx):
         """Repeats the currently playing song"""
         state = self.get_voice_state(ctx.message.server)
         voter = ctx.message.author
         if voter == state.current.requester:
-            await self.bot.say('Repeating the song...')
+            embed=discord.Embed(description='Repeating the song...',color=0xf7d28c)
+            await self.bot.say(embed=embed)
             state.repeat()
-        
+
 
     @commands.command(pass_context=True, no_pm=True)
     async def skip(self, ctx):
@@ -221,35 +230,43 @@ class Music:
 
         state = self.get_voice_state(ctx.message.server)
         if not state.is_playing():
-            await self.bot.say('Not playing any music right now...')
+            embed=discord.Embed(description='Not playing any music right now...',color=0xf7d28c)
+            await self.bot.say(embed=embed)
             return
 
         voter = ctx.message.author
         if voter == state.current.requester:
-            await self.bot.say('Requester requested skipping song...')
+            embed=discord.Embed(description='Requester requested skipping song...',color=0xf7d28c)
+            await self.bot.say(embed=embed)
             state.skip()
         elif voter.id not in state.skip_votes:
             state.skip_votes.add(voter.id)
             total_votes = len(state.skip_votes)
             if total_votes >= 3:
-                await self.bot.say('Skip vote passed, skipping song...')
+                embed=discord.Embed(description='Skip vote passed, skipping song...',color=0xf7d28c)
+                await self.bot.say(embed=embed)
                 state.skip()
             else:
-                await self.bot.say('Skip vote added, currently at [{}/3]'.format(total_votes))
+                embed=discord.Embed(description='Skip vote added, currently at [{}/3]'.format(total_votes),color=0xf7d28c)
+                await self.bot.say(embed=embed)
         else:
-            await self.bot.say('You have already voted to skip this song.')
+            embed=discord.Embed(description='You have already voted to skip this song.',color=0xf7d28c)
+            await self.bot.say(embed=embed)
 
     @commands.command(pass_context=True, no_pm=True)
     async def playing(self, ctx):
         """Shows info about the currently played song."""
-
         state = self.get_voice_state(ctx.message.server)
         if state.current is None:
-            await self.bot.say('Not playing anything.')
+
+            embed=discord.Embed(description="Not playing anything",color=0xf7d28c)
+            await self.bot.say(embed=embed)
+
         else:
-            skip_count = len(state.skip_votes)
-            await self.bot.say('Now playing {} [skips: {}/3]'.format(state.current, skip_count))
-            
+             skip_count = len(state.skip_votes)
+             embed=discord.Embed(description="Now playing {} [skips: {}/3]".format(state.current,skip_count),color=0xf7d28c)
+             await self.bot.say(embed=embed)
+
 def setup(bot):
     bot.add_cog(Music(bot))
     print('Music is loaded')
