@@ -1,19 +1,11 @@
 discord.py[voice] ~= 0.16.0
-
 xkcd 
-
 urbandictionary 
-
 chucknorris
- 
 spice_api 
-
 lxml 
-
-py_thesaurus
- 
+py_thesaurus 
 lyricwikia 
-
 google 
 wikipedia
 pip
