@@ -61,21 +61,41 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     Words=["dick","pussy","motherfucker","asshole","son of a bitch","dickhead","bitch","dick head","cunt","faggot","fag","nigga","niger","nigger","slut"]
-
-    if  message.author.bot==False:
-      if message.server.id==411803755600936962:
-        if message.author.id in owner:
-            pass
-        else:
-            try:
-                for i in Words:
-                 if  i in message.content.lower():
-                    await bot.send_message(message.channel, "|:x:| Pardon, dear {}, you said something that is not allowed in this server".format(message.author))
-                    await bot.delete_message(message)
-            except Exception as e:
-                print(e)
+    with open("serverf.txt", "r") as f1:
+        list1=f1.readlines()
+        for i in list1:
+            j=i.replace("\n","")
+            if j==message.server.id:
+                if  message.author.bot==False:
+                    if message.author.id in owner:
+                        pass
+                    else:
+                        try:
+                            for i in Words:
+                             if  i in message.content.lower():
+                                await bot.send_message(message.channel, "|:x:| Pardon, dear {}, you said something that is not allowed in this server".format(message.author))
+                                await bot.delete_message(message)
+                        except Exception as e:
+                            print(e)
     await bot.process_commands(message)
 
+@bot.command(pass_context=True)
+async def filter(ctx,state=1):
+    if state==1:
+        with open("serverf.txt", "a") as f1:
+            f1.write("\n"+ctx.message.server.id)
+        await bot.say("Filter turned on successfully.")
+    else:
+        f = open("serverf.txt","r")
+        lines = f.readlines()
+        f.close()
+        f = open("serverf.txt","w")
+        for line in lines:
+            p=line.replace("\n","")
+            if p!=ctx.message.server.id:
+                f.write(line)
+        f.close()
+        await bot.say("Filter turned off successfully.")
 
 @bot.command(pass_context=True)
 async def ping(self):
@@ -237,6 +257,7 @@ async def help(ctx):
 • -invite → Add Asuna to your guild.
 • -ping → Runs a connection test to Discord.
 • -help → Display this message.
+• -filter [state] → Use this command to setup filter on your server. Set it off using -filter 0. 
 
 **General Query Commands:**
 • -google <query> → Searches Google for your query.
@@ -268,6 +289,9 @@ async def help(ctx):
 • -tickle [@user]→ Don't stop until they cry.
 • -sleepy [@user]→ Why not sleeping then?.
 • -cry [@user]→ Did someone hurt you?.
+• -nom [@user]→ Are you hungry?.
+• -blush [@user]→ OwO whats the reason behind those pink cheeks?.
+• -stare [@user]→ Hmm, i think you have got some enemies.
 
 **General Emoji Commands:**
 • -emoji <shrug,sip,bang,wonder,mikuyay,peek,dance,j> → Appends that emoji in chat.
