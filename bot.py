@@ -85,22 +85,24 @@ async def on_message(message):
     await bot.process_commands(message)
 @bot.command(pass_context=True)
 async def filter(ctx,state=1):
-    if state==1:
-        with open("serverf.txt", "a") as f1:
-            f1.write("\n"+ctx.message.server.id)
-        await bot.say("Filter turned on successfully.")
+    if ctx.message.author.server_permissions.administrator:
+        if state==1:
+            with open("serverf.txt", "a") as f1:
+                f1.write("\n"+ctx.message.server.id)
+            await bot.say("Filter turned on successfully.")
+        else:
+            f = open("serverf.txt","r")
+            lines = f.readlines()
+            f.close()
+            f = open("serverf.txt","w")
+            for line in lines:
+                p=line.replace("\n","")
+                if p!=ctx.message.server.id:
+                    f.write(line)
+            f.close()
+            await bot.say("Filter turned off successfully.")
     else:
-        f = open("serverf.txt","r")
-        lines = f.readlines()
-        f.close()
-        f = open("serverf.txt","w")
-        for line in lines:
-            p=line.replace("\n","")
-            if p!=ctx.message.server.id:
-                f.write(line)
-        f.close()
-        await bot.say("Filter turned off successfully.")
-
+        await bot.say("You do not have required permissions to use this command.")
 
 @bot.command(pass_context=True)
 async def ping(self):
@@ -302,6 +304,7 @@ async def help(ctx):
 • -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,notlike,kiss,grr,sob,toj> → Appends your favorite Google blob stickers in chat."""
 
     help3="""
+    
 **General Music Commands:**
 • -join <query> → Make the bot join a voice channel.
 • -play <query> → Name of the song/url you want to play.
