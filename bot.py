@@ -298,8 +298,8 @@ async def help(ctx):
 • -cry [@user]→ Aaawww,did someone make you feel flushed?.
 
 **General Emoji Commands:**
-• -emoji <shrug,sip,bang,wonder,yay,peek,dance,j,OwO,nom> → Appends that emoji in chat.
-• -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,notlike,kiss,grr,sob,toj> → Appends your favorite Google blob stickers in chat."""
+• -emoji <shrug,sip,bang,wonder,yay,peek,dance,j,nom> → Appends that emoji in chat.
+• -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,unamused,kiss,grr,sob,toj,OwO> → Appends your favorite Google blob stickers in chat."""
 
     help3="""
 **General Music Commands:**
@@ -1124,9 +1124,14 @@ async def teeth(ctx):
         await bot.say("<a:teeth:436934738771574797>")
         await bot.delete_message(ctx.message)
 @blob.command(pass_context=True)
-async def notlike(ctx):
+async def unamused(ctx):
     if ctx.message.author.bot==False:
         await bot.say("<a:not_like:436934761962012702>")
+        await bot.delete_message(ctx.message)
+@blob.command(pass_context=True)        
+async def OwO(ctx):
+    if ctx.message.author.bot==False:
+        await bot.say("<a:OwO:458251627443519488>")
         await bot.delete_message(ctx.message)
 @blob.command(pass_context=True)
 async def kiss(ctx):
@@ -1198,11 +1203,6 @@ async def bang(ctx):
 async def wonder(ctx):
     if ctx.message.author.bot==False:
         await bot.say("<a:wonder:435147959101947905>")
-        await bot.delete_message(ctx.message)
-@emoji.command(pass_context=True)
-async def OwO(ctx):
-    if ctx.message.author.bot==False:
-        await bot.say("<a:OwO:458251627443519488>")
         await bot.delete_message(ctx.message)
 @emoji.command(pass_context=True)
 async def nom(ctx):
