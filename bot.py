@@ -296,6 +296,7 @@ async def help(ctx):
 • -nom [@user]→ Hungry? have something to eat.
 • -gaze [@user]→ Glare at someone.
 • -cry [@user]→ Aaawww,did someone make you feel flushed?.
+
 **General Emoji Commands:**
 • -emoji <shrug,sip,bang,wonder,mikuyay,peek,dance,j> → Appends that emoji in chat.
 • -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,notlike,kiss,grr,sob,toj> → Appends your favorite Google blob stickers in chat."""
@@ -318,6 +319,7 @@ This also clears the queue.
 """
     await bot.whisper(help1)
     await bot.whisper(help2)
+    await bot.whisper(help3)
     await bot.say(":inbox_tray: | The list of commands you have access to has been sent to your DMs.")
     print("help")
 
