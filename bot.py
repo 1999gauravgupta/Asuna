@@ -298,7 +298,7 @@ async def help(ctx):
 • -cry [@user]→ Aaawww,did someone make you feel flushed?.
 
 **General Emoji Commands:**
-• -emoji <shrug,sip,bang,wonder,mikuyay,peek,dance,j> → Appends that emoji in chat.
+• -emoji <shrug,sip,bang,wonder,mikuyay,peek,dance,j,OwO> → Appends that emoji in chat.
 • -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,notlike,kiss,grr,sob,toj> → Appends your favorite Google blob stickers in chat."""
 
     help3="""
@@ -1199,5 +1199,11 @@ async def wonder(ctx):
     if ctx.message.author.bot==False:
         await bot.say("<a:wonder:435147959101947905>")
         await bot.delete_message(ctx.message)
+@emoji.command(pass_context=True)
+async def OwO(ctx):
+    if ctx.message.author.bot==False:
+        await bot.say("<a:OwO:458251627443519488>")
+        await bot.delete_message(ctx.message)
+        
 
 bot.run("NDExNTY2NDczMzUwMjE3NzQ4.DWRS8A.U2VKbHmJAbktNhhgOhSNcpgwGt4")
