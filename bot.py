@@ -299,7 +299,7 @@ async def help(ctx):
 
 **General Emoji Commands:**
 • -emoji <shrug,sip,bang,wonder,yay,peek,dance,j,nom> → Appends that emoji in chat.
-• -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,unamused,kiss,grr,sob,toj,OwO> → Appends your favorite Google blob stickers in chat."""
+• -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,unamused,kiss,grr,sob,toj,owo> → Appends your favorite Google blob stickers in chat."""
 
     help3="""
 **General Music Commands:**
@@ -1129,7 +1129,7 @@ async def unamused(ctx):
         await bot.say("<a:not_like:436934761962012702>")
         await bot.delete_message(ctx.message)
 @blob.command(pass_context=True)        
-async def OwO(ctx):
+async def owo(ctx):
     if ctx.message.author.bot==False:
         await bot.say("<a:OwO:458251627443519488>")
         await bot.delete_message(ctx.message)
