@@ -1055,7 +1055,7 @@ async def lyrics(ctx,*,song):
             print(e)
 
 @bot.command(pass_context=True)
-async def big(emoji: discord.Emoji=None):
+async def big(ctx,emoji: discord.Emoji=None):
     if emoji!=None:
         if ctx.message.author.bot==False:
             embed=discord.Embed(title="Here's what i could find about {}".format(emoji.name),color=0xf7d28c)
