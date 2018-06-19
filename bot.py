@@ -1054,6 +1054,18 @@ async def lyrics(ctx,*,song):
             await bot.say("Lyrics not available for this song. Are you sure you entered correct details?")
             print(e)
 
+@bot.command(pass_context=True)
+async def big(emoji: discord.Emoji=None):
+    if emoji!=None:
+        if ctx.message.author.bot==False:
+            embed=discord.Embed(title="Here's what i could find about {}".format(emoji.name),color=0xf7d28c)
+            embed.add_field(name="Name",value=emoji.name)
+            embed.add_field(name="ID",value=emoji.id)
+            embed.add_field(name="Server",value=emoji.server)
+            embed.add_field(name="Created at",value=emoji.created_at)
+            embed.set_image(url=emoji.url)
+            await bot.say(embed=embed)
+
 @bot.group(pass_context=True)
 async def groot(ctx):
     if ctx.invoked_subcommand is None:
