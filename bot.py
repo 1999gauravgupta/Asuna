@@ -1058,12 +1058,13 @@ async def lyrics(ctx,*,song):
 async def big(ctx,emoji: discord.Emoji=None):
     if emoji!=None:
         if ctx.message.author.bot==False:
+            print(emoji.name,emoji.id,emoji.server,emoji.created_at,emoji.url)
             embed=discord.Embed(title="Here's what i could find about {}".format(emoji.name),color=0xf7d28c)
-            embed.add_field(name="Name",value=emoji.name)
-            embed.add_field(name="ID",value=emoji.id)
-            embed.add_field(name="Server",value=emoji.server)
-            embed.add_field(name="Created at",value=emoji.created_at)
-            embed.set_image(url=emoji.url)
+            embed.add_field(name="Name",value=emoji.name if emoji.name else "\u200b")
+            embed.add_field(name="ID",value=emoji.id if emoji.id else "\u200b")
+            embed.add_field(name="Server",value=emoji.server if emoji.server else "\u200b")
+            embed.add_field(name="Created at",value=emoji.created_at if emoji.created_at else "\u200b")
+            embed.set_image(url=emoji.url if emoji.url else "\u200b")
             await bot.say(embed=embed)
 
 @bot.group(pass_context=True)
