@@ -1057,7 +1057,7 @@ async def lyrics(ctx,*,song):
 @bot.command(pass_context=True)
 async def big(ctx,emoji: FailsafeEmojiConverter):
     if emoji!=None:
-        	if ctx.message.author.bot==False:
+        if ctx.message.author.bot==False:
         	e = discord.Embed(type='rich', color=0xf7d28c)
 		if isinstance(emoji, discord.Emoji):
 			url = emoji.url.replace('discordapp.com/api', 'cdn.discordapp.com')
@@ -1067,7 +1067,7 @@ async def big(ctx,emoji: FailsafeEmojiConverter):
 			e.add_field(name='Created at', value=emoji.created_at.strftime(datetime_format))
 			e.add_field(name='URL', value=url)
 		else:
-			e.add_field(name='Name', value=unicodedata.name(emoji))
+			e.add_field(name='Name', value=unicodedata.name(emoji))blurple
 			e.add_field(name='ID', value='Built-in')
 		await ctx.send(embed=e) 
 
