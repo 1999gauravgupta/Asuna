@@ -1053,9 +1053,8 @@ async def lyrics(ctx,*,song):
         except Exception as e:
             await bot.say("Lyrics not available for this song. Are you sure you entered correct details?")
             print(e)
-
-def emoji( ctx, emoji : FailsafeEmojiConverter):
-		"""Retrieves information about an emoji."""
+@bot.command(pass_context=True)
+async def emoji( ctx, emoji : FailsafeEmojiConverter):
 		e = discord.Embed(type='rich', color=0xf7d28c)
         if isinstance(emoji, discord.Emoji):
 			url = emoji.url.replace('discordapp.com/api', 'cdn.discordapp.com')
