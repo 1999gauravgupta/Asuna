@@ -1054,7 +1054,7 @@ async def lyrics(ctx,*,song):
             await bot.say("Lyrics not available for this song. Are you sure you entered correct details?")
             print(e)
 @bot.command(pass_context=True)
-async def big( ctx, emoji : FailsafeEmojiConverter):
+async def big( ctx, emoji : discord.Emoji):
     try:
         e = discord.Embed(title="{}".format(emoji.name), color=0xf7d28c)
         p=(emoji.url).replace("discordapp.com/api","cdn.discordapp.com")
