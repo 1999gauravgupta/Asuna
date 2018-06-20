@@ -1054,24 +1054,19 @@ async def lyrics(ctx,*,song):
             await bot.say("Lyrics not available for this song. Are you sure you entered correct details?")
             print(e)
 
-@bot.command(pass_context=True)
-async def big(ctx,emoji: FailsafeEmojiConverter):
-    if emoji!=None:
-        if ctx.message.author.bot==False:
-        	e = discord.Embed(type='rich', color=0xf7d28c)
-		try:
+def emoji( ctx, emoji : FailsafeEmojiConverter):
+		"""Retrieves information about an emoji."""
+		e = discord.Embed(type='rich', color=0xf7d28c)
+        if isinstance(emoji, discord.Emoji):
 			url = emoji.url.replace('discordapp.com/api', 'cdn.discordapp.com')
 			e.set_thumbnail(url=url)
 			e.add_field(name='Name', value=emoji.name)
 			e.add_field(name='ID', value=emoji.id)
 			e.add_field(name='Created at', value=emoji.created_at.strftime(datetime_format))
 			e.add_field(name='URL', value=url)
-		except Exception:
-		     try:
-			e.add_field(name='Name', value=unicodedata.name(emoji))blurple
+		else:
+			e.add_field(name='Name', value=unicodedata.name(emoji))
 			e.add_field(name='ID', value='Built-in')
-		     except Exception:
-			await bot.say("Something went wrong. Try again Later")
 		await ctx.send(embed=e) 
 
 @bot.group(pass_context=True)
