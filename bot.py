@@ -153,7 +153,7 @@ async def cat():
     response=json.loads(response.decode("utf-8"))
     await bot.say(response["url"])
 
-@bbot.command()
+@bot.command()
 async def dog():
     response=urllib.request.urlopen("https://random.dog/woof.json").read()
     response=json.loads(response.decode("utf-8"))
