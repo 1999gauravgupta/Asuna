@@ -1057,8 +1057,8 @@ async def lyrics(ctx,*,song):
 @bot.command(pass_context=True)
 async def big(ctx,emoji: FailsafeEmojiConverter):
     if emoji!=None:
-        if ctx.message.author.bot==False:
-        e = discord.Embed(type='rich', color=blurple)
+        	if ctx.message.author.bot==False:
+        	e = discord.Embed(type='rich', color=0xf7d28c)
 		if isinstance(emoji, discord.Emoji):
 			url = emoji.url.replace('discordapp.com/api', 'cdn.discordapp.com')
 			e.set_thumbnail(url=url)
