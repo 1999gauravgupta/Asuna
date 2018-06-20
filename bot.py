@@ -1055,14 +1055,21 @@ async def lyrics(ctx,*,song):
             print(e)
 
 @bot.command(pass_context=True)
-async def big(ctx,emoji: discord.Emoji=None):
+async def big(ctx,emoji: FailsafeEmojiConverter):
     if emoji!=None:
         if ctx.message.author.bot==False:
-            print(emoji.name,emoji.id,emoji.server,emoji.created_at,emoji.url)
-            embed=discord.Embed(title="Here's what i could find about {}".format(emoji.name),color=0xf7d28c)
-            embed.add_field(name="Name",value=emoji.name if emoji.name else "\u200b")
-            embed.add_field(name="ID",value=emoji.id if emoji.id else "\u200b")
-            await bot.say(embed=embed)
+        e = discord.Embed(type='rich', color=blurple)
+		if isinstance(emoji, discord.Emoji):
+			url = emoji.url.replace('discordapp.com/api', 'cdn.discordapp.com')
+			e.set_thumbnail(url=url)
+			e.add_field(name='Name', value=emoji.name)
+			e.add_field(name='ID', value=emoji.id)
+			e.add_field(name='Created at', value=emoji.created_at.strftime(datetime_format))
+			e.add_field(name='URL', value=url)
+		else:
+			e.add_field(name='Name', value=unicodedata.name(emoji))
+			e.add_field(name='ID', value='Built-in')
+		await ctx.send(embed=e) 
 
 @bot.group(pass_context=True)
 async def groot(ctx):
