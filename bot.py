@@ -111,6 +111,24 @@ async def ping(self):
         await self.bot.say("**Pong 🏓, took {0:.0f}ms**".format(tim))
         print("ping")
 
+@commands.command()
+async def cat(self, ctx):
+	response=urllib.request.urlopen('https://nekos.life/api/v2/img/meow').read()
+        response=json.loads(response.decode("utf-8"))
+	await bot.say(response["url"])
+
+@commands.command()
+async def dog(self, ctx):
+	response=urllib.request.urlopen('https://random.dog/woof.json').read()
+        response=json.loads(response.decode("utf-8"))
+	await bot.say(response["url"])
+
+@commands.command()
+async def duck(self, ctx):
+	response=urllib.request.urlopen('https://random-d.uk/api/v1/random').read()
+        response=json.loads(response.decode("utf-8"))
+	await bot.say(response["url"])
+	
 @bot.command(pass_context=True,name="info",aliases=["user","userinfo"])
 async def info(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
