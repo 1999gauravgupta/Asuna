@@ -118,8 +118,8 @@ async def poll(ctx,*,query=None):
     p=query.replace("?","")
     p=p+" ?"
     await bot.say(p.title())
-    await bot.add_reaction(ctx.message , :arrow_up_small:)
-    await bot.add_reaction(ctx.message , :arrow_down_small:)
+    await bot.add_reaction(ctx.message , ":arrow_up_small:")
+    await bot.add_reaction(ctx.message , ":arrow_down_small:")
 
 @bot.command()
 async def cat():
