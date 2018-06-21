@@ -1081,29 +1081,12 @@ async def lyrics(ctx,*,song):
         except Exception as e:
             await bot.say("Lyrics not available for this song. Are you sure you entered correct details?")
             print(e)
-@bot.command(pass_context=True)
-async def big( ctx, emoji : FailsafeEmojiConverter):
+		
+@bot.command()
+async def big(emo):
         """Enlarge emoji"""
         emo = emo.split(':')[-1].replace('>' , '')
-        m=client.get_all_emojis()
-        for i in m:
-            if i.id==emo:
-                await bot.say("worked")
-#         emo = discord.utils.get(ctx.message.server.emojis , name= 'nom')
-# print(emo.id)
-    # try:
-    #     e = discord.Embed(title="{}".format(emoji.name), color=0xf7d28c)
-    #     p=(emoji.url).replace("discordapp.com/api","cdn.discordapp.com")
-    #     e.set_image(url=p)
-    #     e.add_field(name="Name",value=emoji.name)
-    #     e.add_field(name="ID",value=emoji.id)
-    #     e.add_field(name="Created at",value=emoji.created_at.strftime(datetime_format))
-    #     await bot.say(embed=e)
-    # except Exception as e:
-    #     await bot.say(e)
-	# 	 e.add_field(name='Name', value=unicodedata.name(emoji))
-	# 	 e.add_field(name='ID', value='Built-in')
-	
+        await bot.say("https://discordapp.com/api/emojis/{}.png".format(emo))
 
 @bot.group(pass_context=True)
 async def groot(ctx):
