@@ -1071,10 +1071,11 @@ async def lyrics(ctx,*,song):
         except Exception as e:
             await bot.say("Lyrics not available for this song. Are you sure you entered correct details?")
             print(e)
-@bot.command(pass_context=True)
-async def big( emo):
+@bot.command()
+async def big(emo):
+        """Enlarge emoji"""
         emo = emo.split(':')[-1].replace('>' , '')
-        await bot.say("https://discordapp.com/api/emojis/{},png".format(emo))
+        await bot.say("https://discordapp.com/api/emojis/{}.png".format(emo))
 
 @bot.group(pass_context=True)
 async def groot(ctx):
