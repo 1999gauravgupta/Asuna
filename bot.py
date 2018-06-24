@@ -323,7 +323,7 @@ async def help(ctx):
 • -cry [@user]→ Did someone hurt you?.
 • -nom [@user]→ Hungry? have something to eat.
 • -gaze [@user]→ Glare at someone.
-• -cry [@user]→ Aaawww,did someone make you feel flushed?.
+• -blush [@user]→ Aaawww,did someone make you feel flushed?.
 
 **General Emoji Commands:**
 • -emoji <shrug,sip,bang,wonder,yay,peek,dance,j,nom> → Appends that emoji in chat.
