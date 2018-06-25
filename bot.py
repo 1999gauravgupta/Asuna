@@ -1073,7 +1073,7 @@ async def lyrics(ctx,*,song):
             embed=discord.Embed(title="{}".format(response["message"]["body"]["track_list"][0]["track"]["track_name"]),color=0xf7d28c)
             for a in k:
                     embed.add_field(name="\u200b",value=a+"\n")
-            embed.set_footer(text=responses["message"]["body"]["lyrics"]["lyrics_copyright"],url=responses["message"]["body"]["lyrics"]["script_tracking_url"])
+            embed.add_field(name="\u200b",value=responses["message"]["body"]["lyrics"]["lyrics_copyright"])
             try:
                 img=response["message"]["body"]["track_list"][0]["track"]["album_coverart_100x100"]
                 embed.set_thumbnail(url=img)
