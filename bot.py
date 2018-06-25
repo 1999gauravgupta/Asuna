@@ -281,7 +281,6 @@ bot.remove_command("help")
 async def help(ctx):
     help1="""
 :page_with_curl: | Help Message
-
 **General User/Server/Bot Info Commands:**
 • -info [@user]→ Provides some information about the user who invoked the command or of mentioned user.
 • -svrinfo → Provides some information about the server in which the command is invoked.
@@ -291,7 +290,6 @@ async def help(ctx):
 • -invite → Add Asuna to your guild.
 • -ping → Runs a connection test to Discord.
 • -help → Display this message.
-
 **General Query Commands:**
 • -google <query> → Searches Google for your query.
 • -wiki <query> → Searches Wikipedia for your query.
@@ -323,8 +321,7 @@ async def help(ctx):
 • -cry [@user]→ Did someone hurt you?.
 • -nom [@user]→ Hungry? have something to eat.
 • -gaze [@user]→ Glare at someone.
-• -blush [@user]→ Aaawww,did someone make you feel flushed?.
-
+• -cry [@user]→ Aaawww,did someone make you feel flushed?.
 **General Emoji Commands:**
 • -emoji <shrug,sip,bang,wonder,yay,peek,dance,j,nom> → Appends that emoji in chat.
 • -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,unamused,kiss,grr,sob,toj,owo> → Appends your favorite Google blob stickers in chat."""
@@ -342,7 +339,6 @@ async def help(ctx):
 • -leave → Stops playing audio and leaves the voice channel.
 This also clears the queue.
 *Music commands not working atm*
-
 **Arguments in [] are optional but arguments in <> are necessary for given function to work**
 """
     await bot.whisper(help1)
@@ -461,7 +457,7 @@ async def wiki(ctx,*,query=None):
     if ctx.message.author.bot==False:
         if query!=None:
             try:
-                query=("-".join(query.split())).encode('utf-8').strip()
+                query=("-".join(query.split())).encode('utf-8').strip() 
                 response=urllib.request.urlopen("http://api.tanvis.xyz/search/"+"wiki"+query).read()
                 response=json.loads(response.decode("utf-8"))
                 await bot.say(response[0]["link"])
@@ -1067,20 +1063,40 @@ async def manga(ctx,*,query):
 async def lyrics(ctx,*,song):
     if ctx.message.author.bot==False:
         try:
-            await bot.say(":mag: Singer Name")
-            singer =await bot.wait_for_message(author=ctx.message.author, timeout=30)
-            singer=str(singer.content)
-            print(song,singer)
-            l = lyricwikia.get_lyrics(singer, song)
-            str1=""
-            ls=l.split("\n\n")
-            embed=discord.Embed(title="{}".format(song.title()),color=0xf7d28c)
-            for a in ls:
+            song="%20".join(song.split())
+            r=requests.get('http://api.musixmatch.com/ws/1.1/track.search?q_track={}&page_size=1&page=1&s_track_rating=desc&apikey=9da66e17efa9fc8d188c6cf152a2b21f'.format(song))
+            response = json.loads(r.content.decode('utf-8'))
+            t=response["message"]["body"]["track_list"][0]["track"]["track_id"]
+            p=requests.get('http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id={}&apikey=9da66e17efa9fc8d188c6cf152a2b21f'.format(t))
+            responses= json.loads(p.content.decode('utf-8'))
+            k=responses["message"]["body"]["lyrics"]["lyrics_body"].split("\n\n")
+            embed=discord.Embed(title="{}".format(response["message"]["body"]["track_list"][0]["track"]["track_name"]),color=0xf7d28c)
+            for a in k:
                     embed.add_field(name="\u200b",value=a+"\n")
-            await bot.say(embed=embed)
+            embed.set_footer(text=responses["message"]["body"]["lyrics"]["lyrics_copyright"],url=responses["message"]["body"]["lyrics"]["script_tracking_url"])
+            try:
+                img=response["message"]["body"]["track_list"][0]["track"]["album_coverart_100x100"]
+                embed.set_thumbnail(url=img)
+                await bot.say(embed=embed)
+            except Exception:
+                await bot.say(embed=embed)
         except Exception as e:
             await bot.say("Lyrics not available for this song. Are you sure you entered correct details?")
             print(e)
+        #     await bot.say(":mag: Singer Name")
+        #     singer =await bot.wait_for_message(author=ctx.message.author, timeout=30)
+        #     singer=str(singer.content)
+        #     print(song,singer)
+        #     l = lyricwikia.get_lyrics(singer, song)
+        #     str1=""
+        #     ls=l.split("\n\n")
+        #     embed=discord.Embed(title="{}".format(song.title()),color=0xf7d28c)
+        #     for a in ls:
+        #             embed.add_field(name="\u200b",value=a+"\n")
+        #     await bot.say(embed=embed)
+        # except Exception as e:
+        #     await bot.say("Lyrics not available for this song. Are you sure you entered correct details?")
+        #     print(e)
 		
 @bot.command()
 async def big(emo):
