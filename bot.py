@@ -1063,7 +1063,10 @@ async def manga(ctx,*,query):
 @bot.command(pass_context=True,name="fact",aliases=["facts","fun facts","fun fact","trivia","random","bored"])
 async def fact(ctx):
     r=requests.get("http://numbersapi.com/random/trivia")
-    await bot.say(r.content)
+    p=str(r.content)
+    q=p.replace("b'","")
+    r=q.replace("'","")
+    await bot.say("```"+r+"```")
 
 @bot.command(pass_context=True,name="lyrics",aliases=["lyric","lines"])
 async def lyrics(ctx,*,song):
