@@ -468,8 +468,9 @@ async def wiki(ctx,*,query=None):
 async def translate(ctx,*,query=None):
     if ctx.message.author.bot==False:
         if query!=None:
-            response=urllib.request.urlopen("http://api.tanvis.xyz/translate/"+query).read()
-            response=json.loads(response.decode("utf-8"))
+            query="%20".join(query.split())
+            response=requests.get("http://api.tanvis.xyz/translate/{}",format(query))
+            response = json.loads(r.content.decode('utf-8'))
             await bot.say(response["to"]["text"])
             await bot.say("The input text language is "+response["from"]["lang"])
 
@@ -1059,6 +1060,11 @@ async def manga(ctx,*,query):
             await bot.say("Service unavailable atm")
             print(e)
 
+@bot.command(pass_context=True,name="fact",aliases=["facts","fun facts","fun fact","trivia","random","bored"])
+async def fact(ctx):
+    r=requests.get("http://numbersapi.com/random/trivia")
+    await bot.say(r.content)
+
 @bot.command(pass_context=True,name="lyrics",aliases=["lyric","lines"])
 async def lyrics(ctx,*,song):
     if ctx.message.author.bot==False:
@@ -1073,7 +1079,7 @@ async def lyrics(ctx,*,song):
             embed=discord.Embed(title="{}".format(response["message"]["body"]["track_list"][0]["track"]["track_name"]),color=0xf7d28c)
             for a in k:
                     embed.add_field(name="\u200b",value=a+"\n")
-            embed.add_field(name="\u200b",value=responses["message"]["body"]["lyrics"]["lyrics_copyright"])
+            embed.set_footer(text=responses["message"]["body"]["lyrics"]["lyrics_copyright"],url=responses["message"]["body"]["lyrics"]["script_tracking_url"])
             try:
                 img=response["message"]["body"]["track_list"][0]["track"]["album_coverart_100x100"]
                 embed.set_thumbnail(url=img)
