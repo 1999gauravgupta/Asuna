@@ -469,7 +469,7 @@ async def translate(ctx,*,query=None):
     if ctx.message.author.bot==False:
         if query!=None:
             query="%20".join(query.split())
-            response=requests.get("http://api.tanvis.xyz/translate/{}",format(query))
+            r=requests.get("http://api.tanvis.xyz/translate/{}".format(query))
             response = json.loads(r.content.decode('utf-8'))
             await bot.say(response["to"]["text"])
             await bot.say("The input text language is "+response["from"]["lang"])
