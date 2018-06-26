@@ -7,4 +7,4 @@ lxml
 py_thesaurus 
 lyricwikia 
 youtube_dl
-obuslib
+opuslib
