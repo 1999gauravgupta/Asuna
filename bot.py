@@ -864,23 +864,7 @@ async def nom(ctx,*, user: discord.Member=None):
 async def blush(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
-            link=["https://cdn.weeb.sh/images/ryhfGI7vZ.gif",
-            "https://cdn.weeb.sh/images/SJkffIXw-.gif",
-"https://cdn.weeb.sh/images/r1U7G87vZ.gif%",
-"https://cdn.weeb.sh/images/rJa-zUmv-.gif",
-"https://cdn.weeb.sh/images/SyIbfImDb.gif",
-"https://cdn.weeb.sh/images/r19GfI7vW.gif",
-"https://cdn.weeb.sh/images/BkalMI7Db.gif",
-"https://cdn.weeb.sh/images/S1X7GIXw-.gif",
-"https://cdn.weeb.sh/images/SJ8lf8Xwb.gif",
-"https://cdn.weeb.sh/images/rkXur1ncz.gif",
-"https://cdn.weeb.sh/images/B1NWGUmvb.gif",
-"https://cdn.weeb.sh/images/Hy-GGIXvb.gif",
-"https://cdn.weeb.sh/images/HklJGIXPW.gif",
-"https://cdn.weeb.sh/images/rkYmGIXPb.gif",
-"https://cdn.weeb.sh/images/rkQMGLmvZ.gif",
-"https://cdn.weeb.sh/images/Sy1-ML7vW.gif",
-"https://cdn.weeb.sh/images/r1n7M87wW.gif"]
+            link=["https://cdn.weeb.sh/images/ryhfGI7vZ.gif","https://cdn.weeb.sh/images/SJkffIXw-.gif","https://cdn.weeb.sh/images/r1U7G87vZ.gif%","https://cdn.weeb.sh/images/rJa-zUmv-.gif","https://cdn.weeb.sh/images/SyIbfImDb.gif","https://cdn.weeb.sh/images/r19GfI7vW.gif","https://cdn.weeb.sh/images/BkalMI7Db.gif","https://cdn.weeb.sh/images/S1X7GIXw-.gif","https://cdn.weeb.sh/images/SJ8lf8Xwb.gif","https://cdn.weeb.sh/images/rkXur1ncz.gif","https://cdn.weeb.sh/images/B1NWGUmvb.gif","https://cdn.weeb.sh/images/Hy-GGIXvb.gif","https://cdn.weeb.sh/images/HklJGIXPW.gif","https://cdn.weeb.sh/images/rkYmGIXPb.gif","https://cdn.weeb.sh/images/rkQMGLmvZ.gif","https://cdn.weeb.sh/images/Sy1-ML7vW.gif","https://cdn.weeb.sh/images/r1n7M87wW.gif"]
             p=link[random.randint(0,len(link)-1)]
             if user!=None:
                     embed=discord.Embed(description="Aaawww {} you made {} blush,its so kawaii <:ehehe:452892342178021376>".format(user.name,ctx.message.author.name),color=0xf7d28c)
@@ -895,24 +879,7 @@ async def blush(ctx,*, user: discord.Member=None):
 async def gaze(ctx,*, user: discord.Member=None):
     if ctx.message.author.bot==False:
         try:
-            link=["https://cdn.weeb.sh/images/HyYuG-CBf.gif",
-"https://cdn.weeb.sh/images/BkkqI1YPZ.jpeg",
-"https://cdn.weeb.sh/images/HyWnLyKPZ.gif",
-"https://cdn.weeb.sh/images/SyzsU1twZ.gif",
-"https://cdn.weeb.sh/images/BJ88vLvd-.gif",
-"https://cdn.weeb.sh/images/Hk22hAo9M.gif",
-"https://cdn.weeb.sh/images/Sk5BOdQIG.gif",
-"https://cdn.weeb.sh/images/ry7KIJYD-.gif",
-"https://cdn.weeb.sh/images/rJao8JKv-.gif",
-"https://cdn.weeb.sh/images/H1P_LyFPb.gif",
-"https://cdn.weeb.sh/images/SkH3Uytwb.gif",
-"https://cdn.weeb.sh/images/Hk768JtP-.gif",
-"https://cdn.weeb.sh/images/rk23UyYP-.gif",
-"https://cdn.weeb.sh/images/SkPoLJKwZ.gif",
-"https://cdn.weeb.sh/images/rk5tI1Yv-.gif",
-"https://cdn.weeb.sh/images/ryc3I1tv-.gif",
-"https://cdn.weeb.sh/images/B1WpLJKwW.gif",
-"https://cdn.weeb.sh/images/B1xpnU1YPZ.gif"]
+            link=["https://cdn.weeb.sh/images/HyYuG-CBf.gif","https://cdn.weeb.sh/images/BkkqI1YPZ.jpeg","https://cdn.weeb.sh/images/HyWnLyKPZ.gif","https://cdn.weeb.sh/images/SyzsU1twZ.gif","https://cdn.weeb.sh/images/BJ88vLvd-.gif","https://cdn.weeb.sh/images/Hk22hAo9M.gif","https://cdn.weeb.sh/images/Sk5BOdQIG.gif","https://cdn.weeb.sh/images/ry7KIJYD-.gif","https://cdn.weeb.sh/images/rJao8JKv-.gif","https://cdn.weeb.sh/images/H1P_LyFPb.gif","https://cdn.weeb.sh/images/SkH3Uytwb.gif","https://cdn.weeb.sh/images/Hk768JtP-.gif","https://cdn.weeb.sh/images/rk23UyYP-.gif","https://cdn.weeb.sh/images/SkPoLJKwZ.gif","https://cdn.weeb.sh/images/rk5tI1Yv-.gif","https://cdn.weeb.sh/images/ryc3I1tv-.gif","https://cdn.weeb.sh/images/B1WpLJKwW.gif","https://cdn.weeb.sh/images/B1xpnU1YPZ.gif"]
             p=link[random.randint(0,len(link)-1)]
             if user!=None:
                     embed=discord.Embed(description="{}, {} is staring at you,what did you do? <a:gaze:457228137856499714>".format(user.name,ctx.message.author.name),color=0xf7d28c)
@@ -1276,6 +1243,23 @@ async def bj(ctx,bet,user: discord.Member=None):
     embed=discord.Embed(title="Blackjack",color=0xf7d28c)  
     embed.add_field(name="\u200b",value="Credits at end of game: {}".format(bal-start))
     await bot.say(embed=embed)
+    with open("bjlb.txt", "a") as f1:
+            f1.write("\n"+user+" "+str(bal-start))
+
+@bot.command(pass_context=True,name="lb",aliases=["leaderboard"])
+async def lb(ctx):
+    with open("bjlb.txt", "r") as f1:
+        list1=f1.readlines()
+        if len(list1>10):
+            limit=11
+        else:
+            limit=len(list1)+1
+        p="```"
+        for i in range(1,limit):
+            a=f1.readline()
+            p+=a+"\n"
+        p+="```"
+        await bot.say(p)
 
 @bot.command()
 async def big(emo):
@@ -1283,30 +1267,6 @@ async def big(emo):
         emo = emo.split(':')[-1].replace('>' , '')
         await bot.say("https://discordapp.com/api/emojis/{}.png".format(emo))
 
-@bot.group(pass_context=True)
-async def groot(ctx):
-    if ctx.invoked_subcommand is None:
-        await bot.say("Invalid groot command passed...")
-@groot.command(pass_context=True)
-async def cool(ctx):
-    if ctx.message.author.bot==False:
-        await bot.say("<:grootcool:439097733178195980>")
-        await bot.delete_message(ctx.message)
-@groot.command(pass_context=True)
-async def thinking(ctx):
-    if ctx.message.author.bot==False:
-        await bot.say("<:Groot_Thinking:439097418680631297>")
-        await bot.delete_message(ctx.message)
-@groot.command(pass_context=True)
-async def hi(ctx):
-    if ctx.message.author.bot==False:
-        await bot.say("<:Groot_Hi:439097354378018833>")
-        await bot.delete_message(ctx.message)
-@groot.command(pass_context=True)
-async def walk(ctx):
-    if ctx.message.author.bot==False:
-        await bot.say("<:Groot_walk:439097403145191426>")
-        await bot.delete_message(ctx.message)
 #blob commands
 @bot.group(pass_context=True)
 async def blob(ctx):
