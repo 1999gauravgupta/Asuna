@@ -6,9 +6,5 @@ spice_api
 lxml 
 py_thesaurus 
 lyricwikia 
-google 
-wikipedia
-pip
 youtube_dl
-colorlog
 
