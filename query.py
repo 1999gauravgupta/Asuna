@@ -49,6 +49,7 @@ class QUERY:
     async def wiki(self,ctx,*,query=None):  
         if query!=None:
             try:
+                query="wikipedia "+query
                 response=requests.get("http://api.tanvis.xyz/search/{}".format(query))
                 response= json.loads(response.content.decode('utf-8'))
                 await self.bot.say(response[0]["link"])
