@@ -172,7 +172,7 @@ class QUERY:
                 list1=r["noun"]
                 stri=""
                 for i in range(len(list1)):
-                    stri+=str(i+1)+". "+list1[i].title()+"."
+                    stri+=str(i+1)+". "+list1[i].title()+".\n"
                 await self.bot.say(stri)
             except Exception:
                 await self.bot.say("Dear User, I could not find a definition for this word.")

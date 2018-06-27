@@ -109,7 +109,7 @@ class BDCOMMANDS:
                 if something is None:
                     await self.bot.say("What would you like me to say? :thinking:")
                 else:
-                    await self.bot.say("```"+inspect.getsource(bot.get_command(something).callback)+"```")
+                    await self.bot.say("```"+inspect.getsource(self.bot.get_command(something).callback)+"```")
             except Exception as e:
                 await self.bot.say("Code may be over word limit")
                 print(e)
