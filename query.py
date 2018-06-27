@@ -60,7 +60,7 @@ class QUERY:
         if query!=None:
             query="%20".join(query.split())
             response=requests.get("http://api.tanvis.xyz/translate/{}".format(query))
-            response = json.loads(r.content.decode('utf-8'))
+            response = json.loads(response.content.decode('utf-8'))
             await self.bot.say(response["to"]["text"])
             await self.bot.say("The input text language is "+response["from"]["lang"])
 
@@ -170,10 +170,10 @@ class QUERY:
                 r=requests.get("http://api.tanvis.xyz/dictionary/{}".format(word))
                 r= json.loads(r.content.decode('utf-8'))
                 list1=r["noun"]
-                stri=""
+                embed=discord.Embed(title=word.title(),color=0xf7d28c)
                 for i in range(len(list1)):
-                    stri+=str(i+1)+". "+list1[i].title()+".\n"
-                await self.bot.say(stri)
+                    embed.add_field(name="\u200b",value=str(i+1)+list1[i]title()+"."
+                await self.bot.say(embed=embed)
             except Exception:
                 await self.bot.say("Dear User, I could not find a definition for this word.")
 
