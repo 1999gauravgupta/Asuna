@@ -13,7 +13,7 @@ class GAMES:
     async def bj(self,ctx,bat,user: discord.Member=None):
         if user==None:
             user=ctx.message.author
-        bal=bat
+        bal=int(bat)
         d_valuea=[]
         fc=["KING","QUEEN","JACK"]
         for i in range(3):
@@ -167,10 +167,10 @@ class GAMES:
                 except:
                     pass
         embed=discord.Embed(title="Blackjack",color=0xf7d28c)  
-        embed.add_field(name="\u200b",value="Credits at end of game: {}".format(bal-bat*1.5))
+        embed.add_field(name="\u200b",value="Credits at end of game: {}".format(bal-int(bat)*1.5))
         await self.bot.say(embed=embed)
         with open("bjlb.txt", "a") as f1:
-            f1.write("\n"+user+" "+str(bal-bat*1.5)+"\n")
+            f1.write("\n"+user+" "+str(bal-int(bat)*1.5)+"\n")
 
     @commands.command(pass_context=True,name="lb",aliases=["leaderboard"])
     async def lb(self,ctx):
