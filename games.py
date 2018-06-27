@@ -170,7 +170,7 @@ class GAMES:
         embed.add_field(name="\u200b",value="Credits at end of game: {}".format(bal-int(bat)*1.5))
         await self.bot.say(embed=embed)
         with open("bjlb.txt", "a") as f1:
-            f1.write("\n"+user+" "+str(bal-int(bat)*1.5)+"\n")
+            f1.write("\n"+str(user)+" "+str(bal-int(bat)*1.5)+"\n")
 
     @commands.command(pass_context=True,name="lb",aliases=["leaderboard"])
     async def lb(self,ctx):
