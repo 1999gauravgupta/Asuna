@@ -4,7 +4,6 @@ urbandictionary
 chucknorris
 spice_api 
 lxml 
-py_thesaurus 
 lyricwikia 
 youtube_dl
 opuslib
