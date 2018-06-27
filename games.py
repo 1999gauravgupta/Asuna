@@ -26,7 +26,7 @@ class GAMES:
             bet=int(bet.content)
             if bet>bal:
                 await self.bot.say("You cannot bet more than {} so resetting your bet value to {}".format(bal,bal))
-                bet=startf
+                bet=bal
             r=requests.get("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
             r= json.loads(r.content.decode('utf-8'))
             deck=r["deck_id"]
