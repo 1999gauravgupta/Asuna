@@ -21,7 +21,7 @@ class GAMES:
         for i in range(3):
             await self.bot.say("Round {}".format(i+1))
             await self.bot.say("Betting Amount: ")
-            bet =await bot.wait_for_message(author=ctx.message.author)
+            bet =await self.bot.wait_for_message(author=ctx.message.author)
             bet=int(bet.content)
             if bet>startf:
                 await self.bot.say("You cannot bet more than {} so resetting your bet value to {}".format(startf,startf))
@@ -63,10 +63,12 @@ class GAMES:
             embed.add_field(name="Betting Amount",value=bet)
             embed.add_field (name="User Cards",value=q)
             embed.add_field(name="Dealer Cards",value=w)
+            embed.add_field(name="User Cards value",value=u_value)
+            embed.add_field(name="Dealer Cards value",value=d_value,inline=True)
             embed.add_field(name="\u200b",value="Hit/Stand/Double Down")
             await self.bot.say(embed=embed)
             # print(u_value,d_value)
-            option =await bot.wait_for_message(author=ctx.message.author, timeout=30)
+            option =await self.bot.wait_for_message(author=ctx.message.author)
             option=str(option.content)
             if option.lower()=="hit":
                 draw=requests.get("https://deckofcardsapi.com/api/deck/{}/draw/?count=1".format(deck))
@@ -107,9 +109,9 @@ class GAMES:
                     d_value=i
             try:
                 mgs = []
-                async for x in bot.logs_from(ctx.message.channel, limit = 2):
+                async for x in self.bot.logs_from(ctx.message.channel, limit = 2):
                     mgs.append(x)
-                await bot.delete_messages(mgs)
+                await self.bot.delete_messages(mgs)
             except:
                 pass
         # print(u_value,d_value)
@@ -173,9 +175,9 @@ class GAMES:
             if i>0:
                 try:
                     mgs = []
-                    async for x in bot.logs_from(ctx.message.channel, limit = 1):
+                    async for x in self.bot.logs_from(ctx.message.channel, limit = 2):
                         mgs.append(x)
-                    await bot.delete_messages(mgs)
+                    await self.bot.delete_messages(mgs)
                 except:
                     pass
         embed=discord.Embed(title="Blackjack",color=0xf7d28c)  

@@ -3,6 +3,8 @@ import asyncio
 import discord
 import string
 import random
+import inspect
+import time
 
 class BDCOMMANDS:
     def __init__(self, bot):
@@ -139,13 +141,13 @@ class BDCOMMANDS:
             if number<2:
                 number=2
             if number<=100:
-                async for x in bot.logs_from(ctx.message.channel, limit = number):
+                async for x in self.bot.logs_from(ctx.message.channel, limit = number):
                     mgs.append(x)
                 await self.bot.delete_messages(mgs)
             else:
                 temp=0
                 while temp!=number:
-                    async for x in bot.logs_from(ctx.message.channel, limit = 100):
+                    async for x in self.bot.logs_from(ctx.message.channel, limit = 100):
                         mgs.append(x)
                         temp=temp+1
                         if temp>number:

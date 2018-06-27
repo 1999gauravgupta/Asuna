@@ -1,7 +1,6 @@
 from discord.ext import commands
 import asyncio
 import discord
-import urllib
 import requests
 import string
 import codecs
@@ -18,9 +17,9 @@ class FUN:
         self.bot = bot
 
     @commands.command()
-    async def dog():
-        response=urllib.request.urlopen("https://random.dog/woof.json").read()
-        response=json.loads(response.decode("utf-8"))
+    async def dog(self):
+        response=requests.get("https://random.dog/woof.json")
+        response= json.loads(response.content.decode('utf-8'))
         await self.bot.say(response["url"])
 
     @commands.command(pass_context=True,name="ask",aliases=["8ball"])
@@ -149,8 +148,8 @@ class FUN:
     @commands.command(pass_context=True,name="sebi",aliases=["sebisauce","Sebi"])
     async def sebi(self,ctx): 
         try:
-            response=urllib.request.urlopen("https://sebisauce.herokuapp.com/api/random").read()
-            response=json.loads(response.decode("utf-8"))
+            response=requests.get("https://sebisauce.herokuapp.com/api/random")
+            response= json.loads(response.content.decode('utf-8'))
             url=response["file"]
             embed=discord.Embed(title="SebiSauce",color=0xf7d28c)
             embed.set_image(url=url)
@@ -162,7 +161,10 @@ class FUN:
     @commands.command(pass_context=True,name="fact",aliases=["facts","fun facts","fun fact","trivia","random","bored"])
     async def fact(self,ctx):
         r=requests.get("http://numbersapi.com/random/trivia")
-        await self.bot.say(r.content)
+        p=r.content
+        q=p.replace("b'","")
+        t=q.replace("'","")
+        await self.bot.say("```"+t+"```")
 
 def setup(bot):
     bot.add_cog(FUN(bot))

@@ -1,11 +1,9 @@
 from discord.ext import commands
 import asyncio
 import discord
-import urllib
 import json
 import requests
 import string
-from py_thesaurus import Thesaurus
 import lyricwikia
 import spice_api as spice
 import urbandictionary as udd
@@ -40,8 +38,8 @@ class QUERY:
         if query!=None:
             try:
                     query="-".join(query.split())
-                    response=urllib.request.urlopen("http://api.tanvis.xyz/search/"+query).read()
-                    response=json.loads(response.decode("utf-8"))
+                    response=requests.get("http://api.tanvis.xyz/search/{}".format(query))
+                    response= json.loads(response.content.decode('utf-8'))
                     await self.bot.say(response[0]["link"])
             except Exception:
                     await self.bot.say("Service unavailable atm")
@@ -51,9 +49,8 @@ class QUERY:
     async def wiki(self,ctx,*,query=None):  
         if query!=None:
             try:
-                query=("-".join(query.split())).encode('utf-8').strip() 
-                response=urllib.request.urlopen("http://api.tanvis.xyz/search/"+"wiki"+query).read()
-                response=json.loads(response.decode("utf-8"))
+                response=requests.get("http://api.tanvis.xyz/search/{}".format(query))
+                response= json.loads(response.content.decode('utf-8'))
                 await self.bot.say(response[0]["link"])
             except Exception:
                     await self.bot.say("Service unavailable atm")
@@ -62,7 +59,7 @@ class QUERY:
     async def translate(self,ctx,*,query=None):   
         if query!=None:
             query="%20".join(query.split())
-            response=requests.get("http://api.tanvis.xyz/translate/{}",format(query))
+            response=requests.get("http://api.tanvis.xyz/translate/{}".format(query))
             response = json.loads(r.content.decode('utf-8'))
             await self.bot.say(response["to"]["text"])
             await self.bot.say("The input text language is "+response["from"]["lang"])
@@ -72,8 +69,8 @@ class QUERY:
         if location!=None:
             try:
                 location="-".join(location.split())
-                response = urllib.request.urlopen('http://api.tanvis.xyz/weather/'+location).read()
-                response = json.loads(response.decode('utf-8'))
+                response=requests.get("http://api.tanvis.xyz/weather/{}".format(location))
+                response= json.loads(response.content.decode('utf-8'))
                 namee=response["name"]
                 celsiuse=response["celsius"]
                 farenheite=response["fahrenheit"]
@@ -96,8 +93,8 @@ class QUERY:
     async def pokemon(self,ctx,pokemon=None):  
         if pokemon!=None:
             try:
-                response=urllib.request.urlopen("http://api.tanvis.xyz/pokedex/"+pokemon).read()
-                response=json.loads(response.decode("utf-8"))
+                response=requests.get("http://api.tanvis.xyz/pokedex/{}".format(pokemon))
+                response= json.loads(response.content.decode('utf-8'))
                 name=response["name"]
                 num=response["number"]
                 image=response["image"]
@@ -147,8 +144,8 @@ class QUERY:
         if query!=None:
             try:
                 query="-".join(query.split())
-                response=urllib.request.urlopen("http://api.tanvis.xyz/youtube/"+query).read()
-                response=json.loads(response.decode("utf-8"))
+                response=requests.get("http://api.tanvis.xyz/youtube/{}".format(query))
+                response= json.loads(response.content.decode('utf-8'))
                 name1=response[0]["name"]
                 image=response[0]["thumbnail"]
                 link1=response[0]["link"]
@@ -170,15 +167,12 @@ class QUERY:
     async def define(self,ctx,*,word=None): 
         if word!=None:
             try:
-                new_instance = Thesaurus(word)
-                list1=new_instance.get_definition()
-                counter=1
+                r=requests.get("http://api.tanvis.xyz/dictionary/{}".format(word))
+                r= json.loads(r.content.decode('utf-8'))
+                list1=r["noun"]
                 stri=""
-                for i in list1:
-                    j=i.replace("(","")
-                    k=j.replace(")","")
-                    stri+=(str(counter)+". "+k.capitalize()+".\n")
-                    counter+=1
+                for i in range(len(list1)):
+                    stri+=str(i+1)+". "+list1[i].title()+"."
                 await self.bot.say(stri)
             except Exception:
                 await self.bot.say("Dear User, I could not find a definition for this word.")
@@ -195,14 +189,14 @@ class QUERY:
                 count+=1
             if list1!="":
                 await self.bot.say("```\n"+list1+"\n```")
-                m =await bot.wait_for_message(author=ctx.message.author, timeout=30)
+                m =await self.bot.wait_for_message(author=ctx.message.author, timeout=30)
                 m=int(m.content)
                 m=m-1
                 try:
                     mgs = []
-                    async for x in bot.logs_from(ctx.message.channel, limit = 2):
+                    async for x in self.bot.logs_from(ctx.message.channel, limit = 2):
                         mgs.append(x)
-                    await bot.delete_messages(mgs)
+                    await self.bot.delete_messages(mgs)
                 except:
                     pass
                 ids=test[m].id
@@ -270,14 +264,14 @@ class QUERY:
                 count+=1
             if list1!="":
                 await self.bot.say("```\n"+list1+"\n```")
-                m =await bot.wait_for_message(author=ctx.message.author, timeout=30)
+                m =await self.bot.wait_for_message(author=ctx.message.author, timeout=30)
                 m=int(m.content)
                 m=m-1
                 try:
                     mgs = []
-                    async for x in bot.logs_from(ctx.message.channel, limit = 2):
+                    async for x in self.bot.logs_from(ctx.message.channel, limit = 2):
                         mgs.append(x)
-                    await bot.delete_messages(mgs)
+                    await self.bot.delete_messages(mgs)
                 except:
                     pass
                 ids=test[m].id
@@ -317,8 +311,6 @@ class QUERY:
             await self.bot.say("Service unavailable atm")
             print(e)
 
-
-
     @commands.command(pass_context=True,name="lyrics",aliases=["lyric","lines"])
     async def lyrics(self,ctx,*,song):  
         try:
@@ -343,7 +335,7 @@ class QUERY:
         #     await self.bot.say("Lyrics not available for this song. Are you sure you entered correct details?")
         #     print(e)
             await self.bot.say(":mag: Singer Name")
-            singer =await bot.wait_for_message(author=ctx.message.author, timeout=30)
+            singer =await self.bot.wait_for_message(author=ctx.message.author)
             singer=str(singer.content)
             print(song,singer)
             l = lyricwikia.get_lyrics(singer, song)

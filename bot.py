@@ -4,14 +4,7 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 from discord.voice_client import VoiceClient
 import asyncio
-import random
-import json
-import urllib
 import string
-import requests
-import time
-import inspect
-import pickle
 
 #for loading music.py
 startup_extensions = ["Music","gifs","executer","emoji","bdcommands","games","query","fun"]
