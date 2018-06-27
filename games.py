@@ -10,21 +10,22 @@ class GAMES:
         self.bot = bot
 
     @commands.command(pass_context=True,name="bj",aliases=["blackjack"])
-    async def bj(self,ctx,bet,user: discord.Member=None):
+    async def bj(self,ctx,bat,user: discord.Member=None):
         if user==None:
             user=ctx.message.author
-        start=int(bet)
-        startf=start
-        bal=0
+        bal=bat
         d_valuea=[]
         fc=["KING","QUEEN","JACK"]
         for i in range(3):
+            if bal<0:
+                await self.bot.say("The game terminated because your balance dipped below zero")
+                break
             await self.bot.say("Round {}".format(i+1))
             await self.bot.say("Betting Amount: ")
             bet =await self.bot.wait_for_message(author=ctx.message.author)
             bet=int(bet.content)
-            if bet>startf:
-                await self.bot.say("You cannot bet more than {} so resetting your bet value to {}".format(startf,startf))
+            if bet>bal:
+                await self.bot.say("You cannot bet more than {} so resetting your bet value to {}".format(bal,bal))
                 bet=startf
             r=requests.get("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
             r= json.loads(r.content.decode('utf-8'))
@@ -117,11 +118,6 @@ class GAMES:
         # print(u_value,d_value)
             if u_value>21:
                 bal=bal-bet
-                if bal>0:
-                    start=start-bal
-                    start=start*(1.5)
-                else:
-                    start=start*(1.5)
                 q=""
                 w=""
                 for a in u_cards:
@@ -136,11 +132,6 @@ class GAMES:
                 await self.bot.say(embed=embed)
             elif u_value<=21 and u_value>=d_value:
                 bal+=bet*2
-                if bal>0:
-                    start=start-bal
-                    start=start*(1.5)
-                else:
-                    start=start*(1.5)
                 q=""
                 w=""
                 for a in u_cards:
@@ -155,11 +146,6 @@ class GAMES:
                 await self.bot.say(embed=embed)
             else:
                 bal=bal-bet
-                if bal>0:
-                    start=start-bal
-                    start=start*(1.5)
-                else:
-                    start=start*(1.5)
                 q=""
                 w=""
                 for a in u_cards:
@@ -181,10 +167,10 @@ class GAMES:
                 except:
                     pass
         embed=discord.Embed(title="Blackjack",color=0xf7d28c)  
-        embed.add_field(name="\u200b",value="Credits at end of game: {}".format(bal-start))
+        embed.add_field(name="\u200b",value="Credits at end of game: {}".format(bal-bat*1.5))
         await self.bot.say(embed=embed)
         with open("bjlb.txt", "a") as f1:
-                f1.write("\n"+user+" "+str(bal-start))
+            f1.write("\n"+user+" "+str(bal-bat*1.5)+"\n")
 
     @commands.command(pass_context=True,name="lb",aliases=["leaderboard"])
     async def lb(self,ctx):
