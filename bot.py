@@ -9,7 +9,7 @@ import string
 #for loading music.py
 startup_extensions = ["Music","gifs","executer","emoji","bdcommands","games","query","fun"]
 
-owner=["343395225571426304","402829897514352641"]
+owner=["343395225571426304"]
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or('-','asuna ',"Asuna ","Asuna, ","asuna, "))
 
