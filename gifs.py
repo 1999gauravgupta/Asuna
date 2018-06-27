@@ -189,3 +189,7 @@ class GIFS:
             await self.bot.say(embed=embed)
         except Exception as e:
             await self.bot.say(e)
+
+def setup(bot):
+    bot.add_cog(GIFS(bot))
+    print("Gifs is loaded")
