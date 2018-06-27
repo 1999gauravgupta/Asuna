@@ -172,7 +172,7 @@ class QUERY:
                 list1=r["noun"]
                 embed=discord.Embed(title=word.title(),color=0xf7d28c)
                 for i in range(len(list1)):
-                    embed.add_field(name="\u200b",value=str(i+1)+list1[i]title()+"."
+                    embed.add_field(name="\u200b",value=str(i+1)+list1[i]title()+".")
                 await self.bot.say(embed=embed)
             except Exception:
                 await self.bot.say("Dear User, I could not find a definition for this word.")
