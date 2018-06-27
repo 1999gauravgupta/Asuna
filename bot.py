@@ -42,7 +42,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    Words=["dick","pussy","motherfucker","whore", "asshole","son of a bitch","dickhead","bitch","dick head","cunt","faggot","fag","nigga","niger","nigger","slut"]
+    Words=["dick","pussy","motherfucker","whore", "asshole","son of a bitch","dickhead","bitch","dick head","cunt","faggot","fag","nigga","nigger","slut"]
     with open("serverf.txt", "r") as f1:
         list1=f1.readlines()
         for i in list1:
