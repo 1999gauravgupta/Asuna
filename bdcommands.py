@@ -123,7 +123,7 @@ class BDCOMMANDS():
         print('code')
 
     @commands.command()
-    async def invite(self, ctx,user: discord.Member = Asuna):
+    async def invite(self, ctx,user: discord.Member = "Asuna"):
         try:
             embed = discord.Embed(title="Asuna's Invite Link", value='Add Asuna to your guild', color=16241292)
             embed.add_field(name='Name', value='Asuna')
