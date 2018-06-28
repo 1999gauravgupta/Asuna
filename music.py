@@ -3,6 +3,7 @@ import asyncio
 import discord
 import youtube_dl
 import os
+from discord import opus
 
 players={}
 opus_libs = ['libopus-0.x86.dll', 'libopus-0.x64.dll', 'libopus-0.dll', 'libopus.so.0', 'libopus.0.dylib']
@@ -39,6 +40,6 @@ class MUSIC():
         players[server.id]=player
         player.start()
          
- def setup(bot):
+def setup(bot):
     bot.add_cog(MUSIC(bot))
     print('Music is loaded')
