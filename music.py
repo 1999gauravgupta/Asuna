@@ -2,7 +2,7 @@ import asyncio
 import functools
 import os
 import pathlib
-
+import logging
 import discord
 import discord.ext.commands as commands
 import youtube_dl
