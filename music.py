@@ -24,7 +24,7 @@ class MUSIC():
     @commands.command()
     async def join(self,ctx):
         channel=ctx.message.author.voice.voice_channel
-        await client.join_voice_channel(channel)
+        await ctx.join_voice_channel(channel)
 
     @commands.command()
     async def leave(self,ctx):
