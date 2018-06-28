@@ -6,7 +6,7 @@ from discord.voice_client import VoiceClient
 import asyncio
 import string
 
-startup_extensions = ['Music', 'gifs', 'executer', 'emoji', 'bdcommands', 'games', 'query', 'fun']
+startup_extensions = ['music', 'gifs', 'executer', 'emoji', 'bdcommands', 'games', 'query', 'fun']
 owner = [343395225571426304, 402829897514352641]  
 bot = commands.Bot(command_prefix=commands.when_mentioned_or('-', 'asuna ', 'Asuna ', 'Asuna, ', 'asuna, '))
 client = discord.Client()
@@ -95,9 +95,9 @@ async def help(ctx):
     help1 = '\n:page_with_curl: | Help Message\n**General User/Server/Bot Info Commands:**\n• -info [@user]→ Provides some information about the user who invoked the command or of mentioned user.\n• -svrinfo → Provides some information about the server in which the command is invoked.\n• -pfp [@user] → Display avatar of yours or mentioned user.\n• -perms [@user] → Display user perms in that server.\n• -filter [state] → Use this command to setup filter on your server. Set it off using -filter 0.\n• -invite → Add Asuna to your guild.\n• -ping → Runs a connection test to Discord.\n• -help → Display this message.\n**General Query Commands:**\n• -google <query> → Searches Google for your query.\n• -wiki <query> → Searches Wikipedia for your query.\n• -yt <query> → Searches YouTube for your query.\n• -weather <location> → Displays weather of given location.\n• -pokemon <query> → Gives some data about queried pokemon.\n• -ud <word> → Searches Urban Dictionary for your word.\n• -define <word> → Searches Dictionary for your word.\n• -anime <query> → Searches for given anime details.\n• -manga <query> → Searches for given manga details.\n• -translate <query> → Translates your input text.'
     help2 = "\n**General Fun Commands:**\n• -quote → Display random motivational code to make your day.\n• -ask <question>→ Asuna helps you with your questions.\n• -emo <text>→ Emojifies the text.\n• -norris [@user] → Display random chuck norris joke.\n• -xkcd [number] → Searches xkcd for your comic else prints a random comic.\n• -sebi → Display a random SebiSauce.\n• -pat [@user]→ Pats somebody's head!.\n• -cuddle [@user]→Cuddle somebody with a picture!.\n• -slap [@user]→ Slap the baka.\n• -punch [@user]→ Give them what they deserve.\n• -hug [@user]→ Hug somebody with a picture!\n• -kiss [@user]→ Show some love.\n• -tickle [@user]→ Don't stop until they cry.\n• -sleepy [@user]→ Why not sleeping then?.\n• -cry [@user]→ Did someone hurt you?.\n• -nom [@user]→ Hungry? have something to eat.\n• -gaze [@user]→ Glare at someone.\n• -cry [@user]→ Aaawww,did someone make you feel flushed?.\n**General Emoji Commands:**\n• -emoji <shrug,sip,bang,wonder,yay,peek,dance,j,nom> → Appends that emoji in chat.\n• -blob <blush,weary,sleepy,sad,cool,wink,winkf,teeth,unamused,kiss,grr,sob,toj,owo> → Appends your favorite Google blob stickers in chat."
     help3 = '\n**General Music Commands:**\n• -join <query> → Make the bot join a voice channel.\n• -play <query> → Name of the song/url you want to play.\n• -playing → Shows info about the currently played songself.\n• -volume <value> → Sets the volume of the currently playing song.\n• -skip → Vote to skip a song. The song requester can automatically skip.\n3 skip votes are needed for the song to be skipped.\n• -pause → Pauses the currently played song.\n• -resume → Resume the currently played song.\n• -leave → Stops playing audio and leaves the voice channel.\nThis also clears the queue.\n*Music commands not working atm*\n**Arguments in [] are optional but arguments in <> are necessary for given function to work**\n'
-    await bot.whisper(help1)
-    await bot.whisper(help2)
-    await bot.whisper(help3)
+    await ctx.author.send(help1)
+    await ctx.author.send(help2)
+    await ctx.author.send(help3)
     await ctx.send(':inbox_tray: | The list of commands you have access to has been sent to your DMs.')
     print('help')
 
