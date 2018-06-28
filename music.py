@@ -30,4 +30,4 @@ class MUSIC():
         
 def setup(bot):
     bot.add_cog(MUSIC(bot))
-    print('Music is loaded")
+    print("Music is loaded")
