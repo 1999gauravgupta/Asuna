@@ -29,5 +29,5 @@ class MUSIC():
         player.start()
         
 def setup(bot):
-    bot.add_cog(Music(bot))
-    print('Music is loaded')
+    bot.add_cog(MUSIC(bot))
+    print('Music is loaded")
