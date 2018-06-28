@@ -1,8 +1,4 @@
 git+https://github.com/Rapptz/discord.py@rewrite
-pip
-youtube_dl
-colorlog
-cffi --only-binary all; sys_platform == 'win32'
 xkcd 
 urbandictionary 
 chucknorris
