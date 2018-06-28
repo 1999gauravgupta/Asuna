@@ -1,3 +1,4 @@
+discord.py[voice] 
 git+https://github.com/Rapptz/discord.py@rewrite
 xkcd 
 urbandictionary 
@@ -6,7 +7,6 @@ spice_api
 lxml 
 lyricwikia 
 youtube_dl
-opuslib
 libopus
 ffmpeg
-discord.py[voice]
+
