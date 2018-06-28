@@ -6,7 +6,7 @@ from discord.voice_client import VoiceClient
 import asyncio
 import string
 
-startup_extensions = ['Music', 'gifs', 'executer', 'emoji', 'bdcommands', 'games', 'query', 'fun']
+startup_extensions = ['music', 'gifs', 'executer', 'emoji', 'bdcommands', 'games', 'query', 'fun']
 owner = [343395225571426304, 402829897514352641]  
 bot = commands.Bot(command_prefix=commands.when_mentioned_or('-', 'asuna ', 'Asuna ', 'Asuna, ', 'asuna, '))
 client = discord.Client()
