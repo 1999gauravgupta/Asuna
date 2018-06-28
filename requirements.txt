@@ -1,9 +1,9 @@
+git+https://github.com/Rapptz/discord.py@rewrite
 discord.py[voice] ~= 0.16.0
 pip
 youtube_dl
 colorlog
 cffi --only-binary all; sys_platform == 'win32'
-git+https://github.com/Rapptz/discord.py@rewrite
 xkcd 
 urbandictionary 
 chucknorris
