@@ -161,8 +161,7 @@ def load_opus_lib(opus_libs=OPUS_LIBS):
             pass
 
     raise RuntimeError('Could not load an opus lib. Tried %s' % (', '.join(opus_libs)))
-
-        state = self.get_voice_state(ctx.message.server)
+    state = self.get_voice_state(ctx.message.server)
         opts = {
             'default_search': 'auto',
             'quiet': True,
@@ -187,6 +186,9 @@ def load_opus_lib(opus_libs=OPUS_LIBS):
             await self.bot.say(embed=embed)
             await state.songs.put(entry)
 
+    
+
+        
     @commands.command(pass_context=True, no_pm=True)
     async def volume(self, ctx, value : int):
         """Sets the volume of the currently playing song."""
