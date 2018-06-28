@@ -5,11 +5,34 @@ from discord import opus
 
 if (not discord.opus.is_loaded()):
     discord.opus.load_opus('opus')  # the 'opus' library here is opus.dll on windows
+class Music():
+    'Voice related commands.\n    Works in multiple servers at once.\n    '
 
+    def __init__(self, bot):
+        self.bot = bot
+        self.voice_states = {}
 
-# or libopus.so on linux in the current directory
-def __init__(self, bot):  # you should replace this with the location the
-    self.bot = bot  # opus library is located in and with the proper filename.
+    def get_voice_state(self, guild):
+        state = self.voice_states.get(guild.id)
+        if state is None:
+            state = VoiceState(self.bot)
+            self.voice_states[guild.id] = state
+        return state
+
+    async def create_voice_client(self, channel):
+        voice = await self.bot.join_voice_channel(channel)
+        state = self.get_voice_state(channel.guild)
+        state.voice = voice
+
+    def __unload(self):
+        for state in self.voice_states.values():
+            try:
+                state.audio_player.cancel()
+                if state.voice:
+                    self.bot.loop.create_task(state.voice.disconnect())
+            except:
+                pass
+
 
 
 # note that on windows this DLL is automatically provided for you
@@ -68,33 +91,6 @@ class VoiceState():
             await self.play_next_song.wait()
 
 
-class Music():
-    'Voice related commands.\n    Works in multiple servers at once.\n    '
-
-    def __init__(self, bot):
-        self.bot = bot
-        self.voice_states = {}
-
-    def get_voice_state(self, guild):
-        state = self.voice_states.get(guild.id)
-        if state is None:
-            state = VoiceState(self.bot)
-            self.voice_states[guild.id] = state
-        return state
-
-    async def create_voice_client(self, channel):
-        voice = await self.bot.join_voice_channel(channel)
-        state = self.get_voice_state(channel.guild)
-        state.voice = voice
-
-    def __unload(self):
-        for state in self.voice_states.values():
-            try:
-                state.audio_player.cancel()
-                if state.voice:
-                    self.bot.loop.create_task(state.voice.disconnect())
-            except:
-                pass
 
     @commands.command(no_pm=True)
     async def join(self, ctx, *, channel: discord.Channel):
