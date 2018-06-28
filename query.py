@@ -50,7 +50,7 @@ class QUERY():
     async def wiki(self, ctx, *, query=None):
         if query != None:
             try:
-                response = requests.get('http://api.tanvis.xyz/search/{}'.format(query))
+                response = requests.get('http://api.tanvis.xyz/search/{}'.format("wikipedia "+query))
                 response = json.loads(response.content.decode('utf-8'))
                 await ctx.send(response[0]['link'])
             except Exception:
@@ -191,7 +191,9 @@ class QUERY():
                 count += 1
             if list1 != '':
                 await ctx.send(('```\n' + list1) + '\n```')
-                m = await self.bot.wait_for('message', timeout=30)
+                def check(p):
+                    return p.author.id == ctx.author.id and p.channel == ctx.channel
+                m = await self.bot.wait_for('message', check = check)
                 m = int(m.content)
                 m = m - 1
                 try:
@@ -262,7 +264,9 @@ class QUERY():
                 count += 1
             if list1 != '':
                 await ctx.send(('```\n' + list1) + '\n```')
-                m = await self.bot.wait_for('message', timeout=30)
+                def check(p):
+                    return p.author.id == ctx.author.id and p.channel == ctx.channel
+                m = await self.bot.wait_for('message', check = check)
                 m = int(m.content)
                 m = m - 1
                 try:
@@ -310,7 +314,9 @@ class QUERY():
     async def lyrics(self, ctx, *, song):
         try:
             await ctx.send(':mag: Singer Name') 
-            singer = await self.bot.wait_for( 'message') 
+            def check(m):
+                return m.author.id == ctx.author.id and m.channel == ctx.channel
+            singer = await self.bot.wait_for('message', check = check)
             singer = str(singer.content) 
             print(song, singer)  
             l = lyricwikia.get_lyrics(singer, song) 

@@ -166,12 +166,13 @@ class FUN():
             await ctx.send(embed=embed)
             print('sebi')
         except Exception as e:
-            await ctx.send(e)
+            await ctx.send("Service unaviable atm")
+            print(e)
 
     @commands.command(name='fact', aliases=['facts', 'fun facts', 'fun fact', 'trivia', 'random', 'bored'])
     async def fact(self, ctx):
         r = requests.get('http://numbersapi.com/random/trivia')
-        p = r.content
+        p = str(r.content)
         q = p.replace("b'", '')
         t = q.replace("'", '')
         await ctx.send(('```' + t) + '```')

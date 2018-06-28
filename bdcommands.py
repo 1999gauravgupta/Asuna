@@ -52,16 +52,16 @@ class BDCOMMANDS():
             time = time.split(' ')
             time = time[0]
             embed = discord.Embed(
-                title=ctx.message.server.name + ' info', description="Here's what I could find.", color=16241292)
-            embed.add_field(name='Name', value=ctx.message.server.name)
-            embed.add_field(name='ID', value=ctx.message.server.id)
-            embed.add_field(name='Owner', value=ctx.message.server.owner.name)
+                title=ctx.message.guild.name + ' info', description="Here's what I could find.", color=16241292)
+            embed.add_field(name='Name', value=ctx.message.guild.name)
+            embed.add_field(name='ID', value=ctx.message.guild.id)
+            embed.add_field(name='Owner', value=ctx.message.guild.owner.name)
             embed.add_field(name='Channels', value=channelz)
-            embed.add_field(name='Emojis', value=len(ctx.message.server.emojis))
-            embed.add_field(name='Members', value=len(ctx.message.server.members))
-            embed.add_field(name='Roles', value=len(ctx.message.server.roles))
+            embed.add_field(name='Emojis', value=len(ctx.message.guild.emojis))
+            embed.add_field(name='Members', value=len(ctx.message.guild.members))
+            embed.add_field(name='Roles', value=len(ctx.message.guild.roles))
             embed.add_field(name='Server roles', value=roles)
-            embed.set_thumbnail(url=ctx.message.server.icon_url)
+            embed.set_thumbnail(url=ctx.message.guild.icon_url)
             await ctx.send(embed=embed)
             print('Server Info')
         except Exception as e:
@@ -123,10 +123,8 @@ class BDCOMMANDS():
         print('code')
 
     @commands.command()
-    async def invite(self, ctx):
+    async def invite(self, ctx,user: discord.Member = Asuna):
         try:
-            member = discord.utils
-            Asuna = discord.utils.get(ctx.members, id=411566473350217748)
             embed = discord.Embed(title="Asuna's Invite Link", value='Add Asuna to your guild', color=16241292)
             embed.add_field(name='Name', value='Asuna')
             embed.add_field(name='Prefix', value='-, Asuna , asuna')
@@ -135,7 +133,7 @@ class BDCOMMANDS():
                 value='https://discordapp.com/api/oauth2/authorize?client_id=411566473350217748&permissions=8&scope=bot'
             )
             embed.set_footer(text='Feel free to uncheck some permissions')
-            embed.set_thumbnail(url=Asuna.avatar_url)
+            embed.set_thumbnail(url=user.avatar_url)
             await ctx.send(embed=embed)
             print('invite')
         except Exception as e:

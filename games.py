@@ -23,7 +23,9 @@ class GAMES():
                 break
             await ctx.send('Round {}'.format(i + 1))
             await ctx.send('Betting Amount: ')
-            bet = await self.bot.wait_for('message')
+            def check(m):
+                return m.author.id == ctx.author.id and m.channel == ctx.channel
+            bet = await self.bot.wait_for('message', check = check)
             bet = int(bet.content)
             if bet > bal:
                 await ctx.send('You cannot bet more than {} so resetting your bet value to {}'.format(bal, bal))
@@ -69,7 +71,9 @@ class GAMES():
             embed.add_field(name='Dealer Cards value', value=d_value, inline=True)
             embed.add_field(name='\u200b', value='Hit/Stand/Double Down')
             await ctx.send(embed=embed)  # print(u_value,d_value)
-            option = await self.bot.wait_for('message')
+            def check(m):
+                return m.author.id == ctx.author.id and m.channel == ctx.channel
+            option = await self.bot.wait_for('message', check = check)
             option = str(option.content)
             if option.lower() == 'hit':
                 draw = requests.get('https://deckofcardsapi.com/api/deck/{}/draw/?count=1'.format(deck))
