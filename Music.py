@@ -18,14 +18,6 @@ def load_opus_lib(opus_libs=OPUS_LIBS):
             pass
 
     raise RuntimeError('Could not load an opus lib. Tried %s' % (', '.join(opus_libs)))
-if not discord.opus.is_loaded():
-    # the 'opus' library here is opus.dll on windows
-    # or libopus.so on linux in the current directory
-    # you should replace this with the location the
-    # opus library is located in and with the proper filename.
-    # note that on windows this DLL is automatically provided for you
-    discord.opus.load_opus('opus')    
-
 
 def __init__(self, bot):
         self.bot = bot
@@ -154,6 +146,22 @@ class Music:
         The list of supported sites can be found here:
         https://rg3.github.io/youtube-dl/supportedsites.html
         """
+        OPUS_LIBS = ['libopus-0.x86.dll', 'libopus-0.x64.dll', 'libopus-0.dll', 'libopus.so.0', 'libopus.0.dylib']
+
+
+def load_opus_lib(opus_libs=OPUS_LIBS):
+    if opus.is_loaded():
+        return True
+
+    for opus_lib in opus_libs:
+        try:
+            opus.load_opus(opus_lib)
+            return
+        except OSError:
+            pass
+
+    raise RuntimeError('Could not load an opus lib. Tried %s' % (', '.join(opus_libs)))
+
         state = self.get_voice_state(ctx.message.server)
         opts = {
             'default_search': 'auto',
