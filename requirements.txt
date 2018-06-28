@@ -7,3 +7,6 @@ lxml
 lyricwikia 
 youtube_dl
 opuslib
+libopus
+ffmpeg
+discord.py[voice]
