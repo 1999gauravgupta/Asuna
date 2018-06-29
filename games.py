@@ -186,23 +186,23 @@ class GAMES():
             r=""
             if pick1==0 and pick2==0:
                 r=("Round Draw")
-            elif pick1==2 and (pick2==0 or pick2==1):
+            elif pick1==2 and pick2==0:
                 r=("User Won")
-                flag=0
-            elif pick2==2 and (pick1==0 or pick2==1):
-                r=("Computer Won")
                 flag=0
             elif pick1==2 and pick2==1:
                 r=("Computer Won")
                 flag=0
-            elif pick1==1 and pick2==2:
-                r=("User Won")
-                flag=0
             elif pick1==0 and pick2==1:
                 r=("User Won")
                 flag=0
+            elif pick1==0 and pick2==2:
+                r=("Computer")
+                flag=0
             elif pick1==1 and pick2==0:
                 r=("Computer Won")
+                flag=0
+            elif pick1==1 and pick2==2:
+                r=("User Won")
                 flag=0
             embed=discord.Embed(title="ECard-Kaiji",color=16241292)
             embed.add_field(name="User Cards: ",value=uc)
