@@ -71,30 +71,21 @@ class GAMES():
         embed.add_field(name='User Cards value', value=u_value)
         embed.add_field(name='Dealer Cards value', value=d_value, inline=True)
         embed.add_field(name='\u200b', value='Hit/Stand/Double Down')
-        await ctx.send(embed=embed)  # print(u_value,d_value)
+        await ctx.send(embed=embed)  
 
         option = await self.bot.wait_for('message', check = check)
         option = str(option.content)
-        if option.lower() == 'hit':
-            draw=self.card_drawer(deck)
-            if draw['cards'][0]['value'] in fc:
-                u_value += 10
-            elif draw['cards'][0]['value'] == 'ACE':
-                u_value += 11
-            else:
-                u_value += int(draw['cards'][0]['value'])
-            u_cards.append(draw['cards'][0]['code'])
-        elif option.lower() == 'double down':
-            draw=self.card_drawer(deck)
-            if draw['cards'][0]['value'] in fc:
-                u_value += 10
-            elif draw['cards'][0]['value'] == 'ACE':
-                u_value += 11
-            else:
-                u_value += int(draw['cards'][0]['value'])
-            u_cards.append(draw['cards'][0]['code'])
-        else:
+        if option.lower() == 'stand':
             pass
+        else:
+            draw=self.card_drawer(deck)
+            if draw['cards'][0]['value'] in fc:
+                u_value += 10
+            elif draw['cards'][0]['value'] == 'ACE':
+                u_value += 11
+            else:
+                u_value += int(draw['cards'][0]['value'])
+            u_cards.append(draw['cards'][0]['code'])
         for k in range(2):
             draw=self.card_drawer(deck)
             if draw['cards'][0]['value'] in fc:
