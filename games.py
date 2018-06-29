@@ -41,13 +41,13 @@ class GAMES():
         deck = r['deck_id']
         for j in range(2):
             draw=self.card_drawer(deck)
-            if draw['cards'][j]['value'] in fc:
+            if draw['cards'][0]['value'] in fc:
                 u_value += 10
-            elif draw['cards'][j]['value'] == 'ACE':
+            elif draw['cards'][0]['value'] == 'ACE':
                 u_value += 11
             else:
-                u_value += int(draw['cards'][j]['value'])
-            u_cards.append(draw['cards'][j]['code'])
+                u_value += int(draw['cards'][0]['value'])
+            u_cards.append(draw['cards'][0]['code'])
         draw=self.card_drawer(deck)
         if draw['cards'][0]['value'] in fc:
             d_value += 10
@@ -97,14 +97,14 @@ class GAMES():
             pass
         for k in range(2):
             draw=self.card_drawer(deck)
-            if draw['cards'][k]['value'] in fc:
+            if draw['cards'][0]['value'] in fc:
                 d_value += 10
-            elif draw['cards'][k]['value'] == 'ACE':
+            elif draw['cards'][0]['value'] == 'ACE':
                 d_value += 11
             else:
-                d_value += int(draw['cards'][k]['value'])
+                d_value += int(draw['cards'][0]['value'])
             d_valuea.append(d_value)
-            d_cards.append(draw['cards'][k]['code'])
+            d_cards.append(draw['cards'][0]['code'])
         for i in d_valuea:
             if i <= 21:
                 d_value = i
