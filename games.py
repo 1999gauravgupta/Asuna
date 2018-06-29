@@ -4,7 +4,7 @@ import discord
 import requests
 import json
 import string
-
+import random
 
 class GAMES():
     def __init__(self, bot):
