@@ -56,31 +56,31 @@ class FUN():
             result5 = q.find('why')
             result6 = q.find('who')
             if result1 != (-1):
-                check = len(when)
+                check = len(when)-1
                 var = random.randint(0, check)
                 await ctx.send(when[var])
             elif result2 != (-1):
-                check = len(what)
+                check = len(what)-1
                 var = random.randint(0, check)
                 await ctx.send(what[var])
             elif result3 != (-1):
-                check = len(howmuch)
+                check = len(howmuch)-1
                 var = random.randint(0, check)
                 await ctx.send(howmuch[var])
             elif result4 != (-1):
-                check = len(howmany)
+                check = len(howmany)-1
                 var = random.randint(0, check)
                 await ctx.send(howmany[var])
             elif result5 != (-1):
-                check = len(why)
+                check = len(why)-1
                 var = random.randint(0, check)
                 await ctx.send(why[var])
             elif result6 != (-1):
-                check = len(who)
+                check = len(who)-1
                 var = random.randint(0, check)
                 await ctx.send(who[var])
             else:
-                check = len(other)
+                check = len(other)-1
                 var = random.randint(0, check)
                 await ctx.send(other[var])
 
