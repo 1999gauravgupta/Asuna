@@ -129,6 +129,90 @@ class GAMES():
             embed.add_field(name='Dealer Cards value', value=d_value, inline=True)
             await ctx.send(embed=embed)
 
+    @commands.command()
+    async def ecard(self,ctx,choice):
+        u_cards=[]
+        o_cards=[]
+        flag=1
+        if choice.lower()=="emperor":
+            u_cards=[2,0,0,0,0]
+            o_cards=[1,0,0,0,0]
+        if choice.lower()=="slave":
+            o_cards=[2,0,0,0,0]
+            u_cards=[1,0,0,0,0]
+        while flag==1:   
+            uc=""
+            for i in u_cards:
+                if i==0:
+                    j="<:citizen:461123113606840333>"
+                elif i==1:
+                    j="<:slave:461123128857460736>"
+                else:
+                    j="<:emperor:461123147744149505>"
+                uc+=j+" "
+            oc=""
+            for i in o_cards:
+                if i==0:
+                    j="<:citizen:461123113606840333>"
+                elif i==1:
+                    j="<:slave:461123128857460736>"
+                else:
+                    j="<:emperor:461123147744149505>"
+                oc+=j+" "
+            embed=discord.Embed(title="ECard-Kaiji",color=16241292)
+            embed.add_field(name="User Cards: ",value=uc)
+            embed.add_field(name="Computer Cards: ",value=oc)
+            await ctx.send(embed=embed)
+            def check(m):
+                return m.author.id == ctx.author.id and m.channel == ctx.channel
+            await ctx.send("Pick ur card: ")
+            pick1 = await self.bot.wait_for('message', check = check)
+            pick1 = str(pick1.content).lower()
+            if pick1=="c" or pick1=="citizen":
+                pick1=0
+                uc="<:citizen:461123113606840333>"
+            elif pick1=="s" or pick1=="slave":
+                pick1=1
+                uc="<:slave:461123128857460736>"
+            else:
+                pick1=2
+                uc="<:emperor:461123147744149505>"
+            u_cards.remove(pick1)
+            pick2=o_cards[random.randint(0,len(o_cards)-1)]
+            if pick2==0:
+                oc="<:citizen:461123113606840333>"
+            elif pick2==1:
+                oc="<:slave:461123128857460736>"
+            else:
+                oc="<:emperor:461123147744149505>"
+            o_cards.remove(pick2)
+            r=""
+            if pick1==0 and pick2==0:
+                r=("Round Draw")
+            elif pick1==2 and (pick2==0 or pick2==1):
+                r=("User Won")
+                flag=0
+            elif pick2==2 and (pick1==0 or pick2==1):
+                r=("Computer Won")
+                flag=0
+            elif pick1==2 and pick2==1:
+                r=("Computer Won")
+                flag=0
+            elif pick1==1 and pick2==2:
+                r=("User Won")
+                flag=0
+            elif pick1==0 and pick2==1:
+                r=("User Won")
+                flag=0
+            elif pick1==1 and pick2==0:
+                r=("Computer Won")
+                flag=0
+            embed=discord.Embed(title="ECard-Kaiji",color=16241292)
+            embed.add_field(name="User Cards: ",value=uc)
+            embed.add_field(name="Computer Cards: ",value=oc)
+            embed.add_field(name="Result: ",value=r)
+            await ctx.send(embed=embed)
+
 def setup(bot):
     bot.add_cog(GAMES(bot))
     print('Games is loaded')
