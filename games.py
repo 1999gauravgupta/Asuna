@@ -129,6 +129,13 @@ class GAMES():
             embed.add_field(name='Dealer Cards value', value=d_value, inline=True)
             await ctx.send(embed=embed)
 
+    def number_to_emoji(self,number):  
+        if number==0:
+            return "<:citizen:461123113606840333>"
+        elif number==1:
+            return "<:slave:461123128857460736>"
+        else:
+            return "<:emperor:461123147744149505>"
     @commands.command()
     async def ecard(self,ctx,choice):
         u_cards=[]
@@ -143,21 +150,11 @@ class GAMES():
         while flag==1:   
             uc=""
             for i in u_cards:
-                if i==0:
-                    j="<:citizen:461123113606840333>"
-                elif i==1:
-                    j="<:slave:461123128857460736>"
-                else:
-                    j="<:emperor:461123147744149505>"
+                j=self.number_to_emoji(i)
                 uc+=j+" "
             oc=""
             for i in o_cards:
-                if i==0:
-                    j="<:citizen:461123113606840333>"
-                elif i==1:
-                    j="<:slave:461123128857460736>"
-                else:
-                    j="<:emperor:461123147744149505>"
+                j=self.number_to_emoji(i)
                 oc+=j+" "
             embed=discord.Embed(title="ECard-Kaiji",color=16241292)
             embed.add_field(name="User Cards: ",value=uc)
@@ -170,21 +167,21 @@ class GAMES():
             pick1 = str(pick1.content).lower()
             if pick1=="c" or pick1=="citizen":
                 pick1=0
-                uc="<:citizen:461123113606840333>"
+                uc=self.number_to_emoji(pick1)
             elif pick1=="s" or pick1=="slave":
                 pick1=1
-                uc="<:slave:461123128857460736>"
+                uc=self.number_to_emoji(pick1)
             else:
                 pick1=2
-                uc="<:emperor:461123147744149505>"
+                uc=self.number_to_emoji(pick1)
             u_cards.remove(pick1)
             pick2=o_cards[random.randint(0,len(o_cards)-1)]
             if pick2==0:
-                oc="<:citizen:461123113606840333>"
+                oc=self.number_to_emoji(pick2)
             elif pick2==1:
-                oc="<:slave:461123128857460736>"
+                oc=self.number_to_emoji(pick2)
             else:
-                oc="<:emperor:461123147744149505>"
+                oc=self.number_to_emoji(pick2)
             o_cards.remove(pick2)
             r=""
             if pick1==0 and pick2==0:
