@@ -50,7 +50,6 @@ class GAMES():
         for b in d_cards:
             w += b + ' '
         embed = discord.Embed(title='Blackjack', color=16241292)
-        embed.add_field(name='Betting Amount', value=bet)
         embed.add_field(name='User Cards', value=q)
         embed.add_field(name='Dealer Cards', value=w)
         embed.add_field(name='User Cards value', value=u_value)
