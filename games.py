@@ -10,7 +10,7 @@ class GAMES():
     def __init__(self, bot):
         self.bot = bot
  
-    def card_drawer(deck):
+    def card_drawer(self,deck):
         restrict=["QH","QS"]
         draw = requests.get('https://deckofcardsapi.com/api/deck/{}/draw/?count=1'.format(deck))
         draw = json.loads(draw.content.decode('utf-8'))
@@ -19,8 +19,8 @@ class GAMES():
         else:
             return draw
     
-    def card_to_emoji(card):       
-        for a in bot.guilds:
+    def card_to_emoji(self,card):       
+        for a in self.bot.guilds:
             if a.id==461497700160897035:
                 for emoji in a.emojis:
                     if emoji.name==card:
@@ -40,7 +40,7 @@ class GAMES():
         r = json.loads(r.content.decode('utf-8'))
         deck = r['deck_id']
         for j in range(2):
-            draw=card_drawer(deck)
+            draw=self.card_drawer(deck)
             if draw['cards'][j]['value'] in fc:
                 u_value += 10
             elif draw['cards'][j]['value'] == 'ACE':
@@ -48,7 +48,7 @@ class GAMES():
             else:
                 u_value += int(draw['cards'][j]['value'])
             u_cards.append(draw['cards'][j]['code'])
-        draw=card_drawer(deck)
+        draw=self.card_drawer(deck)
         if draw['cards'][0]['value'] in fc:
             d_value += 10
         elif draw['cards'][0]['value'] == 'ACE':
@@ -60,10 +60,10 @@ class GAMES():
         q=""
         w=""
         for i in u_cards:
-            a=card_to_emoji(i)
+            a=self.card_to_emoji(i)
             q+=a+" "
         for i in d_cards:
-            a=card_to_emoji(i)
+            a=self.card_to_emoji(i)
             w+=a+" "
         embed = discord.Embed(title='Blackjack', color=16241292)
         embed.add_field(name='User Cards', value=q)
@@ -76,7 +76,7 @@ class GAMES():
         option = await self.bot.wait_for('message', check = check)
         option = str(option.content)
         if option.lower() == 'hit':
-            draw=card_drawer(deck)
+            draw=self.card_drawer(deck)
             if draw['cards'][0]['value'] in fc:
                 u_value += 10
             elif draw['cards'][0]['value'] == 'ACE':
@@ -85,7 +85,7 @@ class GAMES():
                 u_value += int(draw['cards'][0]['value'])
             u_cards.append(draw['cards'][0]['code'])
         elif option.lower() == 'double down':
-            draw=card_drawer(deck)
+            draw=self.card_drawer(deck)
             if draw['cards'][0]['value'] in fc:
                 u_value += 10
             elif draw['cards'][0]['value'] == 'ACE':
@@ -95,8 +95,8 @@ class GAMES():
             u_cards.append(draw['cards'][0]['code'])
         else:
             pass
-        draw=card_drawer(deck)
         for k in range(2):
+            draw=self.card_drawer(deck)
             if draw['cards'][k]['value'] in fc:
                 d_value += 10
             elif draw['cards'][k]['value'] == 'ACE':
@@ -111,10 +111,10 @@ class GAMES():
         q=""
         w=""
         for i in u_cards:
-            a=card_to_emoji(i)
+            a=self.card_to_emoji(i)
             q+=a+" "
         for i in d_cards:
-            a=card_to_emoji(i)
+            a=self.card_to_emoji(i)
             w+=a+" "
 
         if u_value > 21: 
