@@ -104,10 +104,9 @@ class GAMES():
             else:
                 d_value += int(draw['cards'][0]['value'])
             d_valuea.append(d_value)
-            d_cards.append(draw['cards'][0]['code'])
-        for i in d_valuea:
-            if i <= 21:
-                d_value = i
+            if d_value<=21:
+                d_cards.append(draw['cards'][0]['code'])
+        d_value = d_valuea[len(d_cards)-1]
         q=""
         w=""
         for i in u_cards:
