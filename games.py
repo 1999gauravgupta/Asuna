@@ -137,7 +137,7 @@ class GAMES():
         else:
             return "<:emperor:461123147744149505>"
     @commands.command()
-    async def ecard(self,ctx,choice):
+    async def ecard(self,ctx,choice="emperor"):
         u_cards=[]
         o_cards=[]
         flag=1
