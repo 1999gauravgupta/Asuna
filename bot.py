@@ -97,7 +97,6 @@ async def help(ctx):
     help3 = '\n**General Music Commands:**\n• -join <query> → Make the bot join a voice channel.\n• -play <query> → Name of the song/url you want to play.\n• -playing → Shows info about the currently played songself.\n• -volume <value> → Sets the volume of the currently playing song.\n• -skip → Vote to skip a song. The song requester can automatically skip.\n3 skip votes are needed for the song to be skipped.\n• -pause → Pauses the currently played song.\n• -resume → Resume the currently played song.\n• -leave → Stops playing audio and leaves the voice channel.\nThis also clears the queue.\n*Music commands not working atm*\n**Arguments in [] are optional but arguments in <> are necessary for given function to work**\n'
     await ctx.author.send(help1)
     await ctx.author.send(help2)
-    await ctx.author.send(help3)
     await ctx.send(':inbox_tray: | The list of commands you have access to has been sent to your DMs.')
     print('help')
 
