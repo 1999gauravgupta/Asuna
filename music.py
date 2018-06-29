@@ -4,6 +4,7 @@ import discord
 import youtube_dl
 import os
 from discord import opus
+from discord.voice_client import VoiceClient
 
 players={}
 opus_libs = ['libopus-0.x86.dll', 'libopus-0.x64.dll', 'libopus-0.dll', 'libopus.so.0', 'libopus.0.dylib']
