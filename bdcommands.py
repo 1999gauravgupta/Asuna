@@ -123,7 +123,7 @@ class BDCOMMANDS():
         print('code')
 
     @commands.command()
-    async def invite(self, ctx,user: discord.Member = "Asuna"):
+    async def invite(self, ctx):
         try:
             embed = discord.Embed(title="Asuna's Invite Link", value='Add Asuna to your guild', color=16241292)
             embed.add_field(name='Name', value='Asuna')
@@ -133,7 +133,7 @@ class BDCOMMANDS():
                 value='https://discordapp.com/api/oauth2/authorize?client_id=411566473350217748&permissions=8&scope=bot'
             )
             embed.set_footer(text='Feel free to uncheck some permissions')
-            embed.set_thumbnail(url=user.avatar_url)
+            embed.set_thumbnail(url=self.bot.user.avatar_url)
             await ctx.send(embed=embed)
             print('invite')
         except Exception as e:
