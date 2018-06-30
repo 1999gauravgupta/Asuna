@@ -3,7 +3,7 @@ import asyncio
 import discord
 import re
 
-EMOJI_REGEX = re.compile(r'<a?:.+?:([0-9]{15,21})>'
+EMOJI_REGEX = re.compile(r'<a?:.+?:([0-9]{15,21})>')
 
 class EMOJI():
     def __init__(self, bot):
