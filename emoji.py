@@ -1,45 +1,16 @@
 from discord.ext import commands
 import asyncio
 import discord
-import re
-
-EMOJI_REGEX = re.compile(r'<a?:.+?:([0-9]{15,21})>')
 
 class EMOJI():
     def __init__(self, bot):
         self.bot = bot
 
-    def partial_emoji(self,argument, *, regex=EMOJI_REGEX):
-        if argument.isdigit():
-            return int(argument)
-        m = regex.match(argument)
-        if m is None:
-            raise commands.BadArgument("That's not a custom emoji...")
-        return int(m.group(1))
     @commands.command()
-    async def emojistats(self, ctx, *, emoji: partial_emoji = None):
-        if emoji is None:
-            await ctx.send("No emoji given.")
-        else:
-            await self.get_emoji_stats(ctx, emoji)
-
-    async def get_emoji_stats(self, ctx, emoji_id):
-        e = discord.Embed(title='Emoji Stats')
-        cdn = f'https://cdn.discordapp.com/emojis/{emoji_id}.png'
-        async with ctx.session.get(cdn) as resp:
-            if resp.status == 404:
-                e.description = "This isn't a valid emoji."
-                e.set_thumbnail(url='https://this.is-serious.business/09e106.jpg')
-                return await ctx.send(embed=e)
-        e.set_thumbnail(url=cdn)
-        # valid emoji ID so let's use it
-        dt = discord.utils.snowflake_time(emoji_id)
-        await ctx.send(embed=e)
-    # @commands.command()
-    # async def big(self, ctx, emo):
-    #     'Enlarge emoji'
-    #     emo = emo.split(':')[(-1)].replace('>', '')
-    #     await ctx.send('https://discordapp.com/api/emojis/{}.png'.format(emo))
+    async def big(self, ctx, emo):
+        'Enlarge emoji'
+        emo = emo.split(':')[(-1)].replace('>', '')
+        await ctx.send('https://discordapp.com/api/emojis/{}.png'.format(emo))
 
 #blob commands
 
