@@ -57,10 +57,10 @@ class QUERY():
                 await ctx.send('Service unavailable atm')
 
     @commands.command(name='translate', aliases=['trans'])
-    async def translate(self, ctx, *, query=None,lg="en"):
+    async def translate(self, ctx, lg="en",*, query=None,):
         if query != None:
             query = '%20'.join(query.split())
-            response = requests.get('http://api.tanvis.xyz/translate/{}?from=auto&to={}'.format(query,lg))
+            response = requests.get('http://api.tanvis.xyz/translate/{}?&to={}'.format(query,lg))
             response = json.loads(response.content.decode('utf-8'))
             await ctx.send(response['to']['text'])
             await ctx.send('The input text language is ' + response['from']['lang'])
