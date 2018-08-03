@@ -114,7 +114,7 @@ class BDCOMMANDS():
                 list1.append(member.joined_at)
             list1.sort()
             p=list1.index(user.joined_at)       
-            embed=discord.Embed(title=str(user),description=user.id, color=color=random.randint(0, 16777215))
+            embed=discord.Embed(title=str(user),description=user.id, color=random.randint(0, 16777215))
             embed.add_field(name="\u200b",value=img+str(user.mention),inline=False)
             embed.add_field(name='Joined At:', value=str(user.joined_at)[0:16],inline=False)
             embed.add_field(name='Created At:', value=str(user.created_at)[0:16],inline=False)
@@ -155,7 +155,7 @@ class BDCOMMANDS():
                 offline_count+=1
             total_count+=1
         
-        embed = discord.Embed(title=guild.name, description=guild.id, color=color=random.randint(0, 16777215))
+        embed = discord.Embed(title=guild.name, description=guild.id, color=random.randint(0, 16777215))
         embed.add_field(name='Owner:', value=guild.owner,inline=False)
         embed.add_field(name="Users:",value="{} Users[{} Humans|{} Bots] \n <:online:468084069305942036> {} \n <:idle:468084104664186915> {} \n <:dnd:468084139195629588> {} \n <:offline:468084174767521792> {}".format(str(total_count),str(user_count),str(bot_count),str(online_count),str(idle_count),str(dnd_count),str(offline_count)),inline=False)
         embed.add_field(name='Roles:', value=len(guild.roles),inline=False)
@@ -200,7 +200,7 @@ class BDCOMMANDS():
     async def avatar(self, ctx, *, user=None):
         try:
             if user=="server":
-                embed = discord.Embed(title=ctx.guild.name.title(), color=color=random.randint(0, 16777215))
+                embed = discord.Embed(title=ctx.guild.name.title(), color=random.randint(0, 16777215))
                 embed.set_image(url=ctx.message.guild.icon_url)
                 await ctx.send(embed=embed) 
                 return
@@ -211,7 +211,7 @@ class BDCOMMANDS():
                 await ctx.send("Dear {},the user you typed does not seem to exist. Please make sure you provided correct details.".format(ctx.message.author.mention))
                 return
             else:
-                embed = discord.Embed(title=str(user), color=color=random.randint(0, 16777215))
+                embed = discord.Embed(title=str(user), color=random.randint(0, 16777215))
                 embed.set_image(url=user.avatar_url)
                 await ctx.send(embed=embed)       
         except Exception as e:
@@ -293,7 +293,7 @@ class BDCOMMANDS():
                 else:
                     str1 += ('<:dnd:468084139195629588>' + j.title()) + '\n'
             embed = discord.Embed(
-                title=' Permissions for {} in this server'.format(user.name), description=str1, color=color=random.randint(0, 16777215))
+                title=' Permissions for {} in this server'.format(user.name), description=str1, color=random.randint(0, 16777215))
             await ctx.send(embed=embed)
         except Exception as e:
             await ctx.send("Dear {},the user you typed does not seem to exist. Please make sure you provided correct details.".format(ctx.message.author.mention))
@@ -306,7 +306,7 @@ class BDCOMMANDS():
                 role = [x.name for x in ctx.guild.role_hierarchy]
                 l=len(role)
                 role=",".join(role)
-                embed=discord.Embed(title="Server Roles",description="Here is a list of all server roles",color=color=random.randint(0, 16777215))
+                embed=discord.Embed(title="Server Roles",description="Here is a list of all server roles",color=random.randint(0, 16777215))
                 embed.add_field(name="\u200b",value=role)
                 embed.add_field(name="Number of roles: ",value=l)
                 await ctx.send(embed=embed)
