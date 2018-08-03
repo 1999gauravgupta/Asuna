@@ -5,6 +5,7 @@ from discord.ext.commands import Bot
 from discord.voice_client import VoiceClient
 import asyncio
 import string
+import random
 
 startup_extensions = ['gifs', 'executer', 'emoji', 'bdcommands', 'games', 'query', 'fun']
 owner = [343395225571426304, 402829897514352641]  

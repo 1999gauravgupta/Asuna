@@ -7,6 +7,7 @@ import string
 import lyricwikia
 import spice_api as spice
 import urbandictionary as udd
+import random
 
 
 class QUERY():
@@ -24,7 +25,7 @@ class QUERY():
                     example = defs[d].example
                     upvotes = defs[d].upvotes
                     downvotes = defs[d].downvotes
-                embed = discord.Embed(title=word, description="Here's what I could find.", color=16241292)
+                embed = discord.Embed(title=word, description="Here's what I could find.", color=random.randint(0, 16777215))
                 embed.add_field(name='Defintion', value=definition, inline=False)
                 embed.add_field(name='Example', value=example if example else '\u200b', inline=False)
                 embed.add_field(name='Upvotes', value=str(upvotes) + '👍', inline=True)
@@ -78,7 +79,7 @@ class QUERY():
                 weathere = response['weather']
                 link = response['icon']
                 windspeede = response['windSpeed']
-                embed = discord.Embed(tile='Weather', description="Here's what i could find: ", color=16241292)
+                embed = discord.Embed(tile='Weather', description="Here's what i could find: ", color=random.randint(0, 16777215))
                 embed.add_field(name='Location', value=namee)
                 embed.add_field(name='Temp in Celsius', value=celsiuse)
                 embed.add_field(name='Temp in Fahrenheit', value=farenheite)
@@ -121,7 +122,7 @@ class QUERY():
                 spDefense = response['baseStats']['spDefense']
                 speed = response['baseStats']['speed']
                 embed = discord.Embed(
-                    title="{}'s info".format(name), desciption="Here's what i could find: ", color=16241292)
+                    title="{}'s info".format(name), desciption="Here's what i could find: ", color=random.randint(0, 16777215))
                 embed.add_field(name='Pokedex Number', value=num)
                 embed.add_field(name='Species', value=species)
                 embed.add_field(name='Height', value=height)
@@ -155,7 +156,7 @@ class QUERY():
                 name3 = response[2]['name']
                 link2 = response[1]['link']
                 link3 = response[2]['link']
-                embed = discord.Embed(title='YouTube', description="Here's what i could find", color=16241292)
+                embed = discord.Embed(title='YouTube', description="Here's what i could find", color=random.randint(0, 16777215))
                 embed.add_field(name=name1, value=link1)
                 embed.set_thumbnail(url=image)
                 embed.add_field(name=name2, value=link2)
@@ -172,7 +173,7 @@ class QUERY():
                 r = requests.get('http://api.tanvis.xyz/dictionary/{}'.format(word))
                 r = json.loads(r.content.decode('utf-8'))
                 list1 = r['noun']
-                embed = discord.Embed(title=word.title(), color=16241292)
+                embed = discord.Embed(title=word.title(), color=random.randint(0, 16777215))
                 for i in range(len(list1)):
                     embed.add_field(name='\u200b', value=((str(i + 1) + '. ') + list1[i].title()) + '.')
                 await ctx.send(embed=embed)
@@ -226,7 +227,7 @@ class QUERY():
                 elif score >= 9:
                     emoji = ':heart_eyes:'
                 if status == 'Currently Airing':
-                    embed = discord.Embed(title='{}'.format(title), color=16241292)
+                    embed = discord.Embed(title='{}'.format(title), color=random.randint(0, 16777215))
                     embed.add_field(name='Synopsis', value=syno)
                     embed.add_field(name='Type', value=typea)
                     embed.add_field(name='Episodes', value=episode, inline=True)
@@ -236,7 +237,7 @@ class QUERY():
                     embed.set_thumbnail(url=link)
                     await ctx.send(embed=embed)
                 else:
-                    embed = discord.Embed(title='{}'.format(title), color=16241292)
+                    embed = discord.Embed(title='{}'.format(title), color=random.randint(0, 16777215))
                     embed.add_field(name='Synopsis', value=syno)
                     embed.add_field(name='Type', value=typea)
                     embed.add_field(name='Episodes', value=episode, inline=True)
@@ -296,7 +297,7 @@ class QUERY():
                     emoji = ':smiley:'
                 else:
                     emoji = ':heart_eyes:'
-                embed = discord.Embed(title='{}'.format(title), color=16241292)
+                embed = discord.Embed(title='{}'.format(title), color=random.randint(0, 16777215))
                 embed.add_field(name='Synopsis', value=syno)
                 embed.add_field(name='Type', value=typea)
                 embed.add_field(name='Chapters', value=episode, inline=True)
@@ -323,7 +324,7 @@ class QUERY():
             str1 = ''  
             ls = l.split('\n\n')  
             embed = discord.Embed(
-                title='{}'.format(song.title()), color=16241292
+                title='{}'.format(song.title()), color=random.randint(0, 16777215)
             ) 
             for a in ls:  
                 embed.add_field(name='\u200b', value=a + '\n') 

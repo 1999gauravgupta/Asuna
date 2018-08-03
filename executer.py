@@ -9,6 +9,8 @@ import inspect
 import textwrap
 from contextlib import redirect_stdout
 import io
+import random
+
 ownerid = [343395225571426304, 402829897514352641]
 
 

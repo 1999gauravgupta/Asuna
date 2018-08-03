@@ -2,6 +2,7 @@ import asyncio
 import discord
 from discord.ext import commands
 from discord import opus
+import random
 
 
 opus_libs = ['libopus-0.x86.dll', 'libopus-0.x64.dll', 'libopus-0.dll', 'libopus.so.0', 'libopus.0.dylib']

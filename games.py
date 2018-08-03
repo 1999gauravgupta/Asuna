@@ -196,7 +196,7 @@ class GAMES():
                 r=("User Won")
                 flag=0
             elif pick1==0 and pick2==2:
-                r=("Computer")
+                r=("Computer Won")
                 flag=0
             elif pick1==1 and pick2==0:
                 r=("Computer Won")
