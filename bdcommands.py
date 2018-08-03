@@ -227,7 +227,7 @@ class BDCOMMANDS():
                 if something is None:
                     await ctx.send('What would you like me to say? :thinking:')
                 else:
-                    await ctx.send(('```' + inspect.getsource(self.bot.get_command(something).callback)) + '```')
+                    await ctx.send(('```py \n' + inspect.getsource(self.bot.get_command(something).callback)) + '```')
             except Exception as e:
                 await ctx.send('Code may be over word limit')
                 print(e)
