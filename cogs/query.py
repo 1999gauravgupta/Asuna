@@ -14,26 +14,28 @@ class QUERY():
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='ud', aliases=['urban'])
-    async def ud(self, ctx, *, query=None):
-        if query != None:
-            try:
-                defs = udd.define(query)
-                for d in range(1):
-                    definition = defs[d].definition
-                    word = defs[d].word
-                    example = defs[d].example
-                    upvotes = defs[d].upvotes
-                    downvotes = defs[d].downvotes
-                embed = discord.Embed(title=word, description="Here's what I could find.", color=random.randint(0, 16777215))
-                embed.add_field(name='Defintion', value=definition, inline=False)
-                embed.add_field(name='Example', value=example if example else '\u200b', inline=False)
-                embed.add_field(name='Upvotes', value=str(upvotes) + '👍', inline=True)
-                embed.add_field(name='Downvotes', value=str(downvotes) + '👎', inline=True)
-                await ctx.send(embed=embed)
-            except Exception:
-                await ctx.send('Dear User, I could not find a definition for this word in Urban Dictionary')
-        print('ud')
+    @commands.command(aliases=['ud', 'uds'], name='urban')
+    async def urban(self,ctx, *, term: str):
+        "Search for definition of a word on Urban dictionary"
+        try:
+            word = term if len(term.split(' ')) == 1 else '+'.join(term.split(' '))
+            async with self.session.get(f'http://api.urbandictionary.com/v0/define?term={word}') as resp:
+                data = await resp.read()
+            data = data.decode('utf-8')
+            data = json.loads(data)
+            stuff = data['list'][0]
+            e = discord.Embed(color=0x3D4D5D, timestamp=datetime.datetime.utcnow())
+            e.set_author(name=term+'\N{GREEN BOOK}', icon_url='http://m.img.brothersoft.com/win7_img/icon/93/935635a6-faf1-4540-afa6-3cab376e04e3.png', url=f'https://www.urbandictionary.com/define.php?term={word}')
+            e.set_thumbnail(url='https://pbs.twimg.com/profile_images/838627383057920000/m5vutv9g_400x400.jpg')
+            e.add_field(name='word', value=term)
+            e.add_field(name='definition', value=stuff['definition'][:800]+ f'...[continue reading](https://www.urbandictionary.com/define.php?term={word})' if len(stuff['definition'])>800 else stuff['definition'], inline=False)
+            e.add_field(name='example', value=stuff['example'][:800]+f'...[continue reading](https://www.urbandictionary.com/define.php?term={word}' if len(stuff['example'])>800 else stuff['example'], inline=False)
+            e.add_field(name='upvotes', value=stuff['thumbs_up'], inline=False)
+            e.add_field(name='downvotes', value=stuff['thumbs_down'], inline=False)
+            e.set_footer(text=term, icon_url='http://m.img.brothersoft.com/win7_img/icon/93/935635a6-faf1-4540-afa6-3cab376e04e3.png')
+            await ctx.send(embed=e)
+        except Exception:
+            await ctx.send('could not find any results.')
 
     @commands.command(name='google', aliases=['g', 'search'])
     async def google(self, ctx, *, query=None):
@@ -157,10 +159,10 @@ class QUERY():
                 link2 = response[1]['link']
                 link3 = response[2]['link']
                 embed = discord.Embed(title='YouTube', description="Here's what i could find", color=random.randint(0, 16777215))
-                embed.add_field(name=name1, value=link1)
+                embed.add_field(name="\u200b", value="[{}]({})".format(name1,link1),inline=False)
                 embed.set_thumbnail(url=image)
-                embed.add_field(name=name2, value=link2)
-                embed.add_field(name=name3, value=link3)
+                embed.add_field(name="\u200b", value="[{}]({})".format(name2,link2,inline=False))
+                embed.add_field(name="\u200b", value="[{}]({})".format(name3,link3),inline=False)
                 await ctx.send(embed=embed)
                 print('yt')
             except Exception as e:
