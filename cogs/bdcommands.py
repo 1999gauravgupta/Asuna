@@ -53,7 +53,48 @@ class BDCOMMANDS():
         except Exception as e:
             print(e)
             return None
-    
+
+    async def special_user_fetcher(self,ctx,user):
+        try:
+            if user is None:
+                return ctx.message.author
+            elif len(ctx.message.mentions)>0:
+                return ctx.message.mentions[0]
+            else:
+                results = []
+                for i in ctx.message.guild.members:
+                    if user.lower() in i.name.lower() or user.lower() in i.display_name.lower() or user in str(i.id):
+                        results.append(i)
+                if len(results)>0:
+                    if len(results)==1:
+                        return results[0]
+                    else:
+                        stri=""
+                        counter=1
+                        await ctx.send("Multiple members found. Please choose one of the following, or type cancel.")
+                        for i in results:
+                            stri+=str(counter)+". "+"``"+str(i)+"``"+"\n"
+                            counter+=1
+                        await ctx.send(stri)
+                        def check(p):
+                            return p.author.id == ctx.author.id and p.channel == ctx.channel
+                        m =await self.bot.wait_for('message', check = check)
+                        def check2(p):
+                            return p.author.id in [ctx.author.id,self.bot.user.id] and p.channel == ctx.channel
+                        if m.content.lower()=="cancel":
+                            await ctx.channel.purge(limit=4,check=check2)
+                            await ctx.send(":x: Command Cancelled.")
+                            return "cancel"
+                        else:
+                            await ctx.channel.purge(limit=4,check=check2)
+                            m=int(m.content)-1
+                            return results[m]
+                else:
+                    return None
+        except Exception as e:
+            print(e)
+            return None
+     
     async def role_fetcher(self,ctx,role):
         try:
             roles = [x.name for x in ctx.guild.role_hierarchy]
@@ -103,7 +144,7 @@ class BDCOMMANDS():
     @commands.command(name="user",aliases=["userinfo","info"])
     async def user(self, ctx, *, user=None):
         try:
-            user=await self.user_fetcher(ctx,user)
+            user=await self.special_user_fetche(sctx,user)
             if user=="cancel":
                 return
             if user is None:
@@ -132,8 +173,8 @@ class BDCOMMANDS():
             embed.set_thumbnail(url=(user.avatar_url))
             await ctx.send(embed=embed)
         except Exception as e:
-            print(e)
             await ctx.send("Dear {},the user you typed does not seem to exist. Please make sure you provided correct details.".format(ctx.message.author.mention))
+            print(e)
         print("UserInfo")
 
     @commands.command(name="server",aliases=["serverinfo","svrinfo"])
@@ -287,7 +328,7 @@ class BDCOMMANDS():
     @commands.command(name='perms', aliases=['permissions', 'permission'])  
     async def perms(self, ctx, *, user= None):
         try:
-            user=await self.user_fetcher(ctx,user)
+            user=await self.special_user_fetcher(ctx,user)
             if user=="cancel":
                 return
             if user is None:
