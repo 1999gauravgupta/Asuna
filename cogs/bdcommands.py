@@ -144,7 +144,7 @@ class BDCOMMANDS():
     @commands.command(name="user",aliases=["userinfo","info"])
     async def user(self, ctx, *, user=None):
         try:
-            user=await self.special_user_fetche(sctx,user)
+            user=await self.special_user_fetcher(sctx,user)
             if user=="cancel":
                 return
             if user is None:
