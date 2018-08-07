@@ -132,6 +132,7 @@ class BDCOMMANDS():
             embed.set_thumbnail(url=(user.avatar_url))
             await ctx.send(embed=embed)
         except Exception as e:
+            print(e)
             await ctx.send("Dear {},the user you typed does not seem to exist. Please make sure you provided correct details.".format(ctx.message.author.mention))
         print("UserInfo")
 
