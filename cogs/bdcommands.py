@@ -6,6 +6,7 @@ import random
 import inspect
 import time
 import re
+import hastebin
 
 class BDCOMMANDS():
     def __init__(self, bot):
@@ -203,8 +204,7 @@ class BDCOMMANDS():
                 dnd_count+=1
             elif str(member.status)=="offline":
                 offline_count+=1
-            total_count+=1
-        
+            total_count+=1 
         embed = discord.Embed(title=guild.name, description=guild.id, color=random.randint(0, 16777215))
         embed.add_field(name='Owner:', value=guild.owner,inline=False)
         embed.add_field(name="Users:",value="{} Users[{} Humans|{} Bots] \n <:online:468084069305942036> {} \n <:idle:468084104664186915> {} \n <:dnd:468084139195629588> {} \n <:offline:468084174767521792> {}".format(str(total_count),str(user_count),str(bot_count),str(online_count),str(idle_count),str(dnd_count),str(offline_count)),inline=False)
@@ -279,8 +279,11 @@ class BDCOMMANDS():
                 else:
                     await ctx.send(('```py\n' + str(inspect.getsource(self.bot.get_command(something).callback)) + '```'))
             except Exception as e:
-                await ctx.send('Code may be over word limit')
-                print(e)
+                try:
+                    await ctx.send(hastebin.post(str(inspect.getsource(self.bot.get_command(something).callback))))
+                except Exception as e:
+                    await ctx.send('Given function do not exist')
+                    print(e)
         else:
             await ctx.send('I only listen to my owner')
         print('code')
