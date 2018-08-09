@@ -23,7 +23,7 @@ class BDCOMMANDS():
             else:
                 results = []
                 for i in ctx.message.guild.members:
-                    if user.lower() in i.name.lower() or user.lower() in i.display_name.lower():
+                    if user.lower() in i.name.lower() or user==str(i) or user.lower() in i.display_name.lower():
                         results.append(i)
                 if len(results)>0:
                     if len(results)==1:
@@ -64,7 +64,7 @@ class BDCOMMANDS():
             else:
                 results = []
                 for i in ctx.message.guild.members:
-                    if user.lower() in i.name.lower() or user.lower() in i.display_name.lower() or user in str(i.id):
+                    if user.lower() in i.name.lower() or user==str(i) or user.lower() in i.display_name.lower() or user in str(i.id):
                         results.append(i)
                 if len(results)>0:
                     if len(results)==1:

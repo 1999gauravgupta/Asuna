@@ -19,7 +19,7 @@ class GIFS():
             else:
                 results = []
                 for i in ctx.message.guild.members:
-                    if user.lower() in i.name.lower() or user.lower() in i.display_name.lower():
+                    if (user.lower() in i.name.lower()) or (user==str(i)) or (user.lower() in i.display_name.lower()):
                         results.append(i)
                 if len(results)>0:
                     if len(results)==1:
