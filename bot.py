@@ -8,7 +8,7 @@ import random
 
 startup_extensions = ['gifs', 'executer', 'emoji', 'bdcommands', 'games', 'query', 'fun','reminder']
 owner = [343395225571426304, 402829897514352641]  
-bot = commands.Bot(command_prefix=commands.when_mentioned_or('-', 'asuna ', 'Asuna ', 'Asuna, ', 'asuna, '))
+bot = commands.Bot(command_prefix=commands.when_mentioned_or('a-', 'asuna ', 'Asuna ', 'Asuna, ', 'asuna, '))
 client = discord.Client()
 
 
