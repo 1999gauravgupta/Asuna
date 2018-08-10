@@ -42,7 +42,7 @@ async def on_ready():
 #COMMANDS
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Game(name='Listening to -help'))
+    await bot.change_presence(activity=discord.Game(name='Listening to a-help',type=2))
     print('status changing done')
 
 @bot.event
