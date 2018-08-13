@@ -64,9 +64,9 @@ async def on_command_error(ctx, err):
         msg=await ctx.send('Umm you not gave proper information. Retry please !')
 #     elif isinstance(err, commands.CommandNotFound):
 #         await ctx.message.add_reaction('\N{CROSS MARK}')
-    else:
-        embed=discord.Embed(title=str(type(err))[8:-2],description=str(err),colour=discord.Colour.from_rgb(random.randint(0,255),random.randint(0,255),random.randint(0,255)))
-        await ctx.send("Command raised an error",embed=embed,delete_after=15)
+#     else:
+#         embed=discord.Embed(title=str(type(err))[8:-2],description=str(err),colour=discord.Colour.from_rgb(random.randint(0,255),random.randint(0,255),random.randint(0,255)))
+#         await ctx.send("Command raised an error",embed=embed,delete_after=15)
 
 @bot.command(pass_context=True)
 async def help(ctx):
