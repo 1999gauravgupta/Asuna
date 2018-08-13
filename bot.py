@@ -8,7 +8,7 @@ import random
 
 startup_extensions = ['gifs', 'executer', 'emoji', 'bdcommands', 'games', 'query', 'fun','reminder']
 owner = [343395225571426304, 402829897514352641]  
-bot = commands.Bot(command_prefix=commands.when_mentioned_or('a-', 'asuna ', 'Asuna ', 'Asuna, ', 'asuna, '))
+bot = commands.Bot(command_prefix=commands.when_mentioned_or('-', 'asuna ', 'Asuna ', 'Asuna, ', 'asuna, '))
 client = discord.Client()
 
 
@@ -42,7 +42,7 @@ async def on_ready():
 #COMMANDS
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="a-help"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="-help"))
     print('status changing done')
 
 @bot.event
@@ -62,8 +62,8 @@ async def on_command_error(ctx, err):
         msg = await ctx.send('I am sorry {}, but it looks like i dont have the required permissions !'.format(ctx.message.author.mention))
     elif isinstance(err, commands.MissingRequiredArgument):
         msg=await ctx.send('Umm you not gave proper information. Retry please !')
-    elif isinstance(err, commands.CommandNotFound):
-        await ctx.message.add_reaction('\N{CROSS MARK}')
+#     elif isinstance(err, commands.CommandNotFound):
+#         await ctx.message.add_reaction('\N{CROSS MARK}')
     else:
         embed=discord.Embed(title=str(type(err))[8:-2],description=str(err),colour=discord.Colour.from_rgb(random.randint(0,255),random.randint(0,255),random.randint(0,255)))
         await ctx.send("Command raised an error",embed=embed,delete_after=15)
