@@ -19,7 +19,7 @@ class EMOJI():
     async def nitro(self, ctx, emo=None):
         await ctx.message.delete()
         if emo is None:
-            await ctx.send("Duh! I need a emoji name to work")
+            await ctx.send("Duh!I need a emoji name")
             return
         emo = discord.utils.get(ctx.guild.emojis , name= emo)
         if emo is None:
@@ -31,7 +31,7 @@ class EMOJI():
                     counter+=1
             await ctx.author.send(stri)
         else:
-            await ctx.send(e)
+            await ctx.send(f'<a:{emo.name}:{emo.id}>')
 
     # @commands.group()
     # async def blob(self, ctx):
