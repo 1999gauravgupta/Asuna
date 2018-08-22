@@ -57,9 +57,9 @@ bot.remove_command('help')
 async def on_command_error(ctx, err):
     if isinstance(err, commands.MissingPermissions):
         msg = await ctx.send('I am sorry {}, but it looks like... you dont have the required permissions !'.format(ctx.message.author.mention))
-    elif isinstance(err, commands.CommandInvokeError):
-        print(err)
-        msg = await ctx.send('I am sorry {}, but it looks like i dont have the required permissions !'.format(ctx.message.author.mention))
+    # elif isinstance(err, commands.CommandInvokeError):
+    #     print(err)
+    #     msg = await ctx.send('I am sorry {}, but it looks like i dont have the required permissions !'.format(ctx.message.author.mention))
     elif isinstance(err, commands.MissingRequiredArgument):
         msg=await ctx.send('Umm you not gave proper information. Retry please !')
 #     elif isinstance(err, commands.CommandNotFound):
