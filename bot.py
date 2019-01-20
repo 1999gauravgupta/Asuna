@@ -94,4 +94,4 @@ async def help(ctx):
 #         await asyncio.gather(*futures)
 
 
-bot.run('NDExNTY2NDczMzUwMjE3NzQ4.DWRS8A.U2VKbHmJAbktNhhgOhSNcpgwGt4')
+bot.run("PUT YOUR BOT TOKEN)
