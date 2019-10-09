@@ -1,2 +1,2 @@
 # Asuna
-A Python based Discord bot
+A Python based Discord bot. 
